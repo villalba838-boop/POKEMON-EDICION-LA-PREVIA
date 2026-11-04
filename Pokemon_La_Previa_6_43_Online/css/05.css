@@ -1,0 +1,12 @@
+
+/* La Previa 5.51 — mobile gesture safety; keeps cinematic buttons reachable. */
+.joy-zone27{touch-action:none;-webkit-user-select:none;user-select:none}
+.joy-base.active27{filter:drop-shadow(0 2px 4px #0b1c2a88)}
+@media(max-height:460px) and (orientation:landscape){
+ .touch-right{right:max(9px,env(safe-area-inset-right));bottom:max(8px,env(safe-area-inset-bottom));gap:8px}
+ .touch-a{width:clamp(48px,15dvh,64px);height:clamp(48px,15dvh,64px);font-size:21px}
+ .touch-b{width:clamp(40px,11dvh,50px);height:clamp(40px,11dvh,50px);font-size:17px}
+ .joy-base{width:92px;height:92px}
+ .modal-card.compact-dialog{max-height:min(54dvh,210px);overflow-y:auto}
+ .compact-dialog .dialog-copy p{font-size:12px;line-height:1.24}
+}

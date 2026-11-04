@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="es">
+<head>
+ <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+ <meta name="theme-color" content="#162d39"><meta name="description" content="Pokémon Edición La Previa — rutas vivas, duelos y secretos, aventura web">
+ <title>Pokémon La Previa Online · 6.43</title>
+ 
+ <link rel="stylesheet" href="/css/01.css">
+<link rel="stylesheet" href="/css/02.css"><link rel="stylesheet" href="/css/03.css">
+<link rel="stylesheet" href="/css/04.css">
+<link rel="stylesheet" href="/css/05.css">
+<style id="visual-dialog-553">
+/* La Previa 5.53 — retratos normalizados y diálogo legible */
+.modal-card.compact-dialog{max-width:680px;}
+.v553-wrap{--v553-main:#2c6472;--v553-edge:#9bd7cc;--v553-wash:#e6f5ed;color:#263f48;}
+.v553-wrap.v553-alegria{--v553-main:#7d8845;--v553-edge:#e0c774;--v553-wash:#fff5d5}
+.v553-wrap.v553-sorpresa{--v553-main:#5177a7;--v553-edge:#a2d8f7;--v553-wash:#e6f4ff}
+.v553-wrap.v553-intenso{--v553-main:#a56259;--v553-edge:#f0c49a;--v553-wash:#fff0e6}
+.v553-top{font-size:10px;font-weight:900;letter-spacing:1.4px;display:flex;justify-content:space-between;gap:12px;color:#557577;margin:-3px 1px 8px;}
+.dialog-person.v553-dialog{align-items:center;background:linear-gradient(135deg,var(--v553-wash),#f6f4e7 80%);border:2px solid var(--v553-edge);border-radius:8px;padding:8px;gap:15px;min-height:153px;}
+.v553-art{width:126px;flex:0 0 126px;position:relative;line-height:0;}
+.dialog-person.v553-dialog img.v553-portrait{width:126px;height:151px;object-fit:fill;image-rendering:pixelated;border:0;background:transparent;border-radius:2px;box-shadow:2px 3px 0 #1f3e4a66;}
+.v553-sigil{position:absolute;top:-6px;right:-7px;display:flex;align-items:center;justify-content:center;min-width:25px;height:25px;background:var(--v553-main);color:white;border:2px solid #fff4d5;border-radius:5px;font:bold 18px system-ui;box-shadow:1px 2px 0 #173a42;}
+.v553-dialog .dialog-copy{min-height:134px;justify-content:center;}
+.v553-dialog .dialog-copy h2{font-size:clamp(18px,3vw,26px);color:#183a49;margin:3px 0 9px;line-height:1.18;}
+.v553-dialog .speaker-tag{background:var(--v553-main);color:#fffdf2;border:1px solid var(--v553-edge);letter-spacing:.7px;margin:0;}
+.v553-dialog .v553-line{color:#264650;font-size:clamp(15px,2.1vw,19px);font-weight:600;line-height:1.4;overflow-wrap:anywhere;margin:0;white-space:pre-wrap;}
+.modal-card.compact-dialog .modal-actions .dialog-next{min-height:43px;min-width:155px;margin-top:5px;}
+@media(max-width:520px){.dialog-person.v553-dialog{padding:6px;gap:10px}.v553-art{width:98px;flex-basis:98px}.dialog-person.v553-dialog img.v553-portrait{width:98px;height:119px}.v553-dialog .dialog-copy{min-height:111px}.v553-dialog .v553-line{font-size:14px;}.v553-dialog .dialog-copy h2{font-size:18px;margin-bottom:5px}}
+@media(max-height:460px) and (orientation: landscape){
+ .modal-card.compact-dialog{padding:8px 12px;max-height:calc(100dvh - 10px);overflow:auto;}
+ .v553-top{margin:0 0 3px;font-size:9px;}
+ .dialog-person.v553-dialog{min-height:0;padding:4px;gap:10px;}
+ .v553-art{width:70px;flex-basis:70px}.dialog-person.v553-dialog img.v553-portrait{width:70px;height:84px}
+ .v553-sigil{width:19px;min-width:19px;height:19px;font-size:12px;}
+ .v553-dialog .dialog-copy{min-height:78px;}.v553-dialog .dialog-copy h2{font-size:16px;margin:0 0 4px;}.v553-dialog .v553-line{font-size:13px;line-height:1.3;}
+ .v553-dialog .speaker-tag{padding:2px 5px;font-size:9px}.modal-card.compact-dialog .modal-actions{margin-top:3px}.modal-card.compact-dialog .modal-actions .dialog-next{min-height:31px;padding:4px 10px;}
+}
+
+</style>
+<style id="face-expression-554">
+/* 5.54. Actual animated atlas: three frames at fixed, integer positions. */
+.v553-art .v554-face {
+ display:block;
+ width:126px;
+ height:151px;
+ background-repeat:no-repeat;
+ background-size:300% 100%;
+ background-position:0 0;
+ image-rendering:pixelated;
+ border-radius:2px;
+ box-shadow:2px 3px 0 #1f3e4a66;
+ animation:v554-expression 6.2s linear infinite;
+ will-change:background-position;
+}
+.v553-art .v554-face-alegria{animation-duration:5.2s}
+.v553-art .v554-face-sorpresa{animation-duration:4.8s}
+.v553-art .v554-face-intenso{animation-duration:5.5s}
+@keyframes v554-expression {
+ 0%,36%,41%,46%,61%,100%{background-position:0 0}
+ 37%,40%{background-position:50% 0}
+ 47%,55%{background-position:100% 0}
+}
+.v553-dialog:has(.v554-face) .v553-sigil{animation:v554-sigil-pulse 3s ease-in-out infinite}
+@keyframes v554-sigil-pulse{0%,85%,100%{transform:translateY(0)}88%{transform:translateY(-2px)}}
+@media(max-width:520px){.v553-art .v554-face{width:98px;height:119px}}
+@media(max-height:460px) and (orientation:landscape){.v553-art .v554-face{width:70px;height:84px}}
+@media(prefers-reduced-motion: reduce){.v553-art .v554-face,.v553-dialog:has(.v554-face) .v553-sigil{animation:none!important;will-change:auto!important}}
+
+</style>
+<style id="audit567-layout">
+.modal-layer:not(.hidden){max-height:100%;overscroll-behavior:contain}
+.modal-card{overscroll-behavior:contain}
+.modal-card .cucu-cine-text{color:#31515b}
+#battle.battle54 .enemy-area,#battle.battle54 .our-area{z-index:auto}
+#battle.battle54[data-layout54=short] #ourPic{height:66%!important;width:28%!important;max-height:100%!important}
+#battle.battle54[data-layout54=short] #enemyPic{height:58%!important;width:24%!important;max-height:100%!important}
+@media(max-height:480px) and (orientation:landscape){
+.modal-layer:not(.hidden){align-items:flex-start;overflow-y:auto;padding:6px}
+.modal-layer .modal-card{max-height:calc(100dvh - 12px);overflow-y:auto}
+.modal-card .modal-actions{position:sticky;bottom:0;z-index:20;background:#f8efd9;padding:7px 0}
+}
+</style>
+<style id="camera568-style">/* Interior cameras reserve a real control strip on portrait phones. */
+@media(orientation:portrait){
+ body.camera-portrait568 #app{justify-content:center!important;gap:8px!important}
+
+}
+#gameShell.camera-room568>.nearby-tip{max-width:calc(100% - 24px);text-align:center;white-space:normal;pointer-events:none}
+@media(orientation:portrait){
+ #gameShell.camera-room568>.nearby-tip{bottom:104px!important;left:50%;font-size:10px;line-height:1.25;padding:6px 9px}
+ #gameShell.camera-room568>.touch-ui .touch-right{bottom:18px!important;right:18px}
+ #gameShell.camera-room568>.touch-ui:before{content:'';position:absolute;bottom:0;left:0;right:0;height:132px;border-top:1px solid #c8e1c326;background:linear-gradient(180deg,#203e4800,#173541aa);pointer-events:none}
+ #gameShell.camera-room568>.touch-ui:after{content:'DESLIZA PARA MOVERTE';position:absolute;left:22px;bottom:42px;width:128px;text-align:center;font:700 10px/1.5 system-ui,sans-serif;letter-spacing:.6px;color:#b8cfc9;pointer-events:none}
+ #gameShell.camera-room568>.touch-ui:has(.joy-base.active27):after{opacity:0}
+ #gameShell.camera-room568>.mission{max-width:calc(100% - 85px);font-size:9px;top:47px}
+}
+
+body.camera-layout568 #app{height:100dvh;min-height:0!important}
+#gameShell.camera-room568:not(.immersive-mode):not(:fullscreen){flex:0 0 auto!important;height:var(--camera-stage-height568)!important;max-height:none!important;min-height:0!important;width:var(--camera-stage-width568)!important;max-width:100%!important;align-self:center;aspect-ratio:auto!important}
+
+@media(orientation:landscape) and (pointer:coarse){
+ #gameShell.camera-room568>.nearby-tip{left:calc(50% - 65px);max-width:calc(100% - 175px);bottom:10px!important}
+ #gameShell.camera-room568>.touch-ui .touch-right{right:14px;bottom:18px}
+}
+</style>
+<link rel="manifest" href="/manifest.webmanifest"><link rel="icon" href="/favicon.svg" type="image/svg+xml"></head>
+<body>
+ <main id="app">
+  <header class="topbar"><div class="brand"><span class="mini-ball">●</span><span>POKÉMON <strong>LA PREVIA</strong></span><small>AVENTURA WEB · 6.21</small></div><div class="topactions"><button type="button" id="soundBtn" aria-label="Activar o silenciar efectos">♪</button><button type="button" id="fullscreenBtn" aria-label="Pantalla completa">⛶</button><button type="button" id="mapBtn31" aria-label="Mapa de la región">◇ MAPA</button><button type="button" id="teamBtn" aria-label="Abrir menú START">☰ START</button></div></header>
+  <div class="game-shell" id="gameShell">
+   <canvas id="game" width="960" height="540" aria-label="Mapa del juego"></canvas>
+   <div class="vignette"></div>
+   <div class="start-shade29 hidden" id="startShade29"></div>
+   <nav class="start-menu29 hidden" id="startMenu29" aria-label="Menú START">
+    <div class="start-head29"><span class="start-heading29">START</span><small id="startTitle29">ENTRENADOR</small></div>
+    <div class="start-info29"><span id="startBadgeCount29">0 / 8 MEDALLAS</span><span id="startMoney29">0 ₽</span></div>
+    <button data-start29="dex" type="button"><span class="start-icon29">▦</span><span>POKÉDEX</span><span class="start-arrow29">›</span></button>
+    <button data-start29="party" type="button"><span class="start-icon29">◉</span><span>POKÉMON</span><span class="start-arrow29" id="startParty29">0 / 6</span></button>
+    <button data-start29="bag" type="button"><span class="start-icon29">▣</span><span>MOCHILA</span><span class="start-arrow29">›</span></button>
+    <button data-start29="map" type="button"><span class="start-icon29">◇</span><span>MAPA</span><span class="start-arrow29">›</span></button>
+    <button data-start29="journal" type="button"><span class="start-icon29">▤</span><span>DIARIO</span><span class="start-arrow29">›</span></button>
+    <button data-start29="save" type="button"><span class="start-icon29">▧</span><span>GUARDAR</span><span class="start-arrow29">›</span></button>
+    <button data-start29="options" type="button"><span class="start-icon29">⚙</span><span>OPCIONES</span><span class="start-arrow29">›</span></button>
+    <button data-start29="close" class="start-exit29" type="button"><span class="start-icon29">↩</span><span>CERRAR</span><span class="start-arrow29">B</span></button>
+   </nav>
+   <button id="exitFullscreen" class="in-game-exit" type="button" aria-label="Salir de pantalla completa">↙ Salir</button>
+   <div class="area-tag" id="areaTag">BENIFAIÓ · PUEBLO INICIAL</div>
+   <div class="mission"><small>PRÓXIMO OBJETIVO</small><b id="objective">Visita el laboratorio del Doctor Alfaro</b></div>
+   <div class="top-stat" id="teamCount">0 / 6</div>
+   <div id="nearbyTip" class="nearby-tip hidden">A · HABLAR</div>
+   <div id="toast" class="toast hidden"></div>
+   <div class="touch-ui" id="touchUi">
+     <div id="joyZone27" class="joy-zone27" aria-label="Zona de movimiento: arrastra para moverte"></div><div class="joy-base" id="joyBase" aria-hidden="true"><div class="joy-center" id="joyCenter"></div><div class="joy-knob" id="joyKnob"></div></div>
+     <div class="touch-right"><button id="aButton" class="touch-a" aria-label="Interactuar">A</button><button id="bButton" class="touch-b" aria-label="Menú">B</button></div>
+   </div>
+   <div id="modal" class="modal-layer hidden" role="dialog" aria-modal="true"><div class="modal-card" id="modalContent"></div></div>
+   <section class="evolution-layer29 hidden" id="evolution29" aria-label="Escena de evolución Pokémon" aria-live="polite">
+    <div class="evo-stars29"></div><p class="evo-eyebrow29">POKÉMON EDICIÓN LA PREVIA</p><h2 id="evoHeading29">¡EVOLUCIÓN!</h2>
+    <div class="evo-platform29"><div class="evo-orbit29"></div><div class="evo-light29"></div><img id="evoOld29" class="evo-old29" alt="Pokémon antes de evolucionar"><img id="evoNew29" class="evo-new29" alt="Pokémon evolucionado"></div>
+    <div class="evo-progress29"><span id="evoNameOld29"></span><span>✦</span><span id="evoNameNew29"></span></div>
+    <p id="evoText29">¡Está evolucionando!</p><button id="evoButton29" class="hidden" type="button">A · CONTINUAR</button>
+   </section>
+   <section id="cine34" class="cine-layer34 hidden" aria-label="Cinemática de La Previa" aria-live="polite">
+     <div class="cine-header34"><strong id="cineEpisode34">CINE LA PREVIA</strong><button type="button" id="cineSkip34" aria-label="Saltar cinemática">SALTAR ↷</button></div>
+     <div class="cine-stage34" id="cineStage34"></div>
+     <div class="cine-dialogbox34"><div><small id="cineProgress34">ESCENA</small><h2 id="cineHeadline34"></h2><p id="cineDialogue34"></p></div><div class="cine-bottom34"><small>A / ENTER · AVANZAR</small><button type="button" id="cineNext34" class="cine-next34">SIGUIENTE · A</button></div><div class="cine-progress-track34"><div id="cineProgressbar34"></div></div></div>
+   </section>
+   <div id="battle" class="battle-layer hidden" role="region" aria-label="Combate Pokémon">
+      <div id="battleBackdrop22" class="battle-backdrop"><div class="battle-glow"></div><div class="enemy-area"><div class="nameplate"><b id="enemyName">PIDGEY</b><span id="enemyLvl">Nv. 4</span><div class="hp-track"><div id="enemyHP" class="hp-fill"></div></div></div><img id="enemyPic" alt="Pokémon rival" src="/assets/14/14508ecd9bba58857442c7cf.png"/></div>
+      <div class="our-area"><img id="ourPic" alt="Tu Pokémon" src="/assets/e5/e5753a2daeb132a71971b93b.png"/><div class="nameplate"><b id="ourName">CHARMANDER</b><span id="ourLvl">Nv. 5</span><div class="hp-track"><div id="ourHP" class="hp-fill"></div></div><small id="ourHPText">20/20 PS</small></div></div></div>
+      <div class="battle-bottom"><p id="battleText">¿Qué debería hacer tu Pokémon?</p><div class="battle-actions" id="battleActions"></div></div>
+   </div>
+  </div>
+  <footer class="bottombar"><span>La Previa · 8 gimnasios · Alto Mando · Camino de los Ocho</span><span id="controlHint">WASD / Flechas · E hablar · M menú START</span></footer>
+ </main>
+ <script src="/js/01.js"></script>
+<script src="/js/02.js"></script>
+
+<!-- Recursos de 5.44 separados del motor y reutilizables en ZIP -->
+<script src="/js/03.js"></script>
+<!-- Recursos transparentes y losetas editables de 5.45 -->
+<script src="/js/04.js"></script>
+<!-- Recursos originales 5.46 · Silla -->
+<script src="/js/05.js"></script>
+<script src="/js/06.js"></script>
+<script src="/js/07.js"></script>
+<script src="/js/08.js"></script>
+<script src="/js/09.js"></script>
+<script src="/js/10.js"></script>
+<script src="/js/11.js"></script>
+
+<script src="/js/12.js"></script>
+
+<script src="/js/13.js"></script>
+<script src="/js/14.js"></script>
+<script src="/js/15.js"></script>
+
+<script src="/js/16.js"></script>
+
+<script src="/js/17.js"></script>
+ 
+
+<script src="/js/18.js"></script>
+
+<script src="/js/19.js"></script>
+
+
+
+</body>
+</html>
