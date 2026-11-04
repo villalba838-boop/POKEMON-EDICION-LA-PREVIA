@@ -2430,8 +2430,8 @@ collision=function(x,y){const room=ROOMS50[state.scene];if(!room)return collisio
  for(const n of getSceneNpcs(state.scene))if(Math.abs(x-(n.x+.5))<.44&&Math.abs(y-(n.y+.5))<.44)return true;return false;};
 function renderRoom50(){const s=SCENES[state.scene],room=ROOMS50[state.scene];let {fit,cx,cy}=roomView50(s);
  ctx.fillStyle='#192b34';ctx.fillRect(0,0,W,H);ctx.save();ctx.scale(fit,fit);ctx.translate(-Math.floor(cx),-Math.floor(cy));ctx.drawImage(roomBase50(state.scene,s),0,0);
- for(const o of room.props.filter(p=>!p.solid))drawProp50(o);
- const layers=room.props.filter(p=>p.solid).map(o=>({y:(o.y+o.h)*TILE,draw:()=>drawProp50(o)}));
+ for(const o of room.props.filter(p=>!p.solid&&!p.depth647))drawProp50(o);
+ const layers=room.props.filter(p=>p.solid||p.depth647).map(o=>({y:(o.y+o.h)*TILE,draw:()=>drawProp50(o)}));
  for(const n of getSceneNpcs(state.scene)){let x=(n.x+.5)*TILE,y=(n.y+1)*TILE;layers.push({y,draw:()=>{let dx=state.player.x-n.x-.5,dy=state.player.y-n.y-.5;let dir=Math.abs(dx)>Math.abs(dy)?(dx>0?2:1):(dy>0?0:3);drawCharacter(n.who,x,y,dir,Math.sin(elapsed*2+n.x)> .9?1:0);if(n.who==='alfaro'){px50(x/2+13,y/2-24,7,10,'#62999f');px50(x/2+14,y/2-23,5,6,Math.sin(elapsed*3)>0?'#b3edba':'#83b9ca')}if(n.who==='raquel_soriano'){px50(x/2+12,y/2-16,8,6,'#91b9af');px50(x/2+14,y/2-14,4,1,'#e9e1b9')}if(n.who==='awelo')text50('z',x/2+14,y/2-45-Math.sin(elapsed)*3,8,'#fff3d0')}})}
  const f=getFollower29();if(f)layers.push({y:(f.y+.42)*TILE,draw:()=>drawMonsterFollower(f.x*TILE,(f.y+.42)*TILE,f.name,f.anim,f.dir)});
  const p=state.player;layers.push({y:(p.y+.42)*TILE,draw:()=>drawCharacter(p.chosen,p.x*TILE,(p.y+.42)*TILE,p.dir,p.anim)});
@@ -16481,6 +16481,11 @@ for(const [k,v] of Object.entries(R598ASSETS)){window.__ASSETS[k]=v;}
  window.__PREVIA_DEV_ACTIVE_600=devActive600;
  let lastPreset600='mewtwo', panelWas600='title';
  const PRESETS600=[
+  {id:"647_sede",label:"Elementos 6.47 · Sede Marshall",detail:'Objetos del MegaPack con pequeñas historias',scene:"casa_beni32",spawn:SCENES["casa_beni32"].spawn||[8,11],badges:8},
+  {id:"647_biblio",label:"Elementos 6.47 · Biblioteca",detail:'Objetos del MegaPack con pequeñas historias',scene:"biblioteca32",spawn:SCENES["biblioteca32"].spawn||[8,11],badges:8},
+  {id:"647_taller",label:"Elementos 6.47 · Taller de Plata",detail:'Objetos del MegaPack con pequeñas historias',scene:"taller32",spawn:SCENES["taller32"].spawn||[8,11],badges:8},
+  {id:"647_albal",label:"Elementos 6.47 · Albal",detail:'Objetos del MegaPack con pequeñas historias',scene:"albal",spawn:SCENES["albal"].spawn||[8,11],badges:8},
+  {id:"647_sueca",label:"Elementos 6.47 · Sueca",detail:'Objetos del MegaPack con pequeñas historias',scene:"sueca",spawn:SCENES["sueca"].spawn||[8,11],badges:8},
   {id:"646_lab",label:"Visual 6.46 · Alfaro",detail:'Revisar objetos transparentes y recorrido en partida de prueba',scene:"lab",spawn:SCENES["lab"].spawn||[8,11],badges:8},
   {id:"646_silla",label:"Visual 6.46 · CB Silla",detail:'Revisar objetos transparentes y recorrido en partida de prueba',scene:"gym_sergio",spawn:SCENES["gym_sergio"].spawn||[8,11],badges:8},
   {id:"646_vinted",label:"Visual 6.46 · Vinted",detail:'Revisar objetos transparentes y recorrido en partida de prueba',scene:"vinted33",spawn:SCENES["vinted33"].spawn||[8,11],badges:8},
@@ -20490,6 +20495,666 @@ window.__PREVIA_645={version:'6.45',door:lp645LabDoor,
  const previousTitle646=title64Frame;
  title64Frame=function(...args){const r=previousTitle646(...args);const footer=title64Layer?.querySelector('.title64-footer span');if(footer)footer.textContent='EDICIÓN LA PREVIA · WEB 6.46';return r;};
  window.__VISUAL_646={version:'6.46',resources:[...activeKeys],ready:()=>[...activeKeys].filter(k=>sprite646(k)).length};
+})();
+
+/* 6.47 · Elementos colocados del MegaPack: dibujo, huella e inspección.
+ * La geometría y los accesos se comprueban contra la colisión final del motor.
+ */
+(function installProps647(){
+ const sources={
+  "terminal_laboratorio_151": "/assets/v647_terminal_laboratorio_151.png",
+  "pizarra_pick_and_roll": "/assets/v647_pizarra_pick_and_roll.png",
+  "bolsa_balones_51": "/assets/v647_bolsa_balones_51.png",
+  "ticket_14_centimos": "/assets/v647_ticket_14_centimos.png",
+  "mobiliario_extra_02": "/assets/v647_mobiliario_extra_02.png",
+  "mobiliario_extra_01": "/assets/v647_mobiliario_extra_01.png",
+  "mobiliario_extra_11": "/assets/v647_mobiliario_extra_11.png",
+  "mobiliario_extra_12": "/assets/v647_mobiliario_extra_12.png",
+  "mobiliario_extra_04": "/assets/v647_mobiliario_extra_04.png",
+  "mobiliario_extra_00": "/assets/v647_mobiliario_extra_00.png",
+  "piedra_cristal_festivern": "/assets/v647_piedra_cristal_festivern.png",
+  "caja_tarjetas": "/assets/v647_caja_tarjetas.png",
+  "marcador_sueca_25_44": "/assets/v647_marcador_sueca_25_44.png",
+  "caja_alitas": "/assets/v647_caja_alitas.png",
+  "maletin_electrico_539": "/assets/v647_maletin_electrico_539.png",
+  "vitrina_copas_537": "/assets/v646_vitrina_copas_537.png",
+  "reliquia_gato_539": "/assets/v646_reliquia_gato_539.png",
+  "maceta_tropical_51": "/assets/v646_maceta_tropical_51.png",
+  "estanteria_recuerdos_51": "/assets/v646_estanteria_recuerdos_51.png"
+};
+ const requested=[
+  {
+    "id": "alfaro_terminal",
+    "scene": "lab",
+    "asset": "terminal_laboratorio_151",
+    "preferred": [
+      11.8,
+      4.4
+    ],
+    "w": 0.7,
+    "h": 0.65,
+    "renderW": 0.85,
+    "renderH": 1.3,
+    "label": "Terminal Kanto · 151",
+    "lines": [
+      "Alfaro ha instalado un terminal con los 151 Pokémon de Kanto.",
+      "En la pantalla: «La investigación va bien. El presupuesto se ha ido en mayonesa»."
+    ],
+    "solid": true,
+    "pedestal": true
+  },
+  {
+    "id": "alfaro_material",
+    "scene": "lab",
+    "asset": "maletin_electrico_539",
+    "preferred": [
+      5.1,
+      9.6
+    ],
+    "w": 1,
+    "h": 0.65,
+    "renderW": 1.3,
+    "renderH": 1,
+    "label": "Maletín de investigación",
+    "lines": [
+      "Un maletín lleno de instrumental, cables y una cuchara.",
+      "Nota de Alfaro: «La cuchara es para calibrar. No preguntéis qué calibra»."
+    ],
+    "solid": true,
+    "pedestal": false
+  },
+  {
+    "id": "sede_material",
+    "scene": "casa_beni32",
+    "asset": "bolsa_balones_51",
+    "preferred": [
+      5.1,
+      5.4
+    ],
+    "w": 1.1,
+    "h": 0.7,
+    "renderW": 1.5,
+    "renderH": 1.3,
+    "label": "La bolsa del entrenador",
+    "lines": [
+      "Balones, zapatillas y una pizarra que ya no cierra.",
+      "Marshall: «Con esto montamos un entrenamiento. Lo de llegar puntuales ya lo vemos»."
+    ],
+    "solid": true,
+    "pedestal": false
+  },
+  {
+    "id": "sede_pizarra",
+    "scene": "casa_beni32",
+    "asset": "pizarra_pick_and_roll",
+    "preferred": [
+      14.3,
+      5.9
+    ],
+    "w": 1,
+    "h": 0.65,
+    "renderW": 1.3,
+    "renderH": 1.3,
+    "label": "Pizarra · 42 Quick",
+    "lines": [
+      "42 QUICK: primero correr, luego mirar si alguien ha entendido la jugada.",
+      "En una esquina: «La mesa del jueves se defiende como un último rebote»."
+    ],
+    "solid": true,
+    "pedestal": false
+  },
+  {
+    "id": "sede_actas",
+    "scene": "casa_beni32",
+    "asset": "caja_tarjetas",
+    "preferred": [
+      5.7,
+      10.6
+    ],
+    "w": 0.7,
+    "h": 0.4,
+    "renderW": 0.9,
+    "renderH": 0.65,
+    "label": "La caja de las actas",
+    "lines": [
+      "Una caja con actas, rotuladores y una reserva del Burger.",
+      "Blas ha subrayado la reserva tres veces. Prioridades."
+    ],
+    "solid": false,
+    "pedestal": false
+  },
+  {
+    "id": "vinted_banco",
+    "scene": "vinted33",
+    "asset": "mobiliario_extra_00",
+    "preferred": [
+      4.4,
+      10.5
+    ],
+    "w": 1.5,
+    "h": 0.65,
+    "renderW": 1.9,
+    "renderH": 1.2,
+    "label": "Banco de probar zapatillas",
+    "lines": [
+      "Raquel ha dejado un banco para probarse las zapatillas.",
+      "Cartel: «Mirar es gratis. Decir que lo has visto más barato también, por desgracia»."
+    ],
+    "solid": true,
+    "pedestal": false
+  },
+  {
+    "id": "vinted_ticket",
+    "scene": "vinted33",
+    "asset": "ticket_14_centimos",
+    "preferred": [
+      10.6,
+      9.5
+    ],
+    "w": 0.45,
+    "h": 0.35,
+    "renderW": 0.55,
+    "renderH": 0.75,
+    "label": "El ticket de 14 céntimos",
+    "lines": [
+      "Un ticket de catorce céntimos.",
+      "Raquel: «No es una errata. Es lo que queda de beneficio después de negociar contigo»."
+    ],
+    "solid": false,
+    "pedestal": false
+  },
+  {
+    "id": "silla_vitrina",
+    "scene": "gym_sergio",
+    "asset": "vitrina_copas_537",
+    "preferred": [
+      2.2,
+      4.6
+    ],
+    "w": 1.8,
+    "h": 0.7,
+    "renderW": 2.2,
+    "renderH": 1.8,
+    "label": "Vitrina del CB Silla",
+    "lines": [
+      "Una vitrina de copas impecable. El cristal está más limpio que el acta.",
+      "Una placa: «Campeones de casi llegar a la hora»."
+    ],
+    "solid": true,
+    "pedestal": false
+  },
+  {
+    "id": "silla_bolsa",
+    "scene": "gym_sergio",
+    "asset": "bolsa_balones_51",
+    "preferred": [
+      3.6,
+      6.4
+    ],
+    "w": 1,
+    "h": 0.65,
+    "renderW": 1.5,
+    "renderH": 1.25,
+    "label": "Material de cantera",
+    "lines": [
+      "La bolsa de los canteranos: tres balones, dos petos y un bote de paciencia.",
+      "En el asa: «DEVOLVER A SERGIO. Si está durmiendo, dejar al lado»."
+    ],
+    "solid": true,
+    "pedestal": false
+  },
+  {
+    "id": "silla_pizarra",
+    "scene": "gym_sergio",
+    "asset": "pizarra_pick_and_roll",
+    "preferred": [
+      17.3,
+      5.6
+    ],
+    "w": 1,
+    "h": 0.6,
+    "renderW": 1.35,
+    "renderH": 1.4,
+    "label": "Pizarra del temporero",
+    "lines": [
+      "La jugada tiene cuatro flechas y una instrucción enorme: «NO OS CHOQUÉIS».",
+      "Debajo: «Si sale mal, era para despistar»."
+    ],
+    "solid": true,
+    "pedestal": false
+  },
+  {
+    "id": "nachito_cristal",
+    "scene": "gym_nachito",
+    "asset": "piedra_cristal_festivern",
+    "preferred": [
+      8.2,
+      5.9
+    ],
+    "w": 0.7,
+    "h": 0.65,
+    "renderW": 0.85,
+    "renderH": 1.2,
+    "label": "Muestra de cristal",
+    "lines": [
+      "Una muestra de cristal del laboratorio. No parece estable.",
+      "Nachito ha pegado una etiqueta: «NO MEZCLAR CON EL AGUA DEL FESTIVERN»."
+    ],
+    "solid": true,
+    "pedestal": true
+  },
+  {
+    "id": "nachito_terminal",
+    "scene": "gym_nachito",
+    "asset": "terminal_laboratorio_151",
+    "preferred": [
+      16.3,
+      6.4
+    ],
+    "w": 0.65,
+    "h": 0.65,
+    "renderW": 0.85,
+    "renderH": 1.3,
+    "label": "Terminal de fórmulas",
+    "lines": [
+      "El terminal calcula fórmulas a una velocidad absurda.",
+      "Resultado de la última consulta: «La cazalla no es un estado de la materia»."
+    ],
+    "solid": true,
+    "pedestal": true
+  },
+  {
+    "id": "nachito_maletin",
+    "scene": "gym_nachito",
+    "asset": "maletin_electrico_539",
+    "preferred": [
+      8.4,
+      11.6
+    ],
+    "w": 1,
+    "h": 0.65,
+    "renderW": 1.3,
+    "renderH": 1.1,
+    "label": "Kit de emergencia",
+    "lines": [
+      "Gafas, guantes, cables y una hoja que dice «PREGUNTAR ANTES DE TOCAR».",
+      "La hoja está chamuscada."
+    ],
+    "solid": true,
+    "pedestal": false
+  },
+  {
+    "id": "biblioteca_banco",
+    "scene": "biblioteca32",
+    "asset": "mobiliario_extra_00",
+    "preferred": [
+      2.4,
+      10.5
+    ],
+    "w": 1.5,
+    "h": 0.65,
+    "renderW": 1.9,
+    "renderH": 1.2,
+    "label": "Rincón de lectura",
+    "lines": [
+      "Un banco para leer mientras Horte termina su explicación.",
+      "Hay una nota: «Si llegas a la diapositiva 47, avisa a tu familia»."
+    ],
+    "solid": true,
+    "pedestal": false
+  },
+  {
+    "id": "biblioteca_flores",
+    "scene": "biblioteca32",
+    "asset": "mobiliario_extra_04",
+    "preferred": [
+      14.1,
+      5.8
+    ],
+    "w": 0.65,
+    "h": 0.6,
+    "renderW": 0.85,
+    "renderH": 1.1,
+    "label": "La planta del 5 %",
+    "lines": [
+      "La planta lleva más años aquí que algunos libros.",
+      "Horte asegura que solo necesita un cinco por ciento de agua. La bibliotecaria la riega a escondidas."
+    ],
+    "solid": true,
+    "pedestal": false
+  },
+  {
+    "id": "taller_maletin",
+    "scene": "taller32",
+    "asset": "maletin_electrico_539",
+    "preferred": [
+      5.1,
+      8.6
+    ],
+    "w": 1,
+    "h": 0.65,
+    "renderW": 1.3,
+    "renderH": 1.1,
+    "label": "Herramientas del hombre de recursos",
+    "lines": [
+      "El maletín de Plata contiene una solución para casi todo.",
+      "Para sus propios problemas, el manual recomienda entre dos y tres meses de investigación."
+    ],
+    "solid": true,
+    "pedestal": false
+  },
+  {
+    "id": "taller_recambios",
+    "scene": "taller32",
+    "asset": "caja_tarjetas",
+    "preferred": [
+      12.1,
+      10.3
+    ],
+    "w": 0.9,
+    "h": 0.6,
+    "renderW": 1.1,
+    "renderH": 0.8,
+    "label": "Caja de comparativas",
+    "lines": [
+      "Fichas de piezas, precios y alternativas.",
+      "Plata ha comparado hasta las cajas en las que guarda las comparativas."
+    ],
+    "solid": true,
+    "pedestal": false
+  },
+  {
+    "id": "albal_correo",
+    "scene": "albal",
+    "asset": "mobiliario_extra_02",
+    "preferred": [
+      24.6,
+      13
+    ],
+    "w": 0.75,
+    "h": 0.75,
+    "renderW": 0.9,
+    "renderH": 1.5,
+    "label": "Buzón de la mesa del jueves",
+    "lines": [
+      "El buzón del barrio está lleno de publicidad y una reserva escrita a mano.",
+      "«Jueves. Los de siempre. No se cancela»."
+    ],
+    "solid": true,
+    "pedestal": false
+  },
+  {
+    "id": "albal_terraza",
+    "scene": "albal",
+    "asset": "mobiliario_extra_12",
+    "preferred": [
+      5.3,
+      19.6
+    ],
+    "w": 2,
+    "h": 1.1,
+    "renderW": 2.6,
+    "renderH": 2.4,
+    "label": "La mesa de la terraza",
+    "lines": [
+      "Una mesa de terraza con sombra y dos sillas.",
+      "Awelo ya ha preguntado si puede reservar solo una de las sillas para toda la tarde."
+    ],
+    "solid": true,
+    "pedestal": false
+  },
+  {
+    "id": "albal_flores",
+    "scene": "albal",
+    "asset": "mobiliario_extra_11",
+    "preferred": [
+      26.2,
+      21.2
+    ],
+    "w": 1.3,
+    "h": 0.7,
+    "renderW": 1.6,
+    "renderH": 1.1,
+    "label": "Jardinera del barrio",
+    "lines": [
+      "Una jardinera cuidada por los vecinos.",
+      "Cartel: «Las flores no son ingredientes de la hamburguesa del mes»."
+    ],
+    "solid": true,
+    "pedestal": false
+  },
+  {
+    "id": "sueca_marcador",
+    "scene": "sueca",
+    "asset": "marcador_sueca_25_44",
+    "preferred": [
+      6.5,
+      18
+    ],
+    "w": 1.4,
+    "h": 0.65,
+    "renderW": 1.8,
+    "renderH": 1.5,
+    "label": "El marcador del 5 %",
+    "lines": [
+      "25–44. El marcador que Horte se niega a jubilar.",
+      "«Mientras quede un cinco por ciento, aquí no se recoge nada»."
+    ],
+    "solid": true,
+    "pedestal": false
+  },
+  {
+    "id": "sueca_banco",
+    "scene": "sueca",
+    "asset": "mobiliario_extra_00",
+    "preferred": [
+      25,
+      12.8
+    ],
+    "w": 1.5,
+    "h": 0.65,
+    "renderW": 1.9,
+    "renderH": 1.2,
+    "label": "Banco de la remontada",
+    "lines": [
+      "Un banco para comentar el partido durante tres horas.",
+      "Horte ha pedido instalar un proyector. El ayuntamiento sigue estudiándolo."
+    ],
+    "solid": true,
+    "pedestal": false
+  },
+  {
+    "id": "sueca_flores",
+    "scene": "sueca",
+    "asset": "mobiliario_extra_04",
+    "preferred": [
+      6.3,
+      22.3
+    ],
+    "w": 0.65,
+    "h": 0.6,
+    "renderW": 0.85,
+    "renderH": 1.1,
+    "label": "La maceta del santuario",
+    "lines": [
+      "Una maceta con una pequeña placa: «Al milagro del cinco por ciento».",
+      "Alguien ha añadido debajo: «Y a cerrar el rebote, por si acaso»."
+    ],
+    "solid": true,
+    "pedestal": false
+  },
+  {
+    "id": "ruta_banco",
+    "scene": "ruta2",
+    "asset": "mobiliario_extra_00",
+    "preferred": [
+      13.5,
+      11.5
+    ],
+    "w": 1.5,
+    "h": 0.65,
+    "renderW": 1.9,
+    "renderH": 1.2,
+    "label": "Descanso entre naranjos",
+    "lines": [
+      "Un banco al borde del camino. Por fin, una parada sin combate.",
+      "Grabado en la madera: «ESTIC BÉ ACÍ????»."
+    ],
+    "solid": true,
+    "pedestal": false
+  },
+  {
+    "id": "ruta_papelera",
+    "scene": "ruta2",
+    "asset": "mobiliario_extra_01",
+    "preferred": [
+      32.8,
+      16.2
+    ],
+    "w": 0.65,
+    "h": 0.65,
+    "renderW": 0.8,
+    "renderH": 1.1,
+    "label": "La papelera de la ruta",
+    "lines": [
+      "La papelera está recién puesta.",
+      "Un cartel pide llevarse los envoltorios. Las excusas de Awelo tampoco son biodegradables."
+    ],
+    "solid": true,
+    "pedestal": false
+  }
+];
+ const placed=[],reports=[],cache=new Map(),grids=new Map();
+ const priorCollision=collision;
+ const wasScene=state.scene,wasScreen=state.screen;
+ const cell=.5;
+ const boxHit=(p,x,y)=>p.solid&&x>p.x-.22&&x<p.x+p.w+.22&&y>p.y-.12&&y<p.y+p.h+.19;
+ const distanceBox=(p,x,y)=>Math.hypot(Math.max(p.x-x,0,x-p.x-p.w),Math.max(p.y-y,0,y-p.y-p.h));
+ const inside=(a,b,gap=.35)=>a.x<b.x+b.w+gap&&a.x+a.w>b.x-gap&&a.y<b.y+b.h+gap&&a.y+a.h>b.y-gap;
+ function component(g,blocked,seed){
+  const seen=new Uint8Array(g.free.length),queue=new Int32Array(g.free.length);let head=0,tail=0;
+  if(seed<0||!g.free[seed]||blocked?.[seed])return {seen,count:0};
+  queue[tail++]=seed;seen[seed]=1;
+  while(head<tail){const i=queue[head++],x=i%g.cols,y=Math.floor(i/g.cols);
+   for(const n of [x>0?i-1:-1,x+1<g.cols?i+1:-1,y>0?i-g.cols:-1,y+1<g.rows?i+g.cols:-1]){
+    if(n<0||seen[n]||!g.free[n]||blocked?.[n])continue;seen[n]=1;queue[tail++]=n;
+   }
+  }
+  return {seen,count:tail};
+ }
+ function gridFor(scene){
+  if(grids.has(scene))return grids.get(scene);
+  const s=SCENES[scene],g={cols:Math.ceil(s.w/cell),rows:Math.ceil(s.h/cell)};
+  g.free=new Uint8Array(g.cols*g.rows);g.points=[];
+  for(let i=0;i<g.free.length;i++){
+   const x=(i%g.cols+.5)*cell,y=(Math.floor(i/g.cols)+.5)*cell;
+   g.points.push([x,y]);if(!priorCollision(x,y))g.free[i]=1;
+  }
+  const handled=new Uint8Array(g.free.length);let main={count:0,seen:handled};
+  for(let i=0;i<g.free.length;i++)if(g.free[i]&&!handled[i]){
+   const c=component(g,null,i);for(let j=0;j<c.seen.length;j++)if(c.seen[j])handled[j]=1;
+   if(c.count>main.count)main=c;
+  }
+  g.main=main.seen;g.mainCount=main.count;grids.set(scene,g);return g;
+ }
+ function graphAfter(g,props){
+  const blocked=new Uint8Array(g.free.length);let seed=-1,expected=0;
+  for(let i=0;i<g.free.length;i++)if(g.main[i]){
+   const [x,y]=g.points[i];if(props.some(p=>boxHit(p,x,y)))blocked[i]=1;
+   else{expected++;if(seed<0)seed=i;}
+  }
+  const c=component(g,blocked,seed);return {valid:c.count===expected&&expected>0,seen:c.seen,blocked,expected};
+ }
+ function inspectFrom(p,g,graph){
+  const preferred=[[p.x+p.w/2,p.y+p.h+.65],[p.x-.65,p.y+p.h/2],[p.x+p.w+.65,p.y+p.h/2],[p.x+p.w/2,p.y-.65]];
+  for(const [xx,yy] of preferred){let best=null,d=Infinity;
+   for(let i=0;i<g.points.length;i++)if(graph.seen[i]){
+    const [x,y]=g.points[i],delta=Math.hypot(xx-x,yy-y);
+    if(delta<d&&delta<=.55&&distanceBox(p,x,y)<=1.3){d=delta;best=[x,y]}
+   }
+   if(best)return best;
+  }
+  return null;
+ }
+ function canPlace(p,scene,g){
+  const s=SCENES[scene],room=ROOMS50[scene],existing=room?.props||outsideProps53[scene]||[];
+  if(p.x<1.5||p.y<3.5||p.x+p.w>s.w-1.5||p.y+p.h>s.h-1.4)return null;
+  if(room&&p.x<s.w/2+.65&&p.x+p.w>s.w/2-.65)return null;
+  if(existing.some(o=>(o.solid||['court','deck'].includes(o.type))&&inside(p,o,.4)))return null;
+  if(placed.some(o=>o.scene===scene&&inside(p,o,.5)))return null;
+  const doors=PORTALS[scene]||[];
+  if(doors.some(d=>distanceBox(p,d.x,d.y)<1.6))return null;
+  if((s.buildings||[]).some(b=>b.door&&distanceBox(p,b.door[0]+.5,b.door[1]+.8)<1.6))return null;
+  if((LORE_POINTS[scene]||[]).some(l=>distanceBox(p,l.x,l.y)<1))return null;
+  if(getSceneNpcs(scene).some(n=>distanceBox(p,n.x+.5,n.y+.5)<1))return null;
+  for(const dx of [.1,p.w/2,p.w-.1])for(const dy of [.1,p.h/2,p.h-.1])if(priorCollision(p.x+dx,p.y+dy))return null;
+  const inScene=placed.filter(o=>o.scene===scene),graph=graphAfter(g,[...inScene,p]);
+  if(!graph.valid)return null;
+  const approach=inspectFrom(p,g,graph);if(!approach)return null;
+  // Every earlier inspection point must remain reachable too.
+  for(const old of inScene){if(!inspectFrom(old,g,graph))return null;}
+  return {approach,graph};
+ }
+ try{
+  state.screen='world';
+  for(const entry of requested){
+   const {scene}=entry;if(!SCENES[scene]||(!ROOMS50[scene]&&!outsideProps53[scene])){reports.push({id:entry.id,label:entry.label,scene,ok:false,reason:'Escenario no compatible'});continue;}
+   state.scene=scene;const g=gridFor(scene),[px,py]=entry.preferred,candidates=[];
+   for(let dy=-3.5;dy<=3.5;dy+=.5)for(let dx=-3.5;dx<=3.5;dx+=.5)candidates.push({x:Math.round((px+dx)*2)/2,y:Math.round((py+dy)*2)/2,cost:Math.hypot(dx,dy)+Math.abs(dy)*.15});
+   candidates.sort((a,b)=>a.cost-b.cost);
+   let result=null,prop=null;
+   for(const c of candidates){
+    const p={...entry,type:'megaprop647',x:c.x,y:c.y,depth647:true};const accepted=canPlace(p,scene,g);
+    if(accepted){result=accepted;prop=p;break;}
+   }
+   if(!prop){reports.push({id:entry.id,label:entry.label,scene,ok:false,reason:'No hay hueco con acceso seguro'});continue;}
+   prop.approach=result.approach;placed.push(prop);
+   if(ROOMS50[scene])ROOMS50[scene].props.push(prop);else outsideProps53[scene].push(prop);
+   const point={id:'prop647_'+prop.id,x:prop.approach[0],y:prop.approach[1],label:prop.label};
+   (LORE_POINTS[scene]||(LORE_POINTS[scene]=[])).push(point);
+   reports.push({id:prop.id,label:prop.label,scene,ok:true,x:prop.x,y:prop.y,approach:prop.approach});
+  }
+ }finally{state.scene=wasScene;state.screen=wasScreen;}
+ // Audit grids are temporary; the world retains only the small placement list.
+ grids.clear();
+ collision=function(x,y){if(priorCollision(x,y))return true;return placed.some(p=>p.scene===state.scene&&boxHit(p,x,y));};
+ function picture(p){
+  if(!cache.has(p.asset)){const im=new Image();im.src=sources[p.asset];cache.set(p.asset,im);}
+  return cache.get(p.asset);
+ }
+ function drawPlaced(p){
+  const im=picture(p),bottom=(p.y+p.h)*TILE,cx=(p.x+p.w/2)*TILE;
+  ctx.save();ctx.imageSmoothingEnabled=false;
+  ctx.fillStyle='rgba(20,39,45,.19)';ctx.beginPath();ctx.ellipse(cx,bottom-2,p.w*TILE*.43,Math.max(3,p.h*TILE*.16),0,0,Math.PI*2);ctx.fill();
+  let base=0;
+  if(p.pedestal){base=15;ctx.fillStyle='#2a505c';ctx.fillRect(cx-19,bottom-16,38,16);ctx.fillStyle='#a9c6c3';ctx.fillRect(cx-21,bottom-19,42,5);}
+  if(im.complete&&im.naturalWidth){const k=Math.min(p.renderW*TILE/im.naturalWidth,p.renderH*TILE/im.naturalHeight),w=im.naturalWidth*k,h=im.naturalHeight*k;ctx.drawImage(im,Math.round(cx-w/2),Math.round(bottom-base-h),Math.round(w),Math.round(h));}
+  else{ctx.fillStyle='#9e7853';ctx.fillRect(cx-p.w*TILE/2,bottom-p.h*TILE,p.w*TILE,p.h*TILE);ctx.strokeStyle='#e5d29a';ctx.strokeRect(cx-p.w*TILE/2+3,bottom-p.h*TILE+3,p.w*TILE-6,p.h*TILE-6);}
+  ctx.restore();
+ }
+ const beforeProp647=drawProp50;
+ drawProp50=function(o){if(o.type==='megaprop647')return drawPlaced(o);return beforeProp647(o);};
+ const beforeOutdoor647=drawOutdoorProp53;
+ drawOutdoorProp53=function(o){if(o.type==='megaprop647')return drawPlaced(o);return beforeOutdoor647(o);};
+ const beforeLore647=landmarkTalk;
+ landmarkTalk=function(p){if(p.id?.startsWith('prop647_')){const prop=placed.find(o=>'prop647_'+o.id===p.id);if(prop)return dialog(null,[prop.label,...prop.lines]);}return beforeLore647(p);};
+ for(const p of placed)picture(p);
+ const brand=document.querySelector('.brand small');if(brand)brand.textContent='AVENTURA WEB · 6.47 · NUEVOS ELEMENTOS';
+ document.title='Pokémon La Previa 6.47 · Un mundo con más detalles';
+ const previousTitle647=title64Frame;
+ title64Frame=function(...args){const r=previousTitle647(...args);const footer=title64Layer?.querySelector('.title64-footer span');if(footer)footer.textContent='EDICIÓN LA PREVIA · WEB 6.47';return r;};
+ // This information lives only in the existing developer panel.
+ function addReport(){
+  const panel=document.getElementById('dev600Panel');if(!panel||panel.querySelector('#props647Report'))return;
+  const detail=document.createElement('details');detail.id='props647Report';
+  const summary=document.createElement('summary');summary.textContent='Elementos 6.47: '+placed.length+'/'+requested.length+' colocados · '+new Set(placed.map(p=>p.scene)).size+' zonas · ver recorridos';detail.appendChild(summary);
+  const list=document.createElement('ul');
+  for(const r of reports){const li=document.createElement('li');li.textContent=(r.ok?'✓ ':'⚠ ')+r.label+' · '+r.scene+(r.ok?' · acceso comprobado':': '+r.reason);list.appendChild(li)}
+  detail.appendChild(list);detail.style.cssText='font-size:12px;color:#cde1d5;padding:10px 0';panel.appendChild(detail);
+ }
+ const overlay=document.getElementById('dev600Overlay');if(overlay){new MutationObserver(addReport).observe(overlay,{childList:true,subtree:true});addReport();}
+ window.__PROPS_647={version:'6.47',placements:placed,reports};
+ if(reports.some(r=>!r.ok))console.warn('Elementos 6.47: hay colocaciones pendientes de revisar.');
 })();
 
 asset('friends_atlas25');for(const d of Object.values(AVATARS28))asset(d.asset);
