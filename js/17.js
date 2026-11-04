@@ -20336,6 +20336,76 @@ window.__world642={version:'6.42',ids:Object.keys(MAPS),models:MAPS,qa,props:id=
  scene:id=>{if(!MAPS[id])return false;state.scene=id;state.screen='world';const m=MAPS[id];const [x,y]=({albal:[19,15],silla:[17,17],sueca:[17,17]})[id];state.player.x=x+.5;state.player.y=y+.5;updateScene(false);return true;},
  saveTest:()=>validSave(serializeState())};
 })();
+/* Pokémon Edición La Previa · 6.45 · laboratorio antes del inicial.
+ * Instalado DENTRO del motor, justo antes de su puesta en marcha.
+ * No altera guardados, flags de historia, inventario ni los Pokémon.
+ */
+const lp645GetNearbyOriginal=getNearby;
+const lp645CollisionOriginal=collision;
+const lp645InteractOriginal=interact;
+const lp645HandleStepOriginal=handleStep;
+function lp645LabDoor(){
+ const b=(SCENES.benifaio?.buildings||[]).find(o=>o.type==='lab');
+ const [x,y]=b?.door||[11,11];
+ return {x:x+.5,y:y+.8,tileX:Math.floor(x),tileY:Math.floor(y)};
+}
+function lp645AtLab(){
+ if(state.screen!=='world'||state.scene!=='benifaio')return false;
+ const d=lp645LabDoor(),p=state.player;
+ // Solo frente a la puerta; el edificio sigue sólido fuera del umbral.
+ return Math.abs(p.x-d.x)<=1.3&&p.y>=d.y-.5&&p.y<=d.y+2.2;
+}
+function lp645AtHomeExit(){
+ if(state.screen!=='world'||state.scene!=='casa_beni32'||state.flags?.starter)return false;
+ const exit=(PORTALS.casa_beni32||[]).find(p=>p.to==='benifaio');
+ if(!exit)return false;
+ return Math.hypot(state.player.x-exit.x,state.player.y-exit.y)<1.6;
+}
+getNearby=function(...args){
+ if(lp645AtLab())return {kind:'door',scene:'lab',spawn:[8,11],dist:.1,label:'ENTRAR · LABORATORIO DE ALFARO'};
+ if(lp645AtHomeExit())return {kind:'door',scene:'benifaio',spawn:[28,13],dist:.1,label:'SALIR A BENIFAIÓ'};
+ return lp645GetNearbyOriginal(...args);
+};
+collision=function(x,y){
+ // No bloquear la casilla de puerta, aunque la fachada sí tenga colisión.
+ if(state.scene==='benifaio'){
+  const d=lp645LabDoor();
+  if(Math.floor(x)===d.tileX&&Math.floor(y)===d.tileY)return false;
+ }
+ return lp645CollisionOriginal(x,y);
+};
+interact=function(...args){
+ if(lp645AtLab())return changeScene('lab',[8,11]);
+ if(lp645AtHomeExit())return changeScene('benifaio',[28,13]);
+ return lp645InteractOriginal(...args);
+};
+handleStep=function(...args){
+ if(lp645AtLab()){
+  const d=lp645LabDoor();
+  if(Math.abs(state.player.x-d.x)<.62&&state.player.y>=d.y-.2&&state.player.y<=d.y+.55)
+   return changeScene('lab',[8,11]);
+ }
+ return lp645HandleStepOriginal(...args);
+};
+// Actualizar el rótulo que 6.42 escribía de forma fija en el propio motor.
+// Mantener serializeState.edition intacto protege la compatibilidad del guardado.
+const lp645Brand=document.querySelector('.brand small');
+if(lp645Brand)lp645Brand.textContent='AVENTURA WEB · 6.45 · LABORATORIO CORREGIDO';
+document.title='Pokémon La Previa 6.45 · Laboratorio de Alfaro';
+if(typeof title64Frame==='function'){
+ const lp645TitleBefore=title64Frame;
+ title64Frame=function(...args){
+  const result=lp645TitleBefore(...args);
+  const footer=title64Layer?.querySelector('.title64-footer span');
+  if(footer)footer.textContent='EDICIÓN LA PREVIA · WEB 6.45';
+  return result;
+ };
+}
+window.__PREVIA_645={version:'6.45',door:lp645LabDoor,
+ inspect:()=>({scene:state.scene,starter:!!state.flags.starter,player:{x:state.player.x,y:state.player.y},near:getNearby()}),
+ atDoor:lp645AtLab};
+
+
 asset('friends_atlas25');for(const d of Object.values(AVATARS28))asset(d.asset);
 resizeStage();updateScene(false);showStart();requestAnimationFrame(frame);
 })();
