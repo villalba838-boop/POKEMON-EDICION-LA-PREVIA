@@ -16481,6 +16481,12 @@ for(const [k,v] of Object.entries(R598ASSETS)){window.__ASSETS[k]=v;}
  window.__PREVIA_DEV_ACTIVE_600=devActive600;
  let lastPreset600='mewtwo', panelWas600='title';
  const PRESETS600=[
+  {id:"646_lab",label:"Visual 6.46 · Alfaro",detail:'Revisar objetos transparentes y recorrido en partida de prueba',scene:"lab",spawn:SCENES["lab"].spawn||[8,11],badges:8},
+  {id:"646_silla",label:"Visual 6.46 · CB Silla",detail:'Revisar objetos transparentes y recorrido en partida de prueba',scene:"gym_sergio",spawn:SCENES["gym_sergio"].spawn||[8,11],badges:8},
+  {id:"646_vinted",label:"Visual 6.46 · Vinted",detail:'Revisar objetos transparentes y recorrido en partida de prueba',scene:"vinted33",spawn:SCENES["vinted33"].spawn||[8,11],badges:8},
+  {id:"646_nachito",label:"Visual 6.46 · Gimnasio Nachito",detail:'Revisar objetos transparentes y recorrido en partida de prueba',scene:"gym_nachito",spawn:SCENES["gym_nachito"].spawn||[8,11],badges:8},
+  {id:"646_zaragoza",label:"Visual 6.46 · Apartamento Awelo",detail:'Revisar objetos transparentes y recorrido en partida de prueba',scene:"z534_apartment",spawn:SCENES["z534_apartment"].spawn||[8,11],badges:8},
+  {id:"646_ruta",label:"Visual 6.46 · Ruta de naranjos",detail:'Revisar objetos transparentes y recorrido en partida de prueba',scene:"ruta2",spawn:SCENES["ruta2"].spawn||[8,11],badges:8},
   {id:'beniparrell',label:'Beniparrell · Ciudad renovada',detail:'Plaza, Team Cierre, puerta de la Liga y postgame',scene:'beniparrell',spawn:[16,22],badges:7},
   {id:'gimnasio',label:'Gimnasio VIII · Reclutas',detail:'Siete medallas; resuelve la nave del Team Cierre',scene:'team_cierre_gym',spawn:[17,28],badges:7},
   {id:'rober',label:'Rober · Octava medalla',detail:'Acceso a la sala del jefe del Team Cierre',scene:'team_cierre_gym',spawn:[17,11],badges:7},
@@ -20408,6 +20414,74 @@ window.__PREVIA_645={version:'6.45',door:lp645LabDoor,
  inspect:()=>({scene:state.scene,starter:!!state.flags.starter,player:{x:state.player.x,y:state.player.y},near:getNearby()}),
  atDoor:lp645AtLab};
 
+
+/* 6.46 · Objetos recortados del paquete visual revisado.
+ * Solo sustituye el dibujo; huellas, profundidad, puertas y guardado pertenecen al motor.
+ */
+(function installVisual646(){
+ const paths={"biblioteca_ejercicios_537": "/assets/v646_biblioteca_ejercicios_537.png", "canasta_pista_537": "/assets/v646_canasta_pista_537.png", "grada_pabellon_537": "/assets/v646_grada_pabellon_537.png", "marcador_gimnasio_537": "/assets/v646_marcador_gimnasio_537.png", "mesita_noche_537": "/assets/v646_mesita_noche_537.png", "portal_dimensional_537": "/assets/v646_portal_dimensional_537.png", "vitrina_copas_537": "/assets/v646_vitrina_copas_537.png", "cama_zaragoza_51": "/assets/v646_cama_zaragoza_51.png", "despensa_refrescos_51": "/assets/v646_despensa_refrescos_51.png", "estanteria_recuerdos_51": "/assets/v646_estanteria_recuerdos_51.png", "maceta_tropical_51": "/assets/v646_maceta_tropical_51.png", "maquina_bebidas_51": "/assets/v646_maquina_bebidas_51.png", "maquina_recreativa_51": "/assets/v646_maquina_recreativa_51.png", "mostrador_tienda_51": "/assets/v646_mostrador_tienda_51.png", "perchero_ropa_51": "/assets/v646_perchero_ropa_51.png", "arbol_hueco_539": "/assets/v646_arbol_hueco_539.png", "barrera_paso_539": "/assets/v646_barrera_paso_539.png", "cama_de_campo_539": "/assets/v646_cama_de_campo_539.png", "escritorio_espia_539": "/assets/v646_escritorio_espia_539.png", "maquina_gas_539": "/assets/v646_maquina_gas_539.png", "mesa_ritual_539": "/assets/v646_mesa_ritual_539.png", "naranjo_caldero_539": "/assets/v646_naranjo_caldero_539.png", "ordenador_actas_539": "/assets/v646_ordenador_actas_539.png", "radio_urgencia_539": "/assets/v646_radio_urgencia_539.png", "reliquia_gato_539": "/assets/v646_reliquia_gato_539.png", "reloj_epico_539": "/assets/v646_reloj_epico_539.png", "senales_rutas_539": "/assets/v646_senales_rutas_539.png", "banco_madera_53": "/assets/v646_banco_madera_53.png"};
+ const loaded=new Map();
+ function sprite646(key){
+  if(!paths[key])return null;
+  if(!loaded.has(key)){
+   const im=new Image();
+   im.onload=()=>{a537RoomCache.clear();a537FloorCache.clear();a536FloorCache.clear();};
+   im.src=paths[key];loaded.set(key,im);
+  }
+  const im=loaded.get(key);return im.complete&&im.naturalWidth?im:null;
+ }
+ // Source PNGs already have individual alpha silhouettes. Keep their aspect ratio
+ // and anchor their bottom to the same depth-sorted foot as the original object.
+ function draw646(g,key,x,bottom,width,maxH=9999){
+  const im=sprite646(key);if(!im)return false;
+  const k=Math.min(width/im.naturalWidth,maxH/im.naturalHeight),w=im.naturalWidth*k,h=im.naturalHeight*k,xx=x+(width-w)/2;
+  g.save();g.imageSmoothingEnabled=false;
+  g.drawImage(im,Math.round(xx),Math.round(bottom-h),Math.round(w),Math.round(h));g.restore();
+  return {x:xx,y:bottom-h,w,h};
+ }
+ const gym646={0:'marcador_gimnasio_537',1:'grada_pabellon_537',2:'canasta_pista_537',3:'vitrina_copas_537',6:'biblioteca_ejercicios_537',8:'portal_dimensional_537',12:'mesita_noche_537'};
+ const previousGym646=a537Draw;
+ a537Draw=function(g,i,x,b,w,h=9999){return gym646[i]&&draw646(g,gym646[i],x,b,w,h)||previousGym646(g,i,x,b,w,h)};
+ const places646={6:'cama_de_campo_539',7:'estanteria_recuerdos_51',11:'maceta_tropical_51',14:'vitrina_copas_537'};
+ const previousPlaces646=a536Draw;
+ a536Draw=function(g,i,x,b,w,h=9999){return places646[i]&&draw646(g,places646[i],x,b,w,h)||previousPlaces646(g,i,x,b,w,h)};
+ const relics646={0:'reloj_epico_539',1:'escritorio_espia_539',4:'reliquia_gato_539',5:'ordenador_actas_539',8:'maquina_gas_539',9:'cama_de_campo_539',11:'mesita_noche_537',13:'mesa_ritual_539',14:'despensa_refrescos_51',17:'radio_urgencia_539',30:'naranjo_caldero_539',31:'arbol_hueco_539',32:'barrera_paso_539',33:'senales_rutas_539',39:'cama_de_campo_539'};
+ const previousRelics646=a539Draw;
+ a539Draw=function(g,i,x,b,w,h=9999){
+  if(relics646[i]&&draw646(g,relics646[i],x,b,w,h)){a539Seen.add(i);return true;}
+  return previousRelics646(g,i,x,b,w,h);
+ };
+ const furniture646={rack:'perchero_ropa_51',boutiqueShelf:'estanteria_recuerdos_51',counter:'mostrador_tienda_51',fridge:'maquina_bebidas_51',bed:'cama_zaragoza_51',mayo:'despensa_refrescos_51',dex:'maquina_recreativa_51',plant:'maceta_tropical_51'};
+ const previousProp646=drawProp50;
+ drawProp50=function(o){
+  // Special objects carry the existing story: do not replace their joke with
+  // a generic item even when their underlying furniture type is the same.
+  const special=a539RoomItem(o,state.scene);
+  if(special!==null)return previousProp646(o);
+  const key=furniture646[artKey51(o)];
+  if(!key)return previousProp646(o);
+  const maxH=o.type==='counter'?84:o.type==='curtain'?144:o.h*TILE+100;
+  const d=draw646(ctx,key,o.x*TILE,(o.y+o.h)*TILE,o.w*TILE,maxH);
+  if(!d)return previousProp646(o);
+  if(o.label&&o.type==='counter'){
+   ctx.save();ctx.font='bold 10px monospace';ctx.textAlign='center';
+   const w=Math.min(o.w*TILE-10,ctx.measureText(o.label).width+12),cx=(o.x+o.w/2)*TILE,b=(o.y+o.h)*TILE;
+   ctx.fillStyle='#213d43';ctx.fillRect(cx-w/2,b-19,w,15);ctx.fillStyle='#f7e4b5';ctx.fillText(o.label,cx,b-8);ctx.restore();
+  }
+  if(o.type==='fridge'&&state.scene==='casa_beni32'){
+   ctx.save();ctx.font='bold 10px monospace';ctx.textAlign='center';ctx.fillStyle='#efe0ae';ctx.fillRect(d.x+3,d.y+5,d.w-6,15);ctx.fillStyle='#264851';ctx.fillText('YATEKOMO',d.x+d.w/2,d.y+16);ctx.restore();
+  }
+ };
+ const previousBench646=drawBench;
+ drawBench=function(x,y){if(!draw646(ctx,'banco_madera_53',x,y+54,66,54))return previousBench646(x,y)};
+ const activeKeys=new Set([...Object.values(gym646),...Object.values(places646),...Object.values(relics646),...Object.values(furniture646),'banco_madera_53']);
+ for(const key of activeKeys)sprite646(key);
+ const brand=document.querySelector('.brand small');if(brand)brand.textContent='AVENTURA WEB · 6.46 · OBJETOS TRANSPARENTES';
+ document.title='Pokémon La Previa 6.46 · Mejora visual';
+ const previousTitle646=title64Frame;
+ title64Frame=function(...args){const r=previousTitle646(...args);const footer=title64Layer?.querySelector('.title64-footer span');if(footer)footer.textContent='EDICIÓN LA PREVIA · WEB 6.46';return r;};
+ window.__VISUAL_646={version:'6.46',resources:[...activeKeys],ready:()=>[...activeKeys].filter(k=>sprite646(k)).length};
+})();
 
 asset('friends_atlas25');for(const d of Object.values(AVATARS28))asset(d.asset);
 resizeStage();updateScene(false);showStart();requestAnimationFrame(frame);
