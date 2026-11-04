@@ -1,0 +1,2180 @@
+{
+  "version": "6.48",
+  "total_pack": 343,
+  "nota": "Este inventario distingue un adaptador conectado de una inspección visual individual. Las 62 decoraciones se validan contra las colisiones reales al cargar. No todos los 343 recursos están colocados. No se sustituyen puentes, suelos ni fachadas sin adaptación geométrica.",
+  "recursos": [
+    {
+      "id": "arbol_kanto",
+      "categoria": "naturaleza",
+      "fuente_pack": "sprites/naturaleza/arbol_kanto.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v648_arbol_kanto.png"
+    },
+    {
+      "id": "arbol_clasico",
+      "categoria": "naturaleza",
+      "fuente_pack": "sprites/naturaleza/arbol_clasico.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v648_arbol_clasico.png"
+    },
+    {
+      "id": "arbusto_redondo",
+      "categoria": "naturaleza",
+      "fuente_pack": "sprites/naturaleza/arbusto_redondo.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v648_arbusto_redondo.png"
+    },
+    {
+      "id": "arbusto_grande",
+      "categoria": "naturaleza",
+      "fuente_pack": "sprites/naturaleza/arbusto_grande.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "arriate_floral",
+      "categoria": "naturaleza",
+      "fuente_pack": "sprites/naturaleza/arriate_floral.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v648_arriate_floral.png"
+    },
+    {
+      "id": "jardinera_parque",
+      "categoria": "urbano",
+      "fuente_pack": "sprites/urbano/jardinera_parque.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "macetero_redondo",
+      "categoria": "urbano",
+      "fuente_pack": "sprites/urbano/macetero_redondo.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "farola_pueblo",
+      "categoria": "urbano",
+      "fuente_pack": "sprites/urbano/farola_pueblo.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "banco_parque_clasico",
+      "categoria": "urbano",
+      "fuente_pack": "sprites/urbano/banco_parque_clasico.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "banco_parque_azul",
+      "categoria": "urbano",
+      "fuente_pack": "sprites/urbano/banco_parque_azul.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "fuente_pueblo_ornamentada",
+      "categoria": "urbano",
+      "fuente_pack": "sprites/urbano/fuente_pueblo_ornamentada.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "fuente_pueblo_azul",
+      "categoria": "urbano",
+      "fuente_pack": "sprites/urbano/fuente_pueblo_azul.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "estanque_plaza",
+      "categoria": "naturaleza",
+      "fuente_pack": "sprites/naturaleza/estanque_plaza.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "porton_entrada",
+      "categoria": "urbano",
+      "fuente_pack": "sprites/urbano/porton_entrada.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "arco_pueblo",
+      "categoria": "urbano",
+      "fuente_pack": "sprites/urbano/arco_pueblo.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "tablón_la_previa",
+      "categoria": "humor_previa",
+      "fuente_pack": "sprites/humor_previa/tablón_la_previa.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "senal_madera",
+      "categoria": "urbano",
+      "fuente_pack": "sprites/urbano/senal_madera.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "senal_camino",
+      "categoria": "urbano",
+      "fuente_pack": "sprites/urbano/senal_camino.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "letrero_laboratorio",
+      "categoria": "pokemon_laboratorio",
+      "fuente_pack": "sprites/pokemon_laboratorio/letrero_laboratorio.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "buzon_correo",
+      "categoria": "urbano",
+      "fuente_pack": "sprites/urbano/buzon_correo.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "puesto_mercado",
+      "categoria": "urbano",
+      "fuente_pack": "sprites/urbano/puesto_mercado.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "mercado_benifaio",
+      "categoria": "urbano",
+      "fuente_pack": "sprites/urbano/mercado_benifaio.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "sombrilla_terraza",
+      "categoria": "urbano",
+      "fuente_pack": "sprites/urbano/sombrilla_terraza.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "mesa_terraza",
+      "categoria": "interiores",
+      "fuente_pack": "sprites/interiores/mesa_terraza.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "silla_awelo",
+      "categoria": "humor_previa",
+      "fuente_pack": "sprites/humor_previa/silla_awelo.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "valla_madera_horizontal",
+      "categoria": "urbano",
+      "fuente_pack": "sprites/urbano/valla_madera_horizontal.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "valla_madera_vertical",
+      "categoria": "urbano",
+      "fuente_pack": "sprites/urbano/valla_madera_vertical.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "hierba_alta",
+      "categoria": "naturaleza",
+      "fuente_pack": "sprites/naturaleza/hierba_alta.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "jardinera_flores_53",
+      "categoria": "urbano",
+      "fuente_pack": "sprites/urbano/jardinera_flores_53.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "banco_madera_53",
+      "categoria": "urbano",
+      "fuente_pack": "sprites/urbano/banco_madera_53.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v646_banco_madera_53.png"
+    },
+    {
+      "id": "farola_hierro_53",
+      "categoria": "urbano",
+      "fuente_pack": "sprites/urbano/farola_hierro_53.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "terraza_sombrilla_53",
+      "categoria": "urbano",
+      "fuente_pack": "sprites/urbano/terraza_sombrilla_53.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "puesto_fruta_53",
+      "categoria": "urbano",
+      "fuente_pack": "sprites/urbano/puesto_fruta_53.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "fuente_monumental_53",
+      "categoria": "urbano",
+      "fuente_pack": "sprites/urbano/fuente_monumental_53.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "charca_florida_53",
+      "categoria": "urbano",
+      "fuente_pack": "sprites/urbano/charca_florida_53.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "canasta_parque_53",
+      "categoria": "urbano",
+      "fuente_pack": "sprites/urbano/canasta_parque_53.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "equipo_deportivo_53",
+      "categoria": "urbano",
+      "fuente_pack": "sprites/urbano/equipo_deportivo_53.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v648_equipo_deportivo_53.png"
+    },
+    {
+      "id": "reloj_calle_53",
+      "categoria": "urbano",
+      "fuente_pack": "sprites/urbano/reloj_calle_53.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v648_reloj_calle_53.png"
+    },
+    {
+      "id": "pizarra_calle_53",
+      "categoria": "urbano",
+      "fuente_pack": "sprites/urbano/pizarra_calle_53.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "naranjo_53",
+      "categoria": "urbano",
+      "fuente_pack": "sprites/urbano/naranjo_53.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "cana_marjal_53",
+      "categoria": "urbano",
+      "fuente_pack": "sprites/urbano/cana_marjal_53.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v648_cana_marjal_53.png"
+    },
+    {
+      "id": "carro_tecnico_53",
+      "categoria": "urbano",
+      "fuente_pack": "sprites/urbano/carro_tecnico_53.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "caseta_pajaros_53",
+      "categoria": "urbano",
+      "fuente_pack": "sprites/urbano/caseta_pajaros_53.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v648_caseta_pajaros_53.png"
+    },
+    {
+      "id": "puente_ponton_53",
+      "categoria": "puentes",
+      "fuente_pack": "sprites/puentes/puente_ponton_53.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "perchero_ropa_51",
+      "categoria": "interiores",
+      "fuente_pack": "sprites/interiores/perchero_ropa_51.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v646_perchero_ropa_51.png"
+    },
+    {
+      "id": "estanteria_recuerdos_51",
+      "categoria": "interiores",
+      "fuente_pack": "sprites/interiores/estanteria_recuerdos_51.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v646_estanteria_recuerdos_51.png"
+    },
+    {
+      "id": "biombo_51",
+      "categoria": "interiores",
+      "fuente_pack": "sprites/interiores/biombo_51.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "mostrador_tienda_51",
+      "categoria": "interiores",
+      "fuente_pack": "sprites/interiores/mostrador_tienda_51.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v646_mostrador_tienda_51.png"
+    },
+    {
+      "id": "estante_equipaciones_51",
+      "categoria": "interiores",
+      "fuente_pack": "sprites/interiores/estante_equipaciones_51.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v648_estante_equipaciones_51.png"
+    },
+    {
+      "id": "maquina_bebidas_51",
+      "categoria": "interiores",
+      "fuente_pack": "sprites/interiores/maquina_bebidas_51.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v646_maquina_bebidas_51.png"
+    },
+    {
+      "id": "bolsa_balones_51",
+      "categoria": "interiores",
+      "fuente_pack": "sprites/interiores/bolsa_balones_51.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v647_bolsa_balones_51.png"
+    },
+    {
+      "id": "cama_zaragoza_51",
+      "categoria": "interiores",
+      "fuente_pack": "sprites/interiores/cama_zaragoza_51.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v646_cama_zaragoza_51.png"
+    },
+    {
+      "id": "despensa_refrescos_51",
+      "categoria": "interiores",
+      "fuente_pack": "sprites/interiores/despensa_refrescos_51.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v646_despensa_refrescos_51.png"
+    },
+    {
+      "id": "maquina_recreativa_51",
+      "categoria": "interiores",
+      "fuente_pack": "sprites/interiores/maquina_recreativa_51.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v646_maquina_recreativa_51.png"
+    },
+    {
+      "id": "mesa_alquimia_51",
+      "categoria": "interiores",
+      "fuente_pack": "sprites/interiores/mesa_alquimia_51.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "mesa_computadores_51",
+      "categoria": "interiores",
+      "fuente_pack": "sprites/interiores/mesa_computadores_51.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v648_mesa_computadores_51.png"
+    },
+    {
+      "id": "plancha_cocina_51",
+      "categoria": "interiores",
+      "fuente_pack": "sprites/interiores/plancha_cocina_51.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "mesa_comensal_51",
+      "categoria": "interiores",
+      "fuente_pack": "sprites/interiores/mesa_comensal_51.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "mesas_bh_51",
+      "categoria": "interiores",
+      "fuente_pack": "sprites/interiores/mesas_bh_51.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "maceta_tropical_51",
+      "categoria": "interiores",
+      "fuente_pack": "sprites/interiores/maceta_tropical_51.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v646_maceta_tropical_51.png"
+    },
+    {
+      "id": "fachada_casa_tierra_536",
+      "categoria": "interiores",
+      "fuente_pack": "sprites/interiores/fachada_casa_tierra_536.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "fachada_casa_purpura_536",
+      "categoria": "interiores",
+      "fuente_pack": "sprites/interiores/fachada_casa_purpura_536.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "fachada_escuela_536",
+      "categoria": "interiores",
+      "fuente_pack": "sprites/interiores/fachada_escuela_536.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "pergola_entrada_536",
+      "categoria": "interiores",
+      "fuente_pack": "sprites/interiores/pergola_entrada_536.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "barra_bar_536",
+      "categoria": "interiores",
+      "fuente_pack": "sprites/interiores/barra_bar_536.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v648_barra_bar_536.png"
+    },
+    {
+      "id": "mesa_cena_536",
+      "categoria": "interiores",
+      "fuente_pack": "sprites/interiores/mesa_cena_536.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v648_mesa_cena_536.png"
+    },
+    {
+      "id": "cama_pension_536",
+      "categoria": "interiores",
+      "fuente_pack": "sprites/interiores/cama_pension_536.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v648_cama_pension_536.png"
+    },
+    {
+      "id": "libreria_antigua_536",
+      "categoria": "interiores",
+      "fuente_pack": "sprites/interiores/libreria_antigua_536.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v648_libreria_antigua_536.png"
+    },
+    {
+      "id": "tocador_536",
+      "categoria": "interiores",
+      "fuente_pack": "sprites/interiores/tocador_536.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v648_tocador_536.png"
+    },
+    {
+      "id": "lavabo_536",
+      "categoria": "interiores",
+      "fuente_pack": "sprites/interiores/lavabo_536.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v648_lavabo_536.png"
+    },
+    {
+      "id": "fogones_536",
+      "categoria": "interiores",
+      "fuente_pack": "sprites/interiores/fogones_536.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v648_fogones_536.png"
+    },
+    {
+      "id": "geranio_grande_536",
+      "categoria": "interiores",
+      "fuente_pack": "sprites/interiores/geranio_grande_536.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v648_geranio_grande_536.png"
+    },
+    {
+      "id": "arco_jardin_536",
+      "categoria": "interiores",
+      "fuente_pack": "sprites/interiores/arco_jardin_536.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v648_arco_jardin_536.png"
+    },
+    {
+      "id": "banco_espaldera_536",
+      "categoria": "interiores",
+      "fuente_pack": "sprites/interiores/banco_espaldera_536.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v648_banco_espaldera_536.png"
+    },
+    {
+      "id": "vitrina_trofeos_536",
+      "categoria": "interiores",
+      "fuente_pack": "sprites/interiores/vitrina_trofeos_536.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v648_vitrina_trofeos_536.png"
+    },
+    {
+      "id": "mesa_alquimista_536",
+      "categoria": "interiores",
+      "fuente_pack": "sprites/interiores/mesa_alquimista_536.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v648_mesa_alquimista_536.png"
+    },
+    {
+      "id": "marcador_gimnasio_537",
+      "categoria": "baloncesto",
+      "fuente_pack": "sprites/baloncesto/marcador_gimnasio_537.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v646_marcador_gimnasio_537.png"
+    },
+    {
+      "id": "grada_pabellon_537",
+      "categoria": "baloncesto",
+      "fuente_pack": "sprites/baloncesto/grada_pabellon_537.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v646_grada_pabellon_537.png"
+    },
+    {
+      "id": "canasta_pista_537",
+      "categoria": "baloncesto",
+      "fuente_pack": "sprites/baloncesto/canasta_pista_537.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v646_canasta_pista_537.png"
+    },
+    {
+      "id": "vitrina_copas_537",
+      "categoria": "baloncesto",
+      "fuente_pack": "sprites/baloncesto/vitrina_copas_537.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v646_vitrina_copas_537.png"
+    },
+    {
+      "id": "libro_leyendas_537",
+      "categoria": "baloncesto",
+      "fuente_pack": "sprites/baloncesto/libro_leyendas_537.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v648_libro_leyendas_537.png"
+    },
+    {
+      "id": "estanque_kiwi_537",
+      "categoria": "baloncesto",
+      "fuente_pack": "sprites/baloncesto/estanque_kiwi_537.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v648_estanque_kiwi_537.png"
+    },
+    {
+      "id": "biblioteca_ejercicios_537",
+      "categoria": "baloncesto",
+      "fuente_pack": "sprites/baloncesto/biblioteca_ejercicios_537.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v646_biblioteca_ejercicios_537.png"
+    },
+    {
+      "id": "circulo_magico_537",
+      "categoria": "baloncesto",
+      "fuente_pack": "sprites/baloncesto/circulo_magico_537.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v648_circulo_magico_537.png"
+    },
+    {
+      "id": "portal_dimensional_537",
+      "categoria": "baloncesto",
+      "fuente_pack": "sprites/baloncesto/portal_dimensional_537.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v646_portal_dimensional_537.png"
+    },
+    {
+      "id": "reliquia_campanas_537",
+      "categoria": "baloncesto",
+      "fuente_pack": "sprites/baloncesto/reliquia_campanas_537.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v648_reliquia_campanas_537.png"
+    },
+    {
+      "id": "vitrina_cristales_537",
+      "categoria": "baloncesto",
+      "fuente_pack": "sprites/baloncesto/vitrina_cristales_537.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v648_vitrina_cristales_537.png"
+    },
+    {
+      "id": "mesa_dj_gimnasio_537",
+      "categoria": "baloncesto",
+      "fuente_pack": "sprites/baloncesto/mesa_dj_gimnasio_537.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v648_mesa_dj_gimnasio_537.png"
+    },
+    {
+      "id": "mesita_noche_537",
+      "categoria": "baloncesto",
+      "fuente_pack": "sprites/baloncesto/mesita_noche_537.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v646_mesita_noche_537.png"
+    },
+    {
+      "id": "carrito_limonero_537",
+      "categoria": "baloncesto",
+      "fuente_pack": "sprites/baloncesto/carrito_limonero_537.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v648_carrito_limonero_537.png"
+    },
+    {
+      "id": "gramola_zaragoza_537",
+      "categoria": "baloncesto",
+      "fuente_pack": "sprites/baloncesto/gramola_zaragoza_537.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v648_gramola_zaragoza_537.png"
+    },
+    {
+      "id": "suelo_cristal_537",
+      "categoria": "baloncesto",
+      "fuente_pack": "sprites/baloncesto/suelo_cristal_537.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "trono_del_kiwi_538",
+      "categoria": "humor_previa",
+      "fuente_pack": "sprites/humor_previa/trono_del_kiwi_538.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v648_trono_del_kiwi_538.png"
+    },
+    {
+      "id": "trono_bano_del_rey_538",
+      "categoria": "humor_previa",
+      "fuente_pack": "sprites/humor_previa/trono_bano_del_rey_538.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v648_trono_bano_del_rey_538.png"
+    },
+    {
+      "id": "canasta_gallo_538",
+      "categoria": "humor_previa",
+      "fuente_pack": "sprites/humor_previa/canasta_gallo_538.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v648_canasta_gallo_538.png"
+    },
+    {
+      "id": "maquina_loca_nachito_538",
+      "categoria": "humor_previa",
+      "fuente_pack": "sprites/humor_previa/maquina_loca_nachito_538.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v648_maquina_loca_nachito_538.png"
+    },
+    {
+      "id": "dj_festivern_538",
+      "categoria": "humor_previa",
+      "fuente_pack": "sprites/humor_previa/dj_festivern_538.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v648_dj_festivern_538.png"
+    },
+    {
+      "id": "fuente_alucinogena_538",
+      "categoria": "humor_previa",
+      "fuente_pack": "sprites/humor_previa/fuente_alucinogena_538.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v648_fuente_alucinogena_538.png"
+    },
+    {
+      "id": "barrera_obras_cierre_538",
+      "categoria": "humor_previa",
+      "fuente_pack": "sprites/humor_previa/barrera_obras_cierre_538.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v648_barrera_obras_cierre_538.png"
+    },
+    {
+      "id": "marcador_carnaval_538",
+      "categoria": "humor_previa",
+      "fuente_pack": "sprites/humor_previa/marcador_carnaval_538.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v648_marcador_carnaval_538.png"
+    },
+    {
+      "id": "trofeo_la_previa_538",
+      "categoria": "humor_previa",
+      "fuente_pack": "sprites/humor_previa/trofeo_la_previa_538.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v648_trofeo_la_previa_538.png"
+    },
+    {
+      "id": "reloj_epico_539",
+      "categoria": "mazmorras",
+      "fuente_pack": "sprites/mazmorras/reloj_epico_539.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v646_reloj_epico_539.png"
+    },
+    {
+      "id": "escritorio_espia_539",
+      "categoria": "mazmorras",
+      "fuente_pack": "sprites/mazmorras/escritorio_espia_539.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v646_escritorio_espia_539.png"
+    },
+    {
+      "id": "reloj_fuego_539",
+      "categoria": "mazmorras",
+      "fuente_pack": "sprites/mazmorras/reloj_fuego_539.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "trono_vintage_539",
+      "categoria": "mazmorras",
+      "fuente_pack": "sprites/mazmorras/trono_vintage_539.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "reliquia_gato_539",
+      "categoria": "mazmorras",
+      "fuente_pack": "sprites/mazmorras/reliquia_gato_539.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v646_reliquia_gato_539.png"
+    },
+    {
+      "id": "ordenador_actas_539",
+      "categoria": "mazmorras",
+      "fuente_pack": "sprites/mazmorras/ordenador_actas_539.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v646_ordenador_actas_539.png"
+    },
+    {
+      "id": "olla_alquimia_539",
+      "categoria": "mazmorras",
+      "fuente_pack": "sprites/mazmorras/olla_alquimia_539.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "mesa_ritual_539",
+      "categoria": "mazmorras",
+      "fuente_pack": "sprites/mazmorras/mesa_ritual_539.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v646_mesa_ritual_539.png"
+    },
+    {
+      "id": "maquina_gas_539",
+      "categoria": "mazmorras",
+      "fuente_pack": "sprites/mazmorras/maquina_gas_539.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v646_maquina_gas_539.png"
+    },
+    {
+      "id": "naranjo_caldero_539",
+      "categoria": "mazmorras",
+      "fuente_pack": "sprites/mazmorras/naranjo_caldero_539.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v646_naranjo_caldero_539.png"
+    },
+    {
+      "id": "arbol_hueco_539",
+      "categoria": "mazmorras",
+      "fuente_pack": "sprites/mazmorras/arbol_hueco_539.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v646_arbol_hueco_539.png"
+    },
+    {
+      "id": "barrera_paso_539",
+      "categoria": "mazmorras",
+      "fuente_pack": "sprites/mazmorras/barrera_paso_539.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v646_barrera_paso_539.png"
+    },
+    {
+      "id": "cama_de_campo_539",
+      "categoria": "mazmorras",
+      "fuente_pack": "sprites/mazmorras/cama_de_campo_539.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v646_cama_de_campo_539.png"
+    },
+    {
+      "id": "puerta_antigua_539",
+      "categoria": "mazmorras",
+      "fuente_pack": "sprites/mazmorras/puerta_antigua_539.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "maletin_electrico_539",
+      "categoria": "mazmorras",
+      "fuente_pack": "sprites/mazmorras/maletin_electrico_539.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v647_maletin_electrico_539.png"
+    },
+    {
+      "id": "senales_rutas_539",
+      "categoria": "mazmorras",
+      "fuente_pack": "sprites/mazmorras/senales_rutas_539.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v646_senales_rutas_539.png"
+    },
+    {
+      "id": "mesa_aviso_539",
+      "categoria": "mazmorras",
+      "fuente_pack": "sprites/mazmorras/mesa_aviso_539.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v648_mesa_aviso_539.png"
+    },
+    {
+      "id": "radio_urgencia_539",
+      "categoria": "mazmorras",
+      "fuente_pack": "sprites/mazmorras/radio_urgencia_539.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v646_radio_urgencia_539.png"
+    },
+    {
+      "id": "senal_peligro_539",
+      "categoria": "mazmorras",
+      "fuente_pack": "sprites/mazmorras/senal_peligro_539.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v648_senal_peligro_539.png"
+    },
+    {
+      "id": "escalera_metal_539",
+      "categoria": "mazmorras",
+      "fuente_pack": "sprites/mazmorras/escalera_metal_539.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "farola_magica_539",
+      "categoria": "mazmorras",
+      "fuente_pack": "sprites/mazmorras/farola_magica_539.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v648_farola_magica_539.png"
+    },
+    {
+      "id": "mobiliario_extra_00",
+      "categoria": "urbano",
+      "fuente_pack": "sprites/urbano/mobiliario_extra_00.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v647_mobiliario_extra_00.png"
+    },
+    {
+      "id": "mobiliario_extra_01",
+      "categoria": "urbano",
+      "fuente_pack": "sprites/urbano/mobiliario_extra_01.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v647_mobiliario_extra_01.png"
+    },
+    {
+      "id": "mobiliario_extra_02",
+      "categoria": "urbano",
+      "fuente_pack": "sprites/urbano/mobiliario_extra_02.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v647_mobiliario_extra_02.png"
+    },
+    {
+      "id": "mobiliario_extra_03",
+      "categoria": "urbano",
+      "fuente_pack": "sprites/urbano/mobiliario_extra_03.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v648_mobiliario_extra_03.png"
+    },
+    {
+      "id": "mobiliario_extra_04",
+      "categoria": "urbano",
+      "fuente_pack": "sprites/urbano/mobiliario_extra_04.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v647_mobiliario_extra_04.png"
+    },
+    {
+      "id": "mobiliario_extra_05",
+      "categoria": "urbano",
+      "fuente_pack": "sprites/urbano/mobiliario_extra_05.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "mobiliario_extra_06",
+      "categoria": "urbano",
+      "fuente_pack": "sprites/urbano/mobiliario_extra_06.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "mobiliario_extra_07",
+      "categoria": "urbano",
+      "fuente_pack": "sprites/urbano/mobiliario_extra_07.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "mobiliario_extra_08",
+      "categoria": "urbano",
+      "fuente_pack": "sprites/urbano/mobiliario_extra_08.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "mobiliario_extra_09",
+      "categoria": "urbano",
+      "fuente_pack": "sprites/urbano/mobiliario_extra_09.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "mobiliario_extra_10",
+      "categoria": "urbano",
+      "fuente_pack": "sprites/urbano/mobiliario_extra_10.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "mobiliario_extra_11",
+      "categoria": "urbano",
+      "fuente_pack": "sprites/urbano/mobiliario_extra_11.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v647_mobiliario_extra_11.png"
+    },
+    {
+      "id": "mobiliario_extra_12",
+      "categoria": "urbano",
+      "fuente_pack": "sprites/urbano/mobiliario_extra_12.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v647_mobiliario_extra_12.png"
+    },
+    {
+      "id": "mobiliario_extra_13",
+      "categoria": "urbano",
+      "fuente_pack": "sprites/urbano/mobiliario_extra_13.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v648_mobiliario_extra_13.png"
+    },
+    {
+      "id": "mobiliario_extra_14",
+      "categoria": "urbano",
+      "fuente_pack": "sprites/urbano/mobiliario_extra_14.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "mobiliario_extra_15",
+      "categoria": "urbano",
+      "fuente_pack": "sprites/urbano/mobiliario_extra_15.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "naturaleza_extra_00",
+      "categoria": "agua",
+      "fuente_pack": "tiles/agua/naturaleza_extra_00.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "naturaleza_extra_01",
+      "categoria": "agua",
+      "fuente_pack": "tiles/agua/naturaleza_extra_01.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "naturaleza_extra_02",
+      "categoria": "agua",
+      "fuente_pack": "tiles/agua/naturaleza_extra_02.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "naturaleza_extra_03",
+      "categoria": "agua",
+      "fuente_pack": "tiles/agua/naturaleza_extra_03.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "naturaleza_extra_04",
+      "categoria": "agua",
+      "fuente_pack": "tiles/agua/naturaleza_extra_04.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "naturaleza_extra_05",
+      "categoria": "agua",
+      "fuente_pack": "tiles/agua/naturaleza_extra_05.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "naturaleza_extra_06",
+      "categoria": "agua",
+      "fuente_pack": "tiles/agua/naturaleza_extra_06.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "naturaleza_extra_07",
+      "categoria": "agua",
+      "fuente_pack": "tiles/agua/naturaleza_extra_07.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "naturaleza_extra_08",
+      "categoria": "naturaleza",
+      "fuente_pack": "sprites/naturaleza/naturaleza_extra_08.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "naturaleza_extra_09",
+      "categoria": "naturaleza",
+      "fuente_pack": "sprites/naturaleza/naturaleza_extra_09.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "naturaleza_extra_10",
+      "categoria": "naturaleza",
+      "fuente_pack": "sprites/naturaleza/naturaleza_extra_10.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "naturaleza_extra_11",
+      "categoria": "naturaleza",
+      "fuente_pack": "sprites/naturaleza/naturaleza_extra_11.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "naturaleza_extra_12",
+      "categoria": "naturaleza",
+      "fuente_pack": "sprites/naturaleza/naturaleza_extra_12.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v648_naturaleza_extra_12.png"
+    },
+    {
+      "id": "naturaleza_extra_13",
+      "categoria": "naturaleza",
+      "fuente_pack": "sprites/naturaleza/naturaleza_extra_13.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v648_naturaleza_extra_13.png"
+    },
+    {
+      "id": "naturaleza_extra_14",
+      "categoria": "naturaleza",
+      "fuente_pack": "sprites/naturaleza/naturaleza_extra_14.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v648_naturaleza_extra_14.png"
+    },
+    {
+      "id": "naturaleza_extra_15",
+      "categoria": "naturaleza",
+      "fuente_pack": "sprites/naturaleza/naturaleza_extra_15.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v648_naturaleza_extra_15.png"
+    },
+    {
+      "id": "local_personalizado_00",
+      "categoria": "edificios",
+      "fuente_pack": "sprites/edificios/local_personalizado_00.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "local_personalizado_01",
+      "categoria": "edificios",
+      "fuente_pack": "sprites/edificios/local_personalizado_01.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "local_personalizado_02",
+      "categoria": "edificios",
+      "fuente_pack": "sprites/edificios/local_personalizado_02.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "local_personalizado_03",
+      "categoria": "edificios",
+      "fuente_pack": "sprites/edificios/local_personalizado_03.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "local_personalizado_04",
+      "categoria": "edificios",
+      "fuente_pack": "sprites/edificios/local_personalizado_04.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "local_personalizado_05",
+      "categoria": "edificios",
+      "fuente_pack": "sprites/edificios/local_personalizado_05.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "local_personalizado_06",
+      "categoria": "edificios",
+      "fuente_pack": "sprites/edificios/local_personalizado_06.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "local_personalizado_07",
+      "categoria": "edificios",
+      "fuente_pack": "sprites/edificios/local_personalizado_07.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "gimnasio_personalizado_00",
+      "categoria": "edificios",
+      "fuente_pack": "sprites/edificios/gimnasio_personalizado_00.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "gimnasio_personalizado_01",
+      "categoria": "edificios",
+      "fuente_pack": "sprites/edificios/gimnasio_personalizado_01.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "gimnasio_personalizado_02",
+      "categoria": "edificios",
+      "fuente_pack": "sprites/edificios/gimnasio_personalizado_02.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "gimnasio_personalizado_03",
+      "categoria": "edificios",
+      "fuente_pack": "sprites/edificios/gimnasio_personalizado_03.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "gimnasio_personalizado_04",
+      "categoria": "edificios",
+      "fuente_pack": "sprites/edificios/gimnasio_personalizado_04.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "gimnasio_personalizado_05",
+      "categoria": "edificios",
+      "fuente_pack": "sprites/edificios/gimnasio_personalizado_05.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "gimnasio_personalizado_06",
+      "categoria": "edificios",
+      "fuente_pack": "sprites/edificios/gimnasio_personalizado_06.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "gimnasio_personalizado_07",
+      "categoria": "edificios",
+      "fuente_pack": "sprites/edificios/gimnasio_personalizado_07.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "pista_secreta_00",
+      "categoria": "coleccionables",
+      "fuente_pack": "sprites/coleccionables/pista_secreta_00.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "pista_secreta_01",
+      "categoria": "coleccionables",
+      "fuente_pack": "sprites/coleccionables/pista_secreta_01.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "pista_secreta_02",
+      "categoria": "coleccionables",
+      "fuente_pack": "sprites/coleccionables/pista_secreta_02.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "pista_secreta_03",
+      "categoria": "coleccionables",
+      "fuente_pack": "sprites/coleccionables/pista_secreta_03.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "pista_secreta_04",
+      "categoria": "coleccionables",
+      "fuente_pack": "sprites/coleccionables/pista_secreta_04.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "pista_secreta_05",
+      "categoria": "coleccionables",
+      "fuente_pack": "sprites/coleccionables/pista_secreta_05.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "pista_secreta_06",
+      "categoria": "coleccionables",
+      "fuente_pack": "sprites/coleccionables/pista_secreta_06.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "pista_secreta_07",
+      "categoria": "coleccionables",
+      "fuente_pack": "sprites/coleccionables/pista_secreta_07.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "pista_secreta_08",
+      "categoria": "coleccionables",
+      "fuente_pack": "sprites/coleccionables/pista_secreta_08.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "pista_secreta_09",
+      "categoria": "coleccionables",
+      "fuente_pack": "sprites/coleccionables/pista_secreta_09.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "pista_secreta_10",
+      "categoria": "coleccionables",
+      "fuente_pack": "sprites/coleccionables/pista_secreta_10.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "pista_secreta_11",
+      "categoria": "coleccionables",
+      "fuente_pack": "sprites/coleccionables/pista_secreta_11.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "efecto_ambiente_00",
+      "categoria": "efectos",
+      "fuente_pack": "sprites/efectos/efecto_ambiente_00.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "efecto_ambiente_01",
+      "categoria": "efectos",
+      "fuente_pack": "sprites/efectos/efecto_ambiente_01.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "efecto_ambiente_02",
+      "categoria": "efectos",
+      "fuente_pack": "sprites/efectos/efecto_ambiente_02.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "efecto_ambiente_03",
+      "categoria": "efectos",
+      "fuente_pack": "sprites/efectos/efecto_ambiente_03.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "efecto_ambiente_04",
+      "categoria": "efectos",
+      "fuente_pack": "sprites/efectos/efecto_ambiente_04.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "efecto_ambiente_05",
+      "categoria": "efectos",
+      "fuente_pack": "sprites/efectos/efecto_ambiente_05.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "efecto_ambiente_06",
+      "categoria": "efectos",
+      "fuente_pack": "sprites/efectos/efecto_ambiente_06.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "efecto_ambiente_07",
+      "categoria": "efectos",
+      "fuente_pack": "sprites/efectos/efecto_ambiente_07.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "efecto_ambiente_08",
+      "categoria": "efectos",
+      "fuente_pack": "sprites/efectos/efecto_ambiente_08.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "efecto_ambiente_09",
+      "categoria": "efectos",
+      "fuente_pack": "sprites/efectos/efecto_ambiente_09.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "efecto_ambiente_10",
+      "categoria": "efectos",
+      "fuente_pack": "sprites/efectos/efecto_ambiente_10.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "efecto_ambiente_11",
+      "categoria": "efectos",
+      "fuente_pack": "sprites/efectos/efecto_ambiente_11.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "efecto_ambiente_12",
+      "categoria": "efectos",
+      "fuente_pack": "sprites/efectos/efecto_ambiente_12.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "efecto_ambiente_13",
+      "categoria": "efectos",
+      "fuente_pack": "sprites/efectos/efecto_ambiente_13.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "efecto_ambiente_14",
+      "categoria": "efectos",
+      "fuente_pack": "sprites/efectos/efecto_ambiente_14.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "efecto_ambiente_15",
+      "categoria": "efectos",
+      "fuente_pack": "sprites/efectos/efecto_ambiente_15.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "efecto_ambiente_16",
+      "categoria": "efectos",
+      "fuente_pack": "sprites/efectos/efecto_ambiente_16.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "efecto_ambiente_17",
+      "categoria": "efectos",
+      "fuente_pack": "sprites/efectos/efecto_ambiente_17.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "efecto_ambiente_18",
+      "categoria": "efectos",
+      "fuente_pack": "sprites/efectos/efecto_ambiente_18.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "efecto_ambiente_19",
+      "categoria": "efectos",
+      "fuente_pack": "sprites/efectos/efecto_ambiente_19.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "efecto_ambiente_20",
+      "categoria": "efectos",
+      "fuente_pack": "sprites/efectos/efecto_ambiente_20.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "efecto_ambiente_21",
+      "categoria": "efectos",
+      "fuente_pack": "sprites/efectos/efecto_ambiente_21.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "efecto_ambiente_22",
+      "categoria": "efectos",
+      "fuente_pack": "sprites/efectos/efecto_ambiente_22.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "efecto_ambiente_23",
+      "categoria": "efectos",
+      "fuente_pack": "sprites/efectos/efecto_ambiente_23.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "gestoa_00",
+      "categoria": "personajes_gestos",
+      "fuente_pack": "sprites/personajes_gestos/gestoa_00.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "gestoa_01",
+      "categoria": "personajes_gestos",
+      "fuente_pack": "sprites/personajes_gestos/gestoa_01.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "gestoa_02",
+      "categoria": "personajes_gestos",
+      "fuente_pack": "sprites/personajes_gestos/gestoa_02.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "gestoa_03",
+      "categoria": "personajes_gestos",
+      "fuente_pack": "sprites/personajes_gestos/gestoa_03.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "gestoa_04",
+      "categoria": "personajes_gestos",
+      "fuente_pack": "sprites/personajes_gestos/gestoa_04.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "gestoa_05",
+      "categoria": "personajes_gestos",
+      "fuente_pack": "sprites/personajes_gestos/gestoa_05.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "gestoa_06",
+      "categoria": "personajes_gestos",
+      "fuente_pack": "sprites/personajes_gestos/gestoa_06.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "gestoa_07",
+      "categoria": "personajes_gestos",
+      "fuente_pack": "sprites/personajes_gestos/gestoa_07.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "gestoa_08",
+      "categoria": "personajes_gestos",
+      "fuente_pack": "sprites/personajes_gestos/gestoa_08.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "gestoa_09",
+      "categoria": "personajes_gestos",
+      "fuente_pack": "sprites/personajes_gestos/gestoa_09.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "gestoa_10",
+      "categoria": "personajes_gestos",
+      "fuente_pack": "sprites/personajes_gestos/gestoa_10.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "gestoa_11",
+      "categoria": "personajes_gestos",
+      "fuente_pack": "sprites/personajes_gestos/gestoa_11.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "gestoa_12",
+      "categoria": "personajes_gestos",
+      "fuente_pack": "sprites/personajes_gestos/gestoa_12.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "gestoa_13",
+      "categoria": "personajes_gestos",
+      "fuente_pack": "sprites/personajes_gestos/gestoa_13.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "gestoa_14",
+      "categoria": "personajes_gestos",
+      "fuente_pack": "sprites/personajes_gestos/gestoa_14.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "gestoa_15",
+      "categoria": "personajes_gestos",
+      "fuente_pack": "sprites/personajes_gestos/gestoa_15.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "gestob_00",
+      "categoria": "personajes_gestos",
+      "fuente_pack": "sprites/personajes_gestos/gestob_00.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "gestob_01",
+      "categoria": "personajes_gestos",
+      "fuente_pack": "sprites/personajes_gestos/gestob_01.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "gestob_02",
+      "categoria": "personajes_gestos",
+      "fuente_pack": "sprites/personajes_gestos/gestob_02.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "gestob_03",
+      "categoria": "personajes_gestos",
+      "fuente_pack": "sprites/personajes_gestos/gestob_03.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "gestob_04",
+      "categoria": "personajes_gestos",
+      "fuente_pack": "sprites/personajes_gestos/gestob_04.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "gestob_05",
+      "categoria": "personajes_gestos",
+      "fuente_pack": "sprites/personajes_gestos/gestob_05.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "gestob_06",
+      "categoria": "personajes_gestos",
+      "fuente_pack": "sprites/personajes_gestos/gestob_06.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "gestob_07",
+      "categoria": "personajes_gestos",
+      "fuente_pack": "sprites/personajes_gestos/gestob_07.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "gestob_08",
+      "categoria": "personajes_gestos",
+      "fuente_pack": "sprites/personajes_gestos/gestob_08.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "gestob_09",
+      "categoria": "personajes_gestos",
+      "fuente_pack": "sprites/personajes_gestos/gestob_09.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "gestob_10",
+      "categoria": "personajes_gestos",
+      "fuente_pack": "sprites/personajes_gestos/gestob_10.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "gestob_11",
+      "categoria": "personajes_gestos",
+      "fuente_pack": "sprites/personajes_gestos/gestob_11.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "gestob_12",
+      "categoria": "personajes_gestos",
+      "fuente_pack": "sprites/personajes_gestos/gestob_12.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "gestob_13",
+      "categoria": "personajes_gestos",
+      "fuente_pack": "sprites/personajes_gestos/gestob_13.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "gestob_14",
+      "categoria": "personajes_gestos",
+      "fuente_pack": "sprites/personajes_gestos/gestob_14.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "gestob_15",
+      "categoria": "personajes_gestos",
+      "fuente_pack": "sprites/personajes_gestos/gestob_15.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "gestob_16",
+      "categoria": "personajes_gestos",
+      "fuente_pack": "sprites/personajes_gestos/gestob_16.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "gestob_17",
+      "categoria": "personajes_gestos",
+      "fuente_pack": "sprites/personajes_gestos/gestob_17.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "gestob_18",
+      "categoria": "personajes_gestos",
+      "fuente_pack": "sprites/personajes_gestos/gestob_18.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "gestob_19",
+      "categoria": "personajes_gestos",
+      "fuente_pack": "sprites/personajes_gestos/gestob_19.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "suelo_mejorado_00",
+      "categoria": "suelo",
+      "fuente_pack": "tiles/suelo/suelo_mejorado_00.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "suelo_mejorado_01",
+      "categoria": "suelo",
+      "fuente_pack": "tiles/suelo/suelo_mejorado_01.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "suelo_mejorado_02",
+      "categoria": "suelo",
+      "fuente_pack": "tiles/suelo/suelo_mejorado_02.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "suelo_mejorado_03",
+      "categoria": "suelo",
+      "fuente_pack": "tiles/suelo/suelo_mejorado_03.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "suelo_mejorado_04",
+      "categoria": "suelo",
+      "fuente_pack": "tiles/suelo/suelo_mejorado_04.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "suelo_mejorado_05",
+      "categoria": "suelo",
+      "fuente_pack": "tiles/suelo/suelo_mejorado_05.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "suelo_mejorado_06",
+      "categoria": "suelo",
+      "fuente_pack": "tiles/suelo/suelo_mejorado_06.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "suelo_mejorado_07",
+      "categoria": "suelo",
+      "fuente_pack": "tiles/suelo/suelo_mejorado_07.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "suelo_mejorado_08",
+      "categoria": "suelo",
+      "fuente_pack": "tiles/suelo/suelo_mejorado_08.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "suelo_mejorado_09",
+      "categoria": "suelo",
+      "fuente_pack": "tiles/suelo/suelo_mejorado_09.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "suelo_mejorado_10",
+      "categoria": "suelo",
+      "fuente_pack": "tiles/suelo/suelo_mejorado_10.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "suelo_mejorado_11",
+      "categoria": "suelo",
+      "fuente_pack": "tiles/suelo/suelo_mejorado_11.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "suelo_mejorado_12",
+      "categoria": "suelo",
+      "fuente_pack": "tiles/suelo/suelo_mejorado_12.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "suelo_mejorado_13",
+      "categoria": "suelo",
+      "fuente_pack": "tiles/suelo/suelo_mejorado_13.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "suelo_mejorado_14",
+      "categoria": "suelo",
+      "fuente_pack": "tiles/suelo/suelo_mejorado_14.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "suelo_mejorado_15",
+      "categoria": "suelo",
+      "fuente_pack": "tiles/suelo/suelo_mejorado_15.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "agua_tramo_00",
+      "categoria": "agua",
+      "fuente_pack": "tiles/agua/agua_tramo_00.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "agua_tramo_01",
+      "categoria": "agua",
+      "fuente_pack": "tiles/agua/agua_tramo_01.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "agua_tramo_02",
+      "categoria": "agua",
+      "fuente_pack": "tiles/agua/agua_tramo_02.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "agua_tramo_03",
+      "categoria": "agua",
+      "fuente_pack": "tiles/agua/agua_tramo_03.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "agua_tramo_04",
+      "categoria": "agua",
+      "fuente_pack": "tiles/agua/agua_tramo_04.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "agua_tramo_05",
+      "categoria": "agua",
+      "fuente_pack": "tiles/agua/agua_tramo_05.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "agua_tramo_06",
+      "categoria": "agua",
+      "fuente_pack": "tiles/agua/agua_tramo_06.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "agua_tramo_07",
+      "categoria": "agua",
+      "fuente_pack": "tiles/agua/agua_tramo_07.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "agua_tramo_08",
+      "categoria": "agua",
+      "fuente_pack": "tiles/agua/agua_tramo_08.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "agua_tramo_09",
+      "categoria": "agua",
+      "fuente_pack": "tiles/agua/agua_tramo_09.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "agua_tramo_10",
+      "categoria": "agua",
+      "fuente_pack": "tiles/agua/agua_tramo_10.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "agua_tramo_11",
+      "categoria": "agua",
+      "fuente_pack": "tiles/agua/agua_tramo_11.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "camino_tramo_00",
+      "categoria": "suelo",
+      "fuente_pack": "tiles/suelo/camino_tramo_00.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "camino_tramo_01",
+      "categoria": "suelo",
+      "fuente_pack": "tiles/suelo/camino_tramo_01.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "camino_tramo_02",
+      "categoria": "suelo",
+      "fuente_pack": "tiles/suelo/camino_tramo_02.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "camino_tramo_03",
+      "categoria": "suelo",
+      "fuente_pack": "tiles/suelo/camino_tramo_03.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "camino_tramo_04",
+      "categoria": "suelo",
+      "fuente_pack": "tiles/suelo/camino_tramo_04.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "camino_tramo_05",
+      "categoria": "suelo",
+      "fuente_pack": "tiles/suelo/camino_tramo_05.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "camino_tramo_06",
+      "categoria": "suelo",
+      "fuente_pack": "tiles/suelo/camino_tramo_06.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "camino_tramo_07",
+      "categoria": "suelo",
+      "fuente_pack": "tiles/suelo/camino_tramo_07.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "camino_tramo_08",
+      "categoria": "suelo",
+      "fuente_pack": "tiles/suelo/camino_tramo_08.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "camino_tramo_09",
+      "categoria": "suelo",
+      "fuente_pack": "tiles/suelo/camino_tramo_09.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "camino_tramo_10",
+      "categoria": "suelo",
+      "fuente_pack": "tiles/suelo/camino_tramo_10.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "camino_tramo_11",
+      "categoria": "suelo",
+      "fuente_pack": "tiles/suelo/camino_tramo_11.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "patinete_patri_vista_0",
+      "categoria": "humor_previa",
+      "fuente_pack": "sprites/humor_previa/patinete_patri_vista_0.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "patinete_patri_vista_1",
+      "categoria": "humor_previa",
+      "fuente_pack": "sprites/humor_previa/patinete_patri_vista_1.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "patinete_patri_vista_2",
+      "categoria": "humor_previa",
+      "fuente_pack": "sprites/humor_previa/patinete_patri_vista_2.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "patinete_patri_vista_3",
+      "categoria": "humor_previa",
+      "fuente_pack": "sprites/humor_previa/patinete_patri_vista_3.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "rafa63_slotmachine",
+      "categoria": "humor_previa",
+      "fuente_pack": "sprites/humor_previa/rafa63_slotmachine.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "burger_table24",
+      "categoria": "humor_previa",
+      "fuente_pack": "sprites/humor_previa/burger_table24.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "burger_chair24",
+      "categoria": "humor_previa",
+      "fuente_pack": "sprites/humor_previa/burger_chair24.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "arbol_variante_autumn",
+      "categoria": "naturaleza",
+      "fuente_pack": "sprites/naturaleza/arbol_variante_autumn.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v648_arbol_variante_autumn.png"
+    },
+    {
+      "id": "arbol_variante_winter",
+      "categoria": "naturaleza",
+      "fuente_pack": "sprites/naturaleza/arbol_variante_winter.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v648_arbol_variante_winter.png"
+    },
+    {
+      "id": "arbol_variante_magic",
+      "categoria": "naturaleza",
+      "fuente_pack": "sprites/naturaleza/arbol_variante_magic.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v648_arbol_variante_magic.png"
+    },
+    {
+      "id": "arbol_variante_dark",
+      "categoria": "naturaleza",
+      "fuente_pack": "sprites/naturaleza/arbol_variante_dark.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v648_arbol_variante_dark.png"
+    },
+    {
+      "id": "arbusto_variante_autumn",
+      "categoria": "naturaleza",
+      "fuente_pack": "sprites/naturaleza/arbusto_variante_autumn.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v648_arbusto_variante_autumn.png"
+    },
+    {
+      "id": "arbusto_variante_winter",
+      "categoria": "naturaleza",
+      "fuente_pack": "sprites/naturaleza/arbusto_variante_winter.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v648_arbusto_variante_winter.png"
+    },
+    {
+      "id": "arbusto_variante_magic",
+      "categoria": "naturaleza",
+      "fuente_pack": "sprites/naturaleza/arbusto_variante_magic.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v648_arbusto_variante_magic.png"
+    },
+    {
+      "id": "arbusto_variante_dark",
+      "categoria": "naturaleza",
+      "fuente_pack": "sprites/naturaleza/arbusto_variante_dark.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v648_arbusto_variante_dark.png"
+    },
+    {
+      "id": "arriate_variante_autumn",
+      "categoria": "naturaleza",
+      "fuente_pack": "sprites/naturaleza/arriate_variante_autumn.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v648_arriate_variante_autumn.png"
+    },
+    {
+      "id": "arriate_variante_winter",
+      "categoria": "naturaleza",
+      "fuente_pack": "sprites/naturaleza/arriate_variante_winter.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v648_arriate_variante_winter.png"
+    },
+    {
+      "id": "arriate_variante_magic",
+      "categoria": "naturaleza",
+      "fuente_pack": "sprites/naturaleza/arriate_variante_magic.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v648_arriate_variante_magic.png"
+    },
+    {
+      "id": "arriate_variante_dark",
+      "categoria": "naturaleza",
+      "fuente_pack": "sprites/naturaleza/arriate_variante_dark.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v648_arriate_variante_dark.png"
+    },
+    {
+      "id": "charca_variante_autumn",
+      "categoria": "naturaleza",
+      "fuente_pack": "sprites/naturaleza/charca_variante_autumn.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "charca_variante_winter",
+      "categoria": "naturaleza",
+      "fuente_pack": "sprites/naturaleza/charca_variante_winter.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "charca_variante_magic",
+      "categoria": "naturaleza",
+      "fuente_pack": "sprites/naturaleza/charca_variante_magic.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "charca_variante_dark",
+      "categoria": "naturaleza",
+      "fuente_pack": "sprites/naturaleza/charca_variante_dark.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "cartel_burger_lhorta",
+      "categoria": "humor_previa",
+      "fuente_pack": "sprites/humor_previa/cartel_burger_lhorta.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "cartel_5porciento",
+      "categoria": "humor_previa",
+      "fuente_pack": "sprites/humor_previa/cartel_5porciento.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v648_cartel_5porciento.png"
+    },
+    {
+      "id": "cartel_hoy_no",
+      "categoria": "humor_previa",
+      "fuente_pack": "sprites/humor_previa/cartel_hoy_no.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "cartel_silla_actas",
+      "categoria": "humor_previa",
+      "fuente_pack": "sprites/humor_previa/cartel_silla_actas.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v648_cartel_silla_actas.png"
+    },
+    {
+      "id": "cartel_ruta_tomates",
+      "categoria": "humor_previa",
+      "fuente_pack": "sprites/humor_previa/cartel_ruta_tomates.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v648_cartel_ruta_tomates.png"
+    },
+    {
+      "id": "cartel_festivern",
+      "categoria": "humor_previa",
+      "fuente_pack": "sprites/humor_previa/cartel_festivern.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "cartel_limonero",
+      "categoria": "humor_previa",
+      "fuente_pack": "sprites/humor_previa/cartel_limonero.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "cartel_vinted",
+      "categoria": "humor_previa",
+      "fuente_pack": "sprites/humor_previa/cartel_vinted.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "cartel_alqueria",
+      "categoria": "humor_previa",
+      "fuente_pack": "sprites/humor_previa/cartel_alqueria.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v648_cartel_alqueria.png"
+    },
+    {
+      "id": "cartel_mesajueves",
+      "categoria": "humor_previa",
+      "fuente_pack": "sprites/humor_previa/cartel_mesajueves.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v648_cartel_mesajueves.png"
+    },
+    {
+      "id": "cartel_peligro_cierre",
+      "categoria": "humor_previa",
+      "fuente_pack": "sprites/humor_previa/cartel_peligro_cierre.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v648_cartel_peligro_cierre.png"
+    },
+    {
+      "id": "ticket_14_centimos",
+      "categoria": "coleccionables",
+      "fuente_pack": "sprites/coleccionables/ticket_14_centimos.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v647_ticket_14_centimos.png"
+    },
+    {
+      "id": "hamburguesa_mes_gigante",
+      "categoria": "humor_previa",
+      "fuente_pack": "sprites/humor_previa/hamburguesa_mes_gigante.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "banco_awelo_durmiendo",
+      "categoria": "humor_previa",
+      "fuente_pack": "sprites/humor_previa/banco_awelo_durmiendo.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "marcador_sueca_25_44",
+      "categoria": "baloncesto",
+      "fuente_pack": "sprites/baloncesto/marcador_sueca_25_44.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v647_marcador_sueca_25_44.png"
+    },
+    {
+      "id": "pizarra_pick_and_roll",
+      "categoria": "baloncesto",
+      "fuente_pack": "sprites/baloncesto/pizarra_pick_and_roll.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v647_pizarra_pick_and_roll.png"
+    },
+    {
+      "id": "trofeo_cb_silla",
+      "categoria": "baloncesto",
+      "fuente_pack": "sprites/baloncesto/trofeo_cb_silla.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v648_trofeo_cb_silla.png"
+    },
+    {
+      "id": "terminal_cierre_2355",
+      "categoria": "humor_previa",
+      "fuente_pack": "sprites/humor_previa/terminal_cierre_2355.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v648_terminal_cierre_2355.png"
+    },
+    {
+      "id": "terminal_laboratorio_151",
+      "categoria": "pokemon_laboratorio",
+      "fuente_pack": "sprites/pokemon_laboratorio/terminal_laboratorio_151.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v647_terminal_laboratorio_151.png"
+    },
+    {
+      "id": "terminal_festivern_5",
+      "categoria": "humor_previa",
+      "fuente_pack": "sprites/humor_previa/terminal_festivern_5.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v648_terminal_festivern_5.png"
+    },
+    {
+      "id": "piedra_cristal_festivern",
+      "categoria": "pokemon_laboratorio",
+      "fuente_pack": "sprites/pokemon_laboratorio/piedra_cristal_festivern.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v647_piedra_cristal_festivern.png"
+    },
+    {
+      "id": "estatua_kiwi_5porciento",
+      "categoria": "humor_previa",
+      "fuente_pack": "sprites/humor_previa/estatua_kiwi_5porciento.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v648_estatua_kiwi_5porciento.png"
+    },
+    {
+      "id": "caja_tomates",
+      "categoria": "humor_previa",
+      "fuente_pack": "sprites/humor_previa/caja_tomates.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v648_caja_tomates.png"
+    },
+    {
+      "id": "caja_tarjetas",
+      "categoria": "humor_previa",
+      "fuente_pack": "sprites/humor_previa/caja_tarjetas.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v647_caja_tarjetas.png"
+    },
+    {
+      "id": "caja_alitas",
+      "categoria": "humor_previa",
+      "fuente_pack": "sprites/humor_previa/caja_alitas.png",
+      "estado": "adaptador_conectado_pendiente_de_revision_en_cada_escena",
+      "ruta": "/assets/v647_caja_alitas.png"
+    },
+    {
+      "id": "portal_cristal_nachito",
+      "categoria": "mazmorras",
+      "fuente_pack": "sprites/mazmorras/portal_cristal_nachito.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "capsula_mewtwo_completa",
+      "categoria": "pokemon_laboratorio",
+      "fuente_pack": "sprites/pokemon_laboratorio/capsula_mewtwo_completa.png",
+      "estado": "silueta_corregida_y_conectada_al_laboratorio_post99",
+      "ruta": "/assets/v648_capsula_mewtwo_limpia.png"
+    },
+    {
+      "id": "capsula_mewtwo_cyan",
+      "categoria": "pokemon_laboratorio",
+      "fuente_pack": "sprites/pokemon_laboratorio/capsula_mewtwo_cyan.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "capsula_mewtwo_green",
+      "categoria": "pokemon_laboratorio",
+      "fuente_pack": "sprites/pokemon_laboratorio/capsula_mewtwo_green.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "capsula_mewtwo_amber",
+      "categoria": "pokemon_laboratorio",
+      "fuente_pack": "sprites/pokemon_laboratorio/capsula_mewtwo_amber.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "capsula_mewtwo_dark",
+      "categoria": "pokemon_laboratorio",
+      "fuente_pack": "sprites/pokemon_laboratorio/capsula_mewtwo_dark.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "puente_madera_transitable",
+      "categoria": "puentes",
+      "fuente_pack": "sprites/puentes/puente_madera_transitable.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "puente_cuerda_transitable",
+      "categoria": "puentes",
+      "fuente_pack": "sprites/puentes/puente_cuerda_transitable.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "puente_piedra_transitable",
+      "categoria": "puentes",
+      "fuente_pack": "sprites/puentes/puente_piedra_transitable.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "puente_metal_transitable",
+      "categoria": "puentes",
+      "fuente_pack": "sprites/puentes/puente_metal_transitable.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "puente_cristal_transitable",
+      "categoria": "puentes",
+      "fuente_pack": "sprites/puentes/puente_cristal_transitable.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "puente_madera_corto",
+      "categoria": "puentes",
+      "fuente_pack": "sprites/puentes/puente_madera_corto.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    },
+    {
+      "id": "puente_piedra_corto",
+      "categoria": "puentes",
+      "fuente_pack": "sprites/puentes/puente_piedra_corto.png",
+      "estado": "pendiente_de_integracion_o_equivalencia_con_motor"
+    }
+  ]
+}
