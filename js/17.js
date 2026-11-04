@@ -20442,10 +20442,10 @@ window.__PREVIA_645={version:'6.45',door:lp645LabDoor,
  const gym646={0:'marcador_gimnasio_537',1:'grada_pabellon_537',2:'canasta_pista_537',3:'vitrina_copas_537',6:'biblioteca_ejercicios_537',8:'portal_dimensional_537',12:'mesita_noche_537'};
  const previousGym646=a537Draw;
  a537Draw=function(g,i,x,b,w,h=9999){return gym646[i]&&draw646(g,gym646[i],x,b,w,h)||previousGym646(g,i,x,b,w,h)};
- const places646={6:'cama_de_campo_539',7:'estanteria_recuerdos_51',11:'maceta_tropical_51',14:'vitrina_copas_537'};
+ const places646={7:'estanteria_recuerdos_51',11:'maceta_tropical_51',14:'vitrina_copas_537'};
  const previousPlaces646=a536Draw;
  a536Draw=function(g,i,x,b,w,h=9999){return places646[i]&&draw646(g,places646[i],x,b,w,h)||previousPlaces646(g,i,x,b,w,h)};
- const relics646={0:'reloj_epico_539',1:'escritorio_espia_539',4:'reliquia_gato_539',5:'ordenador_actas_539',8:'maquina_gas_539',9:'cama_de_campo_539',11:'mesita_noche_537',13:'mesa_ritual_539',14:'despensa_refrescos_51',17:'radio_urgencia_539',30:'naranjo_caldero_539',31:'arbol_hueco_539',32:'barrera_paso_539',33:'senales_rutas_539',39:'cama_de_campo_539'};
+ const relics646={0:'reloj_epico_539',1:'escritorio_espia_539',4:'reliquia_gato_539',5:'ordenador_actas_539',8:'maquina_gas_539',11:'mesita_noche_537',13:'mesa_ritual_539',17:'radio_urgencia_539',30:'naranjo_caldero_539',31:'arbol_hueco_539',32:'barrera_paso_539',33:'senales_rutas_539',39:'cama_de_campo_539'};
  const previousRelics646=a539Draw;
  a539Draw=function(g,i,x,b,w,h=9999){
   if(relics646[i]&&draw646(g,relics646[i],x,b,w,h)){a539Seen.add(i);return true;}
@@ -20454,6 +20454,15 @@ window.__PREVIA_645={version:'6.45',door:lp645LabDoor,
  const furniture646={rack:'perchero_ropa_51',boutiqueShelf:'estanteria_recuerdos_51',counter:'mostrador_tienda_51',fridge:'maquina_bebidas_51',bed:'cama_zaragoza_51',mayo:'despensa_refrescos_51',dex:'maquina_recreativa_51',plant:'maceta_tropical_51'};
  const previousProp646=drawProp50;
  drawProp50=function(o){
+  if(state.scene==='gym_sergio'&&o.type==='scoreboard521'){
+   const d=draw646(ctx,'marcador_gimnasio_537',o.x*TILE,(o.y+o.h)*TILE,o.w*TILE,o.h*TILE+65);
+   if(!d)return previousProp646(o);
+   ctx.save();ctx.textAlign='center';ctx.fillStyle='#f6d78e';ctx.font='bold 11px monospace';
+   ctx.fillText('C.B. SILLA · PELLE',d.x+d.w/2,d.y+d.h*.40);
+   ctx.font='bold 17px monospace';ctx.fillStyle='#c7f1c5';
+   ctx.fillText(state.badges?.includes(0)?'01 : 00':'00 : 00',d.x+d.w/2,d.y+d.h*.60);
+   ctx.restore();return;
+  }
   // Special objects carry the existing story: do not replace their joke with
   // a generic item even when their underlying furniture type is the same.
   const special=a539RoomItem(o,state.scene);
