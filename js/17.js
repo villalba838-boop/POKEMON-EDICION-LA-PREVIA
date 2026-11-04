@@ -20345,6 +20345,9 @@ const lp645CollisionOriginal=collision;
 const lp645InteractOriginal=interact;
 const lp645HandleStepOriginal=handleStep;
 function lp645LabDoor(){
+ const portal=(PORTALS.benifaio||[]).find(p=>p.to==='lab');
+ if(portal&&Number.isFinite(portal.x)&&Number.isFinite(portal.y))
+  return {x:portal.x,y:portal.y,tileX:Math.floor(portal.x),tileY:Math.floor(portal.y)};
  const b=(SCENES.benifaio?.buildings||[]).find(o=>o.type==='lab');
  const [x,y]=b?.door||[11,11];
  return {x:x+.5,y:y+.8,tileX:Math.floor(x),tileY:Math.floor(y)};
