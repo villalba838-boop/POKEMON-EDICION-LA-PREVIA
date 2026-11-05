@@ -9,7 +9,7 @@ const $=id=>document.getElementById(id);
 const mod=$('modal'),modalContent=$('modalContent'),battleUI=$('battle');
 const gameShell=$('gameShell');
 const images={};const asset=(name)=>{if(name==='tile_meadow5')name='tile_meadow4';if(!images[name]){const i=new Image();i.src=(window.__ASSETS&&window.__ASSETS[name+'.png'])||'assets/'+name+'.png';images[name]=i;}return images[name];};
-const savedKey='la-previa-web-demo-v04-preview637'; // Beta save isolated from player's real adventure.
+const savedKey='la-previa-web-demo-v04'; // Beta save isolated from player's real adventure.
 try{if(!localStorage.getItem(savedKey)){const previous=localStorage.getItem('la-previa-web-demo-v04');if(previous)localStorage.setItem(savedKey,previous)}}catch(e){}
 const CHARS={"marshall": {"name": "Marshall", "tag": "El Marshall", "description": "Competitivo y resolutivo. Equipación de entrenador y pizarra: siempre tiene un plan.", "quote": "El Marshall siempre gana"}, "horte": {"name": "Horte", "tag": "El Hechicero", "description": "Intrépido, intelectual y mágico. Equipación azul de CB Aldaia y explicaciones que necesitan cuarenta y siete diapositivas.", "quote": "Confía en el 5%"}, "plata": {"name": "Plata", "tag": "El Hombre de Recursos", "description": "Tranquilo, leal y empático. Gafas graduadas de lentes transparentes: escucha, compara opciones y encuentra una salida.", "quote": "A ver, es que…"}, "awelo": {"name": "El Awelo", "tag": "El Rayo Amarillo", "description": "Analítico, sociable e impuntual. Camiseta azul, pantalón verde y una silla que nadie debe tocar.", "quote": "Somos listos, pero tontos no"}, "sergio": {"name": "Sergio Hernández", "tag": "El Temporero", "description": "Sincero, amigable e independiente. Chándal, gorro de lana y ganas de terminar los trámites para dormir.", "quote": "Hoy haré la siesta"}, "alfaro": {"name": "Doctor Alfaro", "tag": "Profesor Pokémon", "description": "El profesor de la región. Bata blanca, camisa morada y un compañero preparado para empezar la aventura.", "quote": "Elige tu primer Pokémon"}, "nachito": {"name": "Nachito Gandul", "tag": "El Alquimista", "description": "Organizado, friki e inteligente. Gorra de Brasil, traje Pokémon con corbata, camisa negra y un matraz lleno de teorías.", "quote": "V de Vanadio, digo… de Victoria"}, "javi_grau": {"name": "Javi Grau", "tag": "El Vagabundo", "description": "Chill, ingenioso y serio. Mohicano, pendientes y apariciones cuando menos te lo esperas.", "quote": "Recordad, niños, hay que reciclar en casa"}, "blas": {"name": "Blas", "tag": "El Sensei", "description": "Generoso y líder. Uniforme negro, bolsa del equipo y paciencia para defender el jueves.", "quote": "NO AWELO NO"}};
 const FRIENDS={
@@ -12968,7 +12968,7 @@ for(const g of MG583_LIST){const hint=MG583_SCENE_SPOTS[g.scene]?.shift()||[5,6]
 const mg583OldDraw=renderWorld;
 renderWorld=function(){mg583OldDraw();if(state.screen!=='world')return;const markers=(LORE_POINTS[state.scene]||[]).filter(p=>p.id?.startsWith('mg583_'));if(!markers.length)return;const s=SCENES[state.scene];if(!s)return;let k=1,cx=0,cy=0;
  if(ROOMS50[state.scene]){const v=roomView50(s);k=v.fit;cx=v.cx;cy=v.cy;}else if(typeof outsideView53==='function'&&outsideProps53[state.scene]){const v=outsideView53(s);cx=v.cx;cy=v.cy;}else {cx=clamp(camera.x,0,Math.max(0,s.w*TILE-W));cy=clamp(camera.y,0,Math.max(0,s.h*TILE-H));}
- ctx.save();ctx.scale(k,k);ctx.translate(-Math.floor(cx),-Math.floor(cy));for(const p of markers){const x=p.x*TILE,y=p.y*TILE;ctx.globalAlpha=.9;ctx.fillStyle='#204c50';ctx.fillRect(x-15,y-36,30,28);ctx.strokeStyle='#f2ce85';ctx.lineWidth=2;ctx.strokeRect(x-15,y-36,30,28);ctx.font='19px sans-serif';ctx.textAlign='center';ctx.fillStyle='#fff1d0';ctx.fillText('🎮',x,y-15);ctx.globalAlpha=1;}ctx.restore();
+ ctx.save();ctx.scale(k,k);ctx.translate(-Math.floor(cx),-Math.floor(cy));for(const p of markers){if(window.__BURGER657?.paintMarker(ctx,p,p.id.slice(6)))continue;const x=p.x*TILE,y=p.y*TILE;ctx.globalAlpha=.9;ctx.fillStyle='#204c50';ctx.fillRect(x-15,y-36,30,28);ctx.strokeStyle='#f2ce85';ctx.lineWidth=2;ctx.strokeRect(x-15,y-36,30,28);ctx.font='19px sans-serif';ctx.textAlign='center';ctx.fillStyle='#fff1d0';ctx.fillText('🎮',x,y-15);ctx.globalAlpha=1;}ctx.restore();
 };
 window.addEventListener('keydown',ev=>{if(typeof mg583Active!=='number'||state.screen!=='menu'||!mg583Session||mg583Session.done)return;if(['21'].includes(String(mg583Active))&&['ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(ev.key)){ev.preventDefault();ev.stopImmediatePropagation();mg583Dispatch('move:'+({'ArrowUp':'U','ArrowDown':'D','ArrowLeft':'L','ArrowRight':'R'}[ev.key]));}else if([9,11,17].includes(mg583Active)&&!(mg583Active===9&&P617.active)&&!(mg583Active===11&&document.getElementById('mg618Overlay'))&&!(mg583Active===17&&document.getElementById('mg619Overlay'))&&['ArrowLeft','ArrowRight','ArrowUp'].includes(ev.key)){ev.preventDefault();ev.stopImmediatePropagation();mg583Dispatch(ev.key==='ArrowUp'?'advance':ev.key==='ArrowLeft'?'lane:L':'lane:R')}},true);
 const mg583OldSerializer=serializeState;
@@ -13337,7 +13337,7 @@ mg589PlaceLore('albal','aw588_event','🚚 Evento camiones del Awelo',[14,17]);
 const mg589OldDraw=renderWorld;
 renderWorld=function(){mg589OldDraw(); if(state.screen!=='world') return; const markers=(LORE_POINTS[state.scene]||[]).filter(p=>p.id==='aw588_event'); if(!markers.length) return; const s=SCENES[state.scene]; if(!s) return; let k=1,cx=0,cy=0;
  if(ROOMS50[state.scene]){const v=roomView50(s);k=v.fit;cx=v.cx;cy=v.cy;} else if(typeof outsideView53==='function'&&outsideProps53[state.scene]){const v=outsideView53(s);cx=v.cx;cy=v.cy;} else {cx=clamp(camera.x,0,Math.max(0,s.w*TILE-W));cy=clamp(camera.y,0,Math.max(0,s.h*TILE-H));}
- ctx.save();ctx.scale(k,k);ctx.translate(-Math.floor(cx),-Math.floor(cy)); for(const p of markers){const x=p.x*TILE,y=p.y*TILE;ctx.globalAlpha=.92;ctx.fillStyle='#4f3b1f';ctx.fillRect(x-16,y-36,32,28);ctx.strokeStyle='#f2ce85';ctx.lineWidth=2;ctx.strokeRect(x-16,y-36,32,28);ctx.font='19px sans-serif';ctx.textAlign='center';ctx.fillStyle='#fff1d0';ctx.fillText('🚚',x,y-15);} ctx.restore();
+ ctx.save();ctx.scale(k,k);ctx.translate(-Math.floor(cx),-Math.floor(cy)); for(const p of markers){if(window.__BURGER657?.paintMarker(ctx,p,'truck'))continue;const x=p.x*TILE,y=p.y*TILE;ctx.globalAlpha=.92;ctx.fillStyle='#4f3b1f';ctx.fillRect(x-16,y-36,32,28);ctx.strokeStyle='#f2ce85';ctx.lineWidth=2;ctx.strokeRect(x-16,y-36,32,28);ctx.font='19px sans-serif';ctx.textAlign='center';ctx.fillStyle='#fff1d0';ctx.fillText('🚚',x,y-15);} ctx.restore();
  };
  const mg589OldSerializer=serializeState;
  serializeState=function(){const data=mg589OldSerializer();data.edition='5.89b';data.patch='minijuegos_2_0';return data};
@@ -16234,7 +16234,7 @@ for(const [k,v] of Object.entries(R598ASSETS)){window.__ASSETS[k]=v;}
  };
  // Guaranteed scripted impossible fight built on the actual attack menu.
  function isImpossible99(){return battle?.trainerId==='post99:rober'&&state.scene===P99;}
- function startImpossible99(){
+ function startImpossible99(){if(!state.flags.gif658_rober){return playGif658('rober','Rober y Mewtwo',()=>{state.flags.gif658_rober=true;save();startImpossible99();});}
   backWorld();if(!state.party.some(m=>m.hp>0))healAll();
   startBattle('Mewtwo',92,false,'post99:rober');
   if(!battle)return;
@@ -16299,7 +16299,7 @@ for(const [k,v] of Object.entries(R598ASSETS)){window.__ASSETS[k]=v;}
    `¡La fuerza de toda La Previa está funcionando! ${Math.round((step+1)*100/GROUP99.length)} % del ataque conjunto completado.`
   ],()=>groupBattle99());
  }
- function groupVictory99(){
+ function groupVictory99(){if(!state.flags.gif658_final){return playGif658('final','¡Toda La Previa unida!',()=>{state.flags.gif658_final=true;save();groupVictory99();});}
   if(!state.flags.post99_groupWin){state.flags.post99_groupWin=true;state.flags.post99_burgerDoor=true;
    noteQuest('post99_allies');rewardOnce99('allies',700,10);save();}
   const all=GROUP99.flat().map(a=>`<div class="post99-fighter"><img src="${media22('mon22_'+a.mon.toLowerCase()+'_front.png')}" alt=""><b>${a.name}</b><small>${a.mon}</small></div>`).join('');
@@ -16315,7 +16315,7 @@ for(const [k,v] of Object.entries(R598ASSETS)){window.__ASSETS[k]=v;}
    ['Seguir explorando la cueva',backWorld]
   ]));
  }
- function startCapture99(){
+ function startCapture99(){if(!state.flags.gif658_capsule){return playGif658('capsule','¡Mewtwo rompe la cápsula!',()=>{state.flags.gif658_capsule=true;save();startCapture99();});}
   if(state.flags.post99_mewtwoCaptured)return;
   backWorld();healAll();normalizeExtras();
   if(!state.flags.post99_ballsGiven){state.flags.post99_ballsGiven=true;state.bag.ultra_ball=(state.bag.ultra_ball||0)+12;state.balls+=8;save();}
@@ -21327,6 +21327,475 @@ for(const key of Object.keys(sources))pic(key);
  window.__PROPS_648={version:'6.48',placements:placed,reports};
  if(reports.some(r=>!r.ok))console.warn('Elementos 6.48: hay colocaciones pendientes de revisar.');
 })();
+
+/* Benifaió 6.56 · render-only reconstruction over ac16acb (6.48).
+   Never assigns collision, portals, state serialization, movement or story handlers.
+   All solids belong to the original map; new landscaping stays on blocked land. */
+(function benifaio653(){
+ 'use strict';
+ const ids=['benifaio','beni_plaza562'], model=window.__benifaio637.map;
+ const baseline={};
+ const engine={collision,interact,handleStep,changeScene,serializeState,applySaveData};
+ const geometry=()=>JSON.stringify({map:model,blocks:B562_BLOCKS,exits:B562_EXITS,portals:PORTALS,npcs:Object.fromEntries(ids.map(id=>[id,getSceneNpcs(id)]))});
+ function sample(){const out={},before=state.scene;try{for(const id of ids){state.scene=id;const s=SCENES[id],bits=[];for(let y=.125;y<s.h;y+=.25)for(let x=.125;x<s.w;x+=.25)bits.push(collision(x,y)?1:0);out[id]=bits;}}finally{state.scene=before}return out;}
+ baseline.samples=sample();baseline.geometry=geometry();baseline.save=JSON.stringify(serializeState());
+ const images={},paths=['tiles','arbol_kanto','arbusto_redondo','jardinera_flores_53','banco_madera_53','farola_hierro_53','naranjo_53','mercado_benifaio','naturaleza_extra_12','naturaleza_extra_13','naturaleza_extra_14','naturaleza_extra_15','banco_espaldera_536','local_personalizado_02','ajuntament','torre','iglesia','vins','peluqueria','kiosco','new_lab','new_vinted','new_sede','new_civic','new_floor'];
+ let overview=false,active=true,ready=false,ground={},objects={},status={version:'6.56-review',base:'ac16acbf1968b06fa69c709eba2309ee51aa4c3a'};
+ const oldRender=renderWorld;
+ const hash=(x,y)=>{let v=(Math.imul(Math.round(x*13),374761393)+Math.imul(Math.round(y*17),668265263)+4517)|0;v=Math.imul(v^(v>>>13),1274126177);return ((v^(v>>>16))>>>0)%997;};
+ function rect(g,x,y,w,h,c){g.fillStyle=c;g.fillRect(Math.round(x),Math.round(y),Math.round(w),Math.round(h));}
+ function label(g,text,x,y,w=200){g.save();g.font='bold 15px sans-serif';g.textAlign='center';g.textBaseline='middle';rect(g,x-w/2,y-13,w,27,'#224e4d');rect(g,x-w/2+2,y-11,w-4,2,'#d4ba7c');g.fillStyle='#fff0c4';g.fillText(text,x,y+1,w-9);g.restore();}
+ function tile(g,x,y,walk,plaza){const opts=walk?(plaza?[10,11,12,13]:[6,7,8,9]):[0,1,2,3,4,5],i=opts[hash(x,y)%opts.length];g.drawImage(images.tiles,(i%8)*48,Math.floor(i/8)*48,48,48,x*48,y*48,48,48);}
+ function floor(id){
+  const s=SCENES[id],c=document.createElement('canvas');c.width=s.w*48;c.height=s.h*48;const g=c.getContext('2d');g.imageSmoothingEnabled=false;
+  const walk=(x,y)=>id==='benifaio'?(model.floorRows[Math.floor(y)]?.[Math.floor(x)]==='1'):(x>.8&&y>.8&&x<s.w-.8&&y<s.h-.8);
+  // One continuous meadow: cluster noise is sampled in world coordinates, never per-tile squares.
+  rect(g,0,0,c.width,c.height,'#819563');
+  for(let yy=0;yy<c.height;yy+=3)for(let xx=0;xx<c.width;xx+=3){const v=hash(xx,yy),patch=Math.sin(xx/113+Math.cos(yy/127))*Math.cos(yy/96+xx/311);const colors=patch>.2?['#8b9e6c','#8c9f70','#809263']:['#7b9061','#829667','#7f9565'];rect(g,xx,yy,3,3,colors[v%3]);if(v<60)rect(g,xx,yy,2,1,'#a5b67d');}
+  function paving(clip,plaza=false){g.save();if(clip)g.clip(clip);for(let y=0;y<s.h;y++)for(let x=0;x<s.w;x++)tile(g,x,y,true,plaza);g.restore();}
+  if(id==='benifaio'){
+   const pavement=new Path2D();for(let y=0;y<s.h;y++)for(let x=0;x<s.w;x++)if(walk(x+.5,y+.5))pavement.rect(x*48,y*48,48,48);paving(pavement);
+   // Broken earth/stone transition entirely on the garden side. The physical edge stays fixed.
+   for(let y=0;y<s.h;y++)for(let x=0;x<s.w;x++)if(!walk(x+.5,y+.5)){
+    for(let by=0;by<48;by+=3)for(let bx=0;bx<48;bx+=3){const px=x*48+bx,py=y*48+by;let d=99;
+     if(walk(x+1.5,y+.5))d=Math.min(d,48-bx);if(walk(x-.5,y+.5))d=Math.min(d,bx+2);if(walk(x+.5,y+1.5))d=Math.min(d,48-by);if(walk(x+.5,y-.5))d=Math.min(d,by+2);
+     const v=hash(px,py);if(d<4+v%9){rect(g,px,py,3,3,v%3?'#aeaa7f':'#bcb48c');}else if(d<17&&v<170){rect(g,px,py,3,2,'#a8aa78');}
+     else if(d<33&&v<70){rect(g,px,py,2,4,'#587b47');if(v<19)rect(g,px+1,py-2,3,2,v%2?'#e5dca2':'#d2b4aa');}
+    }
+   }
+   // Small embedded curb stones punctuate, rather than outline, the whole boundary.
+   for(let y=1;y<s.h-1;y++)for(let x=1;x<s.w-1;x++)if(walk(x+.5,y+.5))for(const [dx,dy] of [[0,-1],[0,1],[-1,0],[1,0]])if(!walk(x+.5+dx,y+.5+dy)){
+    for(let n=0;n<6;n++){if(hash(x+n,y)%5===0)continue;const px=x*48+(dx===1?46:dx===-1?0:n*8),py=y*48+(dy===1?46:dy===-1?0:n*8);rect(g,px,py,dx?2:6,dy?2:6,'#c2bc96');}
+   }
+   // 6.54: distinguish the shared square, walking lanes and doorstep aprons without changing a single solid.
+   g.save();g.clip(pavement);
+   const square=new Path2D();square.ellipse(20.45*48,16.7*48,8.1*48,7.6*48,0,0,Math.PI*2);
+   g.save();g.clip(square);paving(null,true);g.restore();
+   const laneMask=document.createElement('canvas');laneMask.width=c.width;laneMask.height=c.height;const lg=laneMask.getContext('2d');lg.lineCap='round';lg.lineJoin='round';lg.strokeStyle='#fff';
+   const lane=(points,width)=>{const p=new Path2D();p.moveTo(points[0][0]*48,points[0][1]*48);for(let i=1;i<points.length;i++){const prev=points[i-1],q=points[i];p.quadraticCurveTo(prev[0]*48,prev[1]*48,(prev[0]+q[0])*24,(prev[1]+q[1])*24);}const end=points[points.length-1];p.lineTo(end[0]*48,end[1]*48);lg.lineWidth=width*48;lg.stroke(p);g.lineCap='round';g.lineJoin='round';g.strokeStyle='#eddfb7';g.lineWidth=(width+.28)*48;g.stroke(p);g.strokeStyle='#b9a68b';g.lineWidth=width*48;g.stroke(p);g.strokeStyle='#ccb99a';g.lineWidth=(width-.12)*48;g.stroke(p);};
+   lane([[7.55,9.5],[13,9.5],[16,10.1],[24,10.1],[29.5,8.2],[29.5,1]],1.1);
+   lane([[12,17],[15,18.8],[20.5,19],[28.3,18],[38.5,18]],1.15);
+   lane([[7.05,23.5],[13,23.5],[20.5,25.3],[20.5,29]],1.15);
+   lane([[33.3,13.5],[30.6,14.2],[29.4,17.9]],1.0);
+   lane([[35.1,27.45],[29,27.2],[25,24],[20.5,25.3]],1.05);
+   const laneStone=document.createElement('canvas');laneStone.width=c.width;laneStone.height=c.height;const ls=laneStone.getContext('2d');ls.imageSmoothingEnabled=false;
+   for(let y=0;y<s.h;y++)for(let x=0;x<s.w;x++){const k=[6,7,8,9][hash(x,y)%4];ls.drawImage(images.tiles,(k%8)*48,Math.floor(k/8)*48,48,48,x*48,y*48,48,48);}ls.fillStyle='rgba(169,126,81,.27)';ls.fillRect(0,0,c.width,c.height);ls.globalCompositeOperation='destination-in';ls.drawImage(laneMask,0,0);g.drawImage(laneStone,0,0);
+   // Existing fountain courtyard: an inset border and stone medallion unify the benches and lamps.
+   g.strokeStyle='#9eae97';g.lineWidth=5;g.beginPath();g.ellipse(20.45*48,16.7*48,7.8*48,7.25*48,0,0,Math.PI*2);g.stroke();
+   g.strokeStyle='#f0e6c9';g.lineWidth=2;g.beginPath();g.ellipse(20.45*48,16.7*48,7.65*48,7.1*48,0,0,Math.PI*2);g.stroke();
+   // Flat threshold mats at the real door coordinates; no props in front of a doorway.
+   for(const p of model.portals.filter(p=>['lab','vinted33','casa_beni32','tienda32'].includes(p.to))){rect(g,p.x*48-31,p.y*48-11,62,21,'#e5d7b2');rect(g,p.x*48-29,p.y*48-8,58,2,'#a89b7f');}
+   g.restore();
+   // Organic garden pockets are clipped to already blocked grass. Their outline varies within the old boundary.
+   const gardenMask=new Path2D();for(let yy=0;yy<s.h;yy++)for(let xx=0;xx<s.w;xx++)if(!walk(xx+.5,yy+.5))gardenMask.rect(xx*48,yy*48,48,48);
+   g.save();g.clip(gardenMask);
+   const beds=[[4.5,12,3.4,1.5],[6,26.5,3.9,1.2],[35,4.5,3.5,1.6],[34.8,15.6,3.5,1.2],[34.8,20.3,3.1,.8],[13,27.7,3.8,1.0],[27,28.1,3.1,.8]];
+   for(const [cx,cy,rx,ry] of beds){
+    const path=new Path2D();for(let i=0;i<=48;i++){const t=i/48*Math.PI*2,r=1+.12*Math.sin(t*3+cx)+.08*Math.cos(t*5+cy),x=(cx+Math.cos(t)*rx*r)*48,y=(cy+Math.sin(t)*ry*r)*48;if(i===0)path.moveTo(x,y);else path.lineTo(x,y);}path.closePath();
+    g.fillStyle='#718552';g.fill(path);g.strokeStyle='#a8aa7a';g.lineWidth=4;g.stroke(path);g.save();g.clip(path);
+    for(let yy=(cy-ry*1.2)*48;yy<(cy+ry*1.2)*48;yy+=9)for(let xx=(cx-rx*1.2)*48;xx<(cx+rx*1.2)*48;xx+=10){const v=hash(xx,yy);if(v>590)continue;const x=xx+v%5,y=yy+(v>>3)%4;rect(g,x,y,5,4,v%2?'#527840':'#8da75b');if(v<330){const col=['#f0ce78','#e5a3a9','#f2e7b7'][v%3];rect(g,x+1,y-3,3,3,col);rect(g,x-1,y-1,3,2,col);rect(g,x+1,y-1,1,1,'#e9b64d');}}
+    g.restore();
+   }
+   g.restore();
+   for(let y=2;y<s.h-1;y+=2.6)for(let x=2;x<s.w-1;x+=2.9){const xx=x+(hash(x*13,y*17)%13-6)/18,yy=y+(hash(x*19,y*11)%13-6)/16;
+    if(walk(xx,yy)||model.portals.some(p=>Math.hypot(p.x-xx,p.y-yy)<3)||model.objects.some(o=>xx>o.x-1&&xx<o.x+o.w+1&&yy>o.y-1&&yy<o.y+o.h+1))continue;
+    const im=images['naturaleza_extra_'+(12+hash(Math.floor(x),Math.floor(y))%4)],w=72+hash(x*9,y*7)%17,h=w*1.12;g.drawImage(im,xx*48-w/2,yy*48-h+19,w,h);
+   }
+   label(g,'↑ SILLA',29.5*48,2.5*48,130);label(g,'ALBAL →',37.2*48,18.5*48,124);label(g,'↓ PLAÇA MAJOR',20.5*48,28.2*48,185);
+  }else{
+   // Plaça Major is a garden square crossed by connected footpaths. Short lawn remains traversable.
+   const paths=new Path2D();
+   const line=(pts,width)=>{const p=new Path2D();p.moveTo(pts[0][0]*48,pts[0][1]*48);for(let i=1;i<pts.length;i++)p.lineTo(pts[i][0]*48,pts[i][1]*48);g.save();g.strokeStyle='#b0aa7e';g.lineCap='round';g.lineJoin='round';g.lineWidth=(width+.22)*48;g.stroke(p);g.restore();return p;};
+   const routes=[
+    {p:[[22.5,30],[22.5,26],[25.5,23.6],[28,22.5],[28,17],[28.3,13]],w:2.6},
+    {p:[[6.7,25.7],[11.5,26.2],[17,26.2],[22.5,26],[28.6,26.5],[37.5,28.6]],w:2.5},
+    {p:[[8.5,12.3],[8.5,16.9],[16.8,17],[22.8,17],[28,17]],w:2.7},
+    {p:[[16.6,12.5],[17.5,16.9]],w:2.1},
+    {p:[[28,22.5],[35.5,21.4]],w:2.4},
+    {p:[[11.5,25.7],[12.1,20.2],[15.5,18],[17.5,17]],w:2.2},
+    {p:[[19.4,18],[18,20.5],[18,23.4],[22.5,26]],w:2.1}
+   ];
+   const mask=document.createElement('canvas');mask.width=c.width;mask.height=c.height;const mg=mask.getContext('2d');mg.lineCap='round';mg.lineJoin='round';mg.strokeStyle='#fff';
+   for(const r of routes){const p=line(r.p,r.w);mg.lineWidth=r.w*48;mg.stroke(p);}
+   const ring=new Path2D();ring.ellipse(24.5*48,20.5*48,3.7*48,3.1*48,0,0,Math.PI*2);mg.lineWidth=1.7*48;mg.stroke(ring);g.strokeStyle='#b0aa7e';g.lineWidth=1.92*48;g.stroke(ring);
+   const stones=document.createElement('canvas');stones.width=c.width;stones.height=c.height;const sg=stones.getContext('2d');sg.imageSmoothingEnabled=false;
+   for(let y=0;y<s.h;y++)for(let x=0;x<s.w;x++){const i=[10,11,12,13][hash(x,y)%4];sg.drawImage(images.tiles,(i%8)*48,Math.floor(i/8)*48,48,48,x*48,y*48,48,48);}sg.globalCompositeOperation='destination-in';sg.drawImage(mask,0,0);g.drawImage(stones,0,0);
+   // A paved apron explains every actual door, while grass pockets give the square a human scale.
+   for(const [x,y,w,h] of [[2.3,11.4,10.1,1.4],[14,11.5,7,1.5],[24,11.6,17,1.3],[30,20,11.2,1.6],[33,27.5,8.2,1.2],[4,24.4,8,1.5]]){g.save();const p=new Path2D();p.roundRect(x*48,y*48,w*48,h*48,13);g.clip(p);paving(null,true);g.restore();}
+   // Irregular tiny flower flecks on the lawn; never tall shrubs or new solids.
+   const data=mg.getImageData(0,0,c.width,c.height).data;
+   for(let y=80;y<c.height-50;y+=11)for(let x=50;x<c.width-50;x+=13){if(data[(y*c.width+x)*4+3]>20||hash(x,y)>48)continue;rect(g,x,y,2,3,'#5b7c47');if(hash(x,y)<16)rect(g,x-1,y-2,4,2,hash(x,y)%2?'#e9dea2':'#d8bfb0');}
+  }
+  return c;
+ }
+ function add(id,o){objects[id].push(o);}
+ function sprite(id,key,x,y,w,h,foot){if(key==='torre'){add(id,{x:x*48,y:y*48,w:w*48,h:h*48,depth:(foot??y+h)*48,img:images[key],crop:[20,0,images[key].naturalWidth-20,images[key].naturalHeight]});return;}if(key==='banco_espaldera_536'){add(id,{x:x*48,y:y*48,w:w*48,h:h*48,depth:(foot??y+h)*48,img:images[key],crop:[31,0,images[key].naturalWidth-31,images[key].naturalHeight]});return;}if(key==='kiosco'){add(id,{x:x*48,y:y*48,w:w*48,h:h*48,depth:(foot??y+h)*48,img:images[key],crop:[28,0,images[key].naturalWidth-28,images[key].naturalHeight]});return;}if(key==='iglesia'){add(id,{x:x*48,y:y*48,w:w*48,h:h*48,depth:(foot??y+h)*48,img:images[key],crop:[32,0,images[key].naturalWidth-32,images[key].naturalHeight]});return;}add(id,{x:x*48,y:y*48,w:w*48,h:h*48,depth:(foot??y+h)*48,img:images[key]});}
+ function sourceObject(id,o){const r=model.atlas[o.sprite];if(!r)return;add(id,{x:o.x*48,y:o.y*48,w:o.w*48,h:o.h*48,depth:(o.y+o.h)*48,img:images.atlas,crop:r});}
+ function newBuilding(id,o,key,sourceDoor,targetDoor){
+  const im=images[key],c=document.createElement('canvas');c.width=o.w*48;c.height=o.h*48;const g=c.getContext('2d');g.imageSmoothingEnabled=false;
+  const a=document.createElement('canvas');a.width=im.naturalWidth;a.height=im.naturalHeight;const ag=a.getContext('2d');ag.drawImage(im,0,0);const px=ag.getImageData(0,0,a.width,a.height).data;
+  let minX=a.width,minY=a.height,maxX=0,maxY=0;for(let y=0;y<a.height;y++)for(let x=0;x<a.width;x++)if(px[(y*a.width+x)*4+3]>100){minX=Math.min(minX,x);maxX=Math.max(maxX,x);minY=Math.min(minY,y);maxY=Math.max(maxY,y);}
+  const w=maxX-minX+1,h=maxY-minY+1,split=Math.round(w*sourceDoor),dest=c.width*targetDoor;
+  g.drawImage(im,minX,minY,split,h,0,0,dest,c.height);g.drawImage(im,minX+split,minY,w-split,h,dest,0,c.width-dest,c.height);
+  add(id,{x:o.x*48,y:o.y*48,w:c.width,h:c.height,depth:(o.y+o.h)*48,img:c});
+ }
+ function make(){baseline.samples=sample();baseline.geometry=geometry();baseline.save=JSON.stringify(serializeState());for(const id of ids){ground[id]=id==='benifaio'?images.new_floor:floor(id);objects[id]=[];}
+  const id='benifaio';
+  // Recompose individual personalized facades at their inherited solid footprints.
+  newBuilding(id,model.objects.find(o=>o.id==='lab'),'new_lab',.54,(7.55-1.5)/11.5);
+  newBuilding(id,model.objects.find(o=>o.id==='civic'),'new_civic',.5,.5);
+  newBuilding(id,model.objects.find(o=>o.id==='sede'),'new_sede',.38,(33.3-28.4)/11.5);
+  newBuilding(id,model.objects.find(o=>o.id==='vinted'),'new_vinted',.5,(7.05-1.3)/10.1);
+  sprite(id,'local_personalizado_02',30.1,21.6,9.7,5.3);
+  for(const o of model.objects){if(['lab','civic','sede','vinted','tienda'].includes(o.id))continue;
+   if(o.sprite==='tree'){sprite(id,'naranjo_53',o.x+.3,o.y+.4,o.w-.6,o.h-.4);}
+   else if(o.sprite==='bench'){sprite(id,'banco_madera_53',o.x,o.y,o.w,o.h);}
+   else if(o.sprite==='lamp'){sprite(id,'farola_hierro_53',o.x,o.y,o.w,o.h);}
+   else if(o.sprite==='board'){
+    const c=document.createElement('canvas');c.width=96;c.height=101;const g=c.getContext('2d');rect(g,12,4,72,76,'#5e4b37');rect(g,17,10,62,62,'#ead9b5');rect(g,21,17,23,29,'#c38c6d');rect(g,49,18,23,20,'#9aa9a1');rect(g,27,51,38,2,'#9c906e');rect(g,7,0,82,8,'#a36c40');rect(g,19,80,7,21,'#67553b');rect(g,70,80,7,21,'#67553b');add(id,{x:o.x*48,y:o.y*48,w:o.w*48,h:o.h*48,depth:(o.y+o.h)*48,img:c});
+   }else sourceObject(id,o);
+  }
+  // Low relief details on the existing facade bases, not new blockers.
+  for(const [x,y] of [[31.6,25.8],[38,25.8]])sprite(id,'jardinera_flores_53',x,y,1.1,.7);
+  const p='beni_plaza562';
+  sprite(p,'ajuntament',2.3,3,10.1,9.15);
+  sprite(p,'torre',14,1,7,11.1);
+  sprite(p,'iglesia',24,2,17,10.4);
+  sprite(p,'vins',30,14,11.2,6.8);
+  sprite(p,'peluqueria',33,23,8.2,5.1);
+  sprite(p,'kiosco',4,20,6.4,5);
+  const tg=ground[p].getContext('2d');
+  sprite(p,'banco_espaldera_536',10,13,6,1.8);
+  sprite(p,'banco_madera_53',18.3,20.7,3.9,1.4);
+  const f=model.objects.find(o=>o.sprite==='fountain');add(p,{x:22.8*48,y:17.6*48,w:3.3*48,h:4.5*48,img:images.atlas,crop:model.atlas.fountain,depth:22.1*48});
+  // Planters stay within the foundations of the buildings.
+  for(const [x,y] of [[3,11],[10.6,11],[30.5,19.8],[39.3,19.8],[33.5,27.1],[40,27.1],[4.5,24.2]])sprite(p,'jardinera_flores_53',x,y,1,.65);
+  objects[id].sort((a,b)=>a.depth-b.depth);objects[p].sort((a,b)=>a.depth-b.depth);
+  ready=true;const after=sample();status={...status,ready:true,collisionSamples:Object.fromEntries(ids.map(id=>[id,after[id].length])),collisionDifferences:ids.reduce((n,id)=>n+after[id].filter((v,i)=>v!==baseline.samples[id][i]).length,0),geometryUnchanged:geometry()===baseline.geometry,saveUnchanged:JSON.stringify(serializeState())===baseline.save,engineFunctionsUnchanged:Object.keys(engine).every(k=>engine[k]===({collision,interact,handleStep,changeScene,serializeState,applySaveData})[k]),assets:paths.length+1};
+  document.getElementById('review654status').textContent=JSON.stringify(status);console.info('Benifaió 6.56',status);
+ }
+ function drawObject(o){ctx.save();ctx.imageSmoothingEnabled=false;if(o.crop){if(o.crop===model.atlas.fountain){ctx.beginPath();ctx.ellipse(o.x+o.w/2,o.y+o.h*.6,o.w*.49,o.h*.4,0,0,Math.PI*2);ctx.rect(o.x+o.w*.28,o.y,o.w*.44,o.h*.65);ctx.clip();}ctx.drawImage(o.img,...o.crop,o.x,o.y,o.w,o.h);}else ctx.drawImage(o.img,o.x,o.y,o.w,o.h);ctx.restore();}
+ renderWorld=function(){if(!active||!ready||!ids.includes(state.scene))return oldRender();oldRender();const id=state.scene,s=SCENES[id],cx=clamp(camera.x,0,Math.max(0,s.w*48-W)),cy=clamp(camera.y,0,Math.max(0,s.h*48-H));
+  ctx.save();ctx.fillStyle='#789366';ctx.fillRect(0,0,W,H);if(overview){const z=Math.min(W/(s.w*48),H/(s.h*48));ctx.translate((W-s.w*48*z)/2,(H-s.h*48*z)/2);ctx.scale(z,z);}else ctx.translate(-Math.floor(cx),-Math.floor(cy));ctx.imageSmoothingEnabled=false;ctx.drawImage(ground[id],0,0);
+  const group=objects[id].map(o=>({depth:o.depth,draw:()=>drawObject(o)}));
+  for(const n of getSceneNpcs(id)){const x=(n.x+.5)*48,y=(n.y+1)*48;group.push({depth:y,draw:()=>{if(id==='beni_plaza562'){const im=asset(B562_NPC_ASSET[n.who]);if(im.complete&&im.naturalWidth)ctx.drawImage(im,(n.walking?Math.floor(elapsed*6+n.x)%4:0)*64,(n.walkDir??0)*96,64,96,x-32,y-87,64,96);else drawCharacter(n.who,x,y,0,0);}else drawCharacter(n.who,x,y,n.dir32??0,n.walkAnim32||0);
+   if(Math.hypot(state.player.x-n.x-.5,state.player.y-n.y-.5)<3){label(ctx,n.label,x,y-102,Math.min(220,n.label.length*8+18));}}});}
+  const f=getFollower29();if(f)group.push({depth:(f.y+.42)*48,draw:()=>drawMonsterFollower(f.x*48,(f.y+.42)*48,f.name,f.anim,f.dir)});
+  group.push({depth:(state.player.y+.42)*48,draw:()=>drawCharacter(state.player.chosen,state.player.x*48,(state.player.y+.42)*48,state.player.dir,state.player.anim)});
+  // Keep all 6.47/6.48 examined objects; original positions and interactions are untouched.
+  for(const o of outsideProps53[id]||[]){if(o.type==='megaprop647'||o.type==='megaprop648')group.push({depth:(o.y+o.h)*48,draw:()=>drawOutdoorProp53(o)});}
+  group.sort((a,b)=>a.depth-b.depth).forEach(o=>o.draw());
+  if(id==='benifaio'){
+   const inspector=window.__benifaio640;
+   for(const t of inspector.targets){if(state.flags['ben640_'+t.id])continue;ctx.fillStyle='#ffd56b';ctx.beginPath();ctx.arc(t.x*48,t.y*48-12,7,0,Math.PI*2);ctx.fill();ctx.fillStyle='#fff5d5';ctx.fillRect(t.x*48-2,t.y*48-16,4,9);}
+   if(document.getElementById('ben640_show')?.textContent==='Ocultar ruta'){const points=inspector.solveRoute(document.getElementById('ben640_dest').value);ctx.strokeStyle='#37e3dc';ctx.lineWidth=5;ctx.beginPath();points.forEach(([x,y],i)=>i?ctx.lineTo(x*48,y*48):ctx.moveTo(x*48,y*48));ctx.stroke();}
+   if(document.getElementById('ben640_night')?.checked){ctx.fillStyle='rgba(15,31,70,.19)';ctx.fillRect(0,0,s.w*48,s.h*48);}
+  }
+  if(id==='beni_plaza562'&&b563MedalTier()>=2){ctx.strokeStyle='#9a6155';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(13*48,15.45*48);ctx.lineTo(23*48,15.8*48);ctx.stroke();for(let i=0;i<12;i++){ctx.fillStyle=['#bf473d','#e8b75a','#427b7b'][i%3];const x=(13+i*.83)*48,y=(15.45+i*.029)*48;ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x+14,y+1);ctx.lineTo(x+7,y+13);ctx.fill();}}
+
+  const exits=id==='benifaio'?PORTALS[id]:B562_EXITS[id];for(const p of exits){if(Math.hypot(state.player.x-p.x,state.player.y-p.y)<3.2){ctx.strokeStyle='#fff0ba';ctx.lineWidth=2;ctx.beginPath();ctx.ellipse(p.x*48,p.y*48,17,7,0,0,7);ctx.stroke();}}
+  ctx.restore();
+ };
+ // A review-only toolbar allows reproducible navigation without affecting production.
+ const bar=document.createElement('div');bar.id='review654';bar.style.cssText='position:relative;z-index:20;display:flex;flex-wrap:wrap;gap:5px;padding:8px;max-width:1280px;margin:auto;background:#183b3e;color:#eee1b9;font:12px system-ui';
+ document.body.appendChild(bar);
+ function button(text,fn){const b=document.createElement('button');b.textContent=text;b.style.cssText='background:#2c5653;color:#fff1cc;border:1px solid #a6b594;padding:7px;border-radius:5px;cursor:pointer';b.onclick=fn;bar.appendChild(b);return b;}
+ function view(id,x,y){if(!window.__PREVIA_DEV_ACTIVE_600||!state.flags.dev600Marker){if(!window.__PREVIA_QA){location.search='?qa';return;}window.__PREVIA_QA.dev600.select('646_lab');}hideModal();state.screen='world';state.scene=id;state.player.x=x;state.player.y=y;camera.x=x*48-W/2;camera.y=y*48-H/2;document.getElementById('title64')?.classList.add('hidden');document.getElementById('gameShell')?.classList.remove('title-open64');document.getElementById('dev600Overlay')?.classList.remove('open');updateScene(false);
+ const safe=(xx,yy)=>[[0,0],[.24,0],[-.24,0],[0,.24],[0,-.24]].every(([dx,dy])=>!collision(xx+dx,yy+dy));
+ if(!safe(x,y)){let best=null,dist=Infinity;for(let oy=-3;oy<=3;oy+=.25)for(let ox=-3;ox<=3;ox+=.25){const d=ox*ox+oy*oy;if(d<dist&&safe(x+ox,y+oy)){best=[x+ox,y+oy];dist=d;}}if(best)[x,y]=best;}
+ state.player.x=x;state.player.y=y;camera.x=x*48-W/2;camera.y=y*48-H/2;bar.dataset.scene=id;bar.dataset.player=x+','+y;}
+ button('Pueblo · fuente',()=>view('benifaio',20.5,19.5));button('Laboratorio',()=>view('benifaio',7.55,9.48));button('Sede Marshall',()=>view('benifaio',33.3,14.5));button('Vinted',()=>view('benifaio',7.05,23.48));button('Plaça Major',()=>view('beni_plaza562',22.5,17.5));button('Ajuntament y torre',()=>view('beni_plaza562',16.6,13.5));
+ button('Vista general / seguir',()=>overview=!overview);
+ button('Antes / Después',()=>{active=!active;bar.dataset.visual=active?'6.56':'6.48';});
+ const output=document.createElement('output');output.id='review654status';output.style.cssText='display:none';bar.appendChild(output);
+ const brand=document.querySelector('.brand small');if(brand)brand.textContent='AVENTURA WEB · 6.56 · BENIFAIÓ · REVISIÓN';document.title='La Previa 6.56 · Benifaió · revisión sin publicar';
+ window.__BENIFAIO656={status:()=>status,active:()=>active,geometry:()=>({benifaio:model,plazaBlocks:B562_BLOCKS,plazaExits:B562_EXITS.beni_plaza562}),ground,objects};
+ Promise.all([...paths.map(key=>new Promise((resolve,reject)=>{const im=new Image();images[key]=im;im.onload=resolve;im.onerror=reject;im.src=key==='new_floor'?'/assets/benifaio656/suelo_pueblo.png':key.startsWith('new_')?'/assets/benifaio653/'+({new_lab:'laboratorio',new_vinted:'vinted',new_sede:'sede',new_civic:'casa_vila'}[key])+'.png':['ajuntament','torre','iglesia','vins','peluqueria','kiosco'].includes(key)?window.__ASSETS['beni562_'+key+'.png']:'/assets/benifaio652/'+key+'.png';})),new Promise((resolve,reject)=>{const im=new Image();images.atlas=im;im.onload=resolve;im.onerror=reject;im.src='/assets/f8/f86acb20c2e71998f00323e8.png';})]).then(make).catch(e=>{status.error=String(e);output.textContent=JSON.stringify(status);console.error(e)});
+})();
+
+/* Review harness: only enabled by ?qa; all mutations use dev600 test storage. */
+if(window.__PREVIA_QA)(function reviewTests656(){
+ const bar=document.getElementById('review654');
+ const report=document.createElement('pre');report.id='review654report';report.style.cssText='display:none;white-space:pre-wrap;max-height:300px;overflow:auto;color:#183b3e;background:#f3eddb;padding:16px';document.body.appendChild(report);
+ let result;
+ function button(text,fn){const b=document.createElement('button');b.textContent=text;b.style.cssText='background:#214743;color:#fff0c9;border:1px solid #bba66f;padding:7px;border-radius:5px';b.onclick=fn;bar.appendChild(b);}
+ const links=id=>B562_EXITS[id]||PORTALS[id]||[];
+ const here=(id,x,y)=>{state.scene=id;state.screen='world';state.player.x=x;state.player.y=y;camera.x=x*48-W/2;camera.y=y*48-H/2;hideModal();document.getElementById('title64')?.classList.add('hidden');updateScene(false);};
+ function pathTo(id,start,p){const old=state.scene;state.scene=id;try{
+  const s=SCENES[id],w=s.w*4,h=s.h*4,free=new Uint8Array(w*h),prev=new Int32Array(w*h).fill(-1),seen=new Uint8Array(w*h),q=[];
+  const xy=k=>[(k%w+.5)/4,(Math.floor(k/w)+.5)/4];
+  for(let k=0;k<w*h;k++){const [x,y]=xy(k);free[k]=[[0,0],[.24,0],[-.24,0],[0,.24],[0,-.24]].every(([dx,dy])=>!collision(x+dx,y+dy));}
+  function closest(x,y){let best=-1,d=.7;for(let k=0;k<free.length;k++){if(!free[k])continue;const [xx,yy]=xy(k),v=Math.hypot(xx-x,yy-y);if(v<d){d=v;best=k}}return best;}
+  const a=closest(...start),b=closest(p.x,p.y);if(a<0||b<0)return [];q.push(a);seen[a]=1;
+  for(let i=0;i<q.length;i++){const k=q[i];if(k===b)break;const x=k%w,y=Math.floor(k/w);for(const z of [x?k-1:-1,x<w-1?k+1:-1,y?k-w:-1,y<h-1?k+w:-1]){if(z<0||seen[z]||!free[z])continue;prev[z]=k;seen[z]=1;q.push(z)}}
+  if(!seen[b])return [];const points=[];for(let k=b;k>=0;k=prev[k]){points.push(xy(k));if(k===a)break;}return points.reverse();
+ }finally{state.scene=old;}}
+ button('Verificar entradas y recorridos',()=>{
+  const normal=localStorage.getItem(savedKey);window.__PREVIA_QA.dev600.select('646_lab');
+  const initial=JSON.parse(JSON.stringify(serializeState())),rows=[];const flags=JSON.stringify(state.flags),party=JSON.stringify(state.party),bag=JSON.stringify(state.bag);
+  for(const id of ['benifaio','beni_plaza562'])for(const portal of links(id)){
+   const start=id==='benifaio'?[20.5,19.5]:[22.5,26.5];here(id,...start);
+   const points=pathTo(id,start,portal),row={from:id,to:portal.to,routePoints:points.length,walked:false,entered:false,returnAvailable:false};
+   if(points.length){let blocked=0;for(const [x,y] of points){if(collision(x,y)){blocked++;break;}state.player.x=x;state.player.y=y;}
+    row.walked=blocked===0;
+    if(row.walked){const n=getNearby();row.nearKind=n?.kind;row.nearDestination=n?.scene||n?.point?.portal?.to;interact();row.destination=state.scene;row.entered=state.scene===portal.to;
+     row.returnAvailable=links(state.scene).some(p=>p.to===id)||Object.values(VILLAGE_ROOMS32).some(r=>r?.id===state.scene);
+     // Exercise real return entry through nearby/interact when destination has a portal.
+     const back=links(state.scene).find(p=>p.to===id)||(state.scene==='lab'?{x:8.5,y:11.5,to:'benifaio'}:state.scene==='ruta'?{x:1.5,y:12.5,to:'benifaio'}:null);if(back){here(state.scene,back.x,back.y+.1);const bn=getNearby();if(state.scene==='ruta'){state.player.x=1.5;state.player.y=12.5;handleStep();}else interact();row.returned=state.scene===id;row.returnAvailable=!!back;row.returnNear=bn?.kind;}
+    }
+   }rows.push(row);
+  }
+  applySaveData(initial);here('benifaio',20.5,19.5);save();
+  result={visual:window.__BENIFAIO656.status(),routes:rows,normalSaveUntouched:localStorage.getItem(savedKey)===normal,validSave:validSave(serializeState()),flagsRestored:JSON.stringify(state.flags)===flags,partyRestored:JSON.stringify(state.party)===party,bagRestored:JSON.stringify(state.bag)===bag};
+  report.textContent=JSON.stringify(result,null,2);report.style.display='block';window.__BENIFAIO656.testResult=result;
+ });
+ button('Descargar auditoría',()=>{const a=document.createElement('a');a.download='auditoria_benifaio656.json';a.href=URL.createObjectURL(new Blob([JSON.stringify(result||window.__BENIFAIO656.status(),null,2)],{type:'application/json'}));a.click();URL.revokeObjectURL(a.href);});
+ button('Ocultar informe',()=>report.style.display='none');
+})();
+
+/* 6.56.1 / BLAS · SEGUNDA MEDALLA — CORRECCIÓN DE PRIORIDAD.
+ * La misión obligatoria Burger 5.27 tiene prioridad sobre los regalos de 6.24
+ * y los encargos opcionales 6.25/6.26 hasta obtener la Medalla Del Mes.
+ * No se modifican portales, combate, recompensas, guardado ni la geometría.
+ */
+const blasBadge2PriorTalk6561=npcTalk;
+npcTalk=function(n){
+ if(n?.id==='burger527Blas' && state.flags?.starter &&
+    Array.isArray(state.badges) && state.badges.includes(0) && !state.badges.includes(1)){
+   const phase=burger527Phase();
+   if(phase===5){
+     return dialog('blas',[
+       '¡NO AWELO NO! ¡Al Burger no lo cierra nadie!',
+       'Has salvado la hamburguesa del mes y has descubierto la oferta de Cierre S. L.',
+       'Ahora te toca ganarte la Medalla Del Mes. ¿Estás preparado para Eevee y Umbreon?'
+     ],()=>{
+       burger527Set(6);
+       noteQuest('burger527_fin');
+       gymChallenge('blas');
+     });
+   }
+   if(phase>=6){
+     // Compatibilidad: antiguas partidas con fase 6 pero sin el flag listo.
+     if(!state.flags.burger527Ready)burger527Set(6);
+     return gymChallenge('blas');
+   }
+ }
+ return blasBadge2PriorTalk6561(n);
+};
+if(window.__PREVIA_QA)window.__BLAS_SECOND_BADGE_6561={
+ phase:()=>burger527Phase(),
+ ready:()=>({first:state.badges.includes(0),second:state.badges.includes(1),
+    burgerPhase:burger527Phase(),ready:!!state.flags.burger527Ready}),
+ talk:()=>npcTalk({id:'burger527Blas',who:'blas'}),
+ current:()=>({screen:state.screen,scene:state.scene,badges:[...state.badges]})
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* BEGIN INTEGRATION657 */
+/* 6.57 review: tile-native Burger rebuild. Story, battles and rewards are reused. */
+(function integration657(){
+'use strict';
+const base='/assets/integracion657/',im={};
+function image657(key,path){const image=new Image();image.src=base+path;im[key]=image;return image;}
+image657('facade','marca/fachada_exacta.png');
+image657('panel','marca/burger_lhorta_panel_interior_grande.png');
+image657('panelSmall','marca/burger_lhorta_panel_interior_pequeno.png');
+const spriteFiles={2:'mg_02_silla_awelo',3:'mg_03_mayonesa_alfaro',6:'mg_06_87_hamburguesas',9:'patinete_v2',11:'mg_11_siesta_sergio',14:'mg_14_comparativas_plata',17:'mg_17_huevos_santo_par',21:'mg_21_naranjas',27:'mg_27_puerta_nachito',30:'mg_30_torneo_3x3',truck:'camion_v3',slots:'extra_tragaperras_rafa'};
+for(const [id,file] of Object.entries(spriteFiles))image657(id,'minijuegos/'+file+'.png');
+for(const [key,file] of Object.entries({kitchen:'puerta_v2',warehouse:'puerta_v2',plant:'maceta_verde',boxes:'caja_almacen',cabinet:'armario_barra'}))image657(key,'burger/'+file+'.png');
+const s=SCENES.burger;s.w=32;s.h=22;s.spawn=[16.5,20];
+const anchor={juanchino:[14,5],cocinero:[20,5],burgerPau50:[7,12],burgerRober50:[24,17],frankBurger520:[22,18],npc523_irene523_burger:[18,7],npc526_patriBurger:[22,7],burger527Blas:[12,18],burger527Cliente:[7,17],rafaSlots63:[3,5],aweloSilla:[4,12],blasBH:[26,12],nachitoBH:[26,17]};
+for(const n of s.npcs){if(anchor[n.id]){[n.x,n.y]=anchor[n.id];if(npc526OriginalLocations[n.id])Object.assign(npc526OriginalLocations[n.id],{x:n.x,y:n.y});}}
+const npcBefore=getSceneNpcs;
+getSceneNpcs=function(id=state.scene){const npcs=npcBefore(id);if(id!=='burger')return npcs;let extra=0;return npcs.map(n=>{const a=anchor[n.id]||[27,11+extra++*2];return {...n,x:a[0],y:a[1]};});};
+const loreAnchor={sillaAwelo:[4.5,13.5],mandamientos:[28,7],mesaGrupo:[15,13],cineRobbery34:[27,5.5],burgerLogo35:[16,7.8],burgerMesas35:[8,10],burgerComanda50:[19,8.5],burgerGrill51:[21,7.8],plus541_0:[4.5,18],mg583_2:[3,13],mg583_6:[11,7.5]};
+for(const p of LORE_POINTS.burger||[])if(loreAnchor[p.id])[p.x,p.y]=loreAnchor[p.id];
+for(const p of PORTALS.burger){if(p.to==='burger_cocina'){p.x=25;p.y=5.5;}else if(p.to==='post99_cocina'){p.x=29;p.y=19;}}
+PORTALS.burger.push({x:16.5,y:20.5,to:'albal',spawn:[16,13],label:'SALIR A ALBAL'});
+for(const p of PORTALS.burger_cocina||[])if(p.to==='burger')p.spawn=[25,7];
+for(const p of PORTALS.post99_cocina||[])if(p.to==='burger')p.spawn=[29,19];
+const props=[prop50('counter',10,5.9,12,.85,{label:'PEDIDOS · BURGER L’HORTA'}),
+ ...[[3,10,4,1.8],[3,15,4,1.8],[25,10,4,1.8],[25,15,4,1.8],[10,10,3,1.7],[17,10,3,1.7],[10,15,3,1.7],[17,15,3,1.7]].map(([x,y,w,h])=>prop50('table',x,y,w,h)),
+ prop50('plant',2,19,.9,.9),prop50('plant',29,19,.9,.9),prop50('shelf',7,3.5,2,1.3),prop50('kitchen',18,3.5,4,1.3)];
+// Keep imported interactive resource props, placing them in a dedicated display bay.
+let preserved=0;for(const o of ROOMS50.burger.props)if(o.type==='megaprop647'||o.type==='megaprop648'){props.push({...o,x:4+preserved++*2,y:19,w:1.4,h:.8});}
+ROOMS50.burger.props=props;
+function solid(x,y){return x<1.35||x>30.65||y<4.8||y>20.9||props.some(o=>o.solid&&x>o.x-.22&&x<o.x+o.w+.22&&y>o.y-.12&&y<o.y+o.h+.19);}
+const oldCollision=collision;
+collision=function(x,y){if(state.scene!=='burger')return oldCollision(x,y);if(!Number.isFinite(x)||!Number.isFinite(y)||solid(x,y))return true;return getSceneNpcs('burger').some(n=>Math.abs(x-n.x-.5)<.43&&Math.abs(y-n.y-.5)<.43);};
+function safe(x,y){return [[0,0],[.24,0],[-.24,0],[0,.24],[0,-.24]].every(([a,b])=>!collision(x+a,y+b));}
+function settle(x,y){if(!safe(x,y)){let nearest=null,distance=Infinity;for(let yy=5;yy<=20.5;yy+=.5)for(let xx=1.5;xx<=30.5;xx+=.5){const d=(x-xx)**2+(y-yy)**2;if(d<distance&&safe(xx,yy)){nearest=[xx,yy];distance=d;}}[x,y]=nearest||s.spawn;}Object.assign(state.player,{x,y});camera.x=x*TILE-W/2;camera.y=y*TILE-H/2;resetFollower29();}
+const oldChange=changeScene;
+changeScene=function(id,spawn){const from=state.scene;oldChange(id,spawn);if(id==='burger'){const target=from==='burger_cocina'?[25,7]:from==='post99_cocina'?[29,19]:s.spawn;settle(...target);updateScene(false);save();}};
+const oldNearby=getNearby;
+getNearby=function(){if(state.scene!=='burger')return oldNearby();const p=state.player,candidates=[];
+for(const n of getSceneNpcs('burger'))candidates.push({kind:'npc',npc:n,dist:Math.hypot(p.x-n.x-.5,p.y-n.y-.5)});
+for(const point of LORE_POINTS.burger||[])candidates.push({kind:'lore',point,dist:Math.hypot(p.x-point.x,p.y-point.y)});
+for(const portal of PORTALS.burger)candidates.push({kind:'lore',point:{id:'portal',label:portal.label,portal},dist:Math.hypot(p.x-portal.x,p.y-portal.y)});
+return candidates.filter(n=>n.dist<1.65).sort((a,b)=>a.dist-b.dist)[0]||null;};
+// The old 6.03 importer projects Burger coordinates onto its 18×13 grid.
+// Restore the intended new position after it has validated and normalized all data.
+const oldApply=applySaveData;
+applySaveData=function(data){let target=null;if(data?.scene==='burger')target=data.burgerLayout657===1?[data.player.x,data.player.y]:[...s.spawn];const ok=oldApply(data);if(ok&&target){settle(...target);updateScene(false);}return ok;};
+const oldSerialize=serializeState;
+serializeState=function(){const data=oldSerialize();data.burgerLayout657=1;data.edition='6.57-review';return data;};
+if(state.scene==='burger')settle(...s.spawn);
+const oldBuilding=drawBuilding;
+drawBuilding=function(b){if(state.scene!=='albal'||b.type!=='burger'||!im.facade.naturalWidth)return oldBuilding(b);ctx.save();ctx.imageSmoothingEnabled=false;ctx.drawImage(im.facade,b.x*TILE,b.y*TILE,b.w*TILE,b.h*TILE);ctx.restore();};
+function stamp(g,key,x,y,w,h){const a=im[key];if(a?.naturalWidth)g.drawImage(a,x*TILE,y*TILE,w*TILE,h*TILE);}
+let floorCache;
+function floor(){if(floorCache)return floorCache;const c=document.createElement('canvas');c.width=32*TILE;c.height=22*TILE;const g=c.getContext('2d');g.imageSmoothingEnabled=false;
+g.fillStyle='#173e35';g.fillRect(0,0,c.width,c.height);
+for(let y=4;y<22;y++)for(let x=0;x<32;x++){g.fillStyle=(x+y)%2?'#c9b995':'#d8c9a9';g.fillRect(x*48,y*48,48,48);g.strokeStyle='#b2a388';g.strokeRect(x*48+.5,y*48+.5,47,47);g.fillStyle='#e6dbc3';g.fillRect(x*48+3,y*48+3,41,2);}
+g.fillStyle='#1e5545';g.fillRect(48,48,30*48,3.8*48);for(let x=1;x<31;x++){g.fillStyle=x%2?'#2a6250':'#28604e';g.fillRect(x*48,48,46,148);g.fillStyle='#bc9a5f';g.fillRect(x*48,183,48,5);}
+g.fillStyle='#152f2a';g.fillRect(0,0,c.width,48);g.fillRect(0,0,48,c.height);g.fillRect(31*48,0,48,c.height);g.fillRect(0,21*48,c.width,48);
+g.fillStyle='#e5cf9e';g.font='bold 24px serif';g.textAlign='center';g.fillText('BURGER L’HORTA · LA MESA NUNCA SE CANCELA',16*48,36);
+// Flat entrance mat and clear central aisle.
+g.fillStyle='#224e43';g.fillRect(15*48,19.8*48,3*48,1.2*48);g.fillStyle='#efdca7';g.font='bold 14px sans-serif';g.fillText('ALBAL ↓',16.5*48,20.5*48);floorCache=c;return c;}
+function label(text,x,y){ctx.font='bold 12px sans-serif';ctx.textAlign='center';const w=ctx.measureText(text).width+20;ctx.fillStyle='#173d34ee';ctx.fillRect(x-w/2,y-18,w,24);ctx.fillStyle='#f8e6bd';ctx.fillText(text,x,y-2);}
+function marker(p,key){stamp(ctx,key,p.x-.65,p.y-1.15,1.3,1.3);}
+const oldRender=renderWorld;
+renderWorld=function(){if(state.scene!=='burger'){oldRender();return;}ctx.fillStyle='#152f2a';ctx.fillRect(0,0,W,H);const v=roomView50(s);ctx.save();ctx.scale(v.fit,v.fit);ctx.translate(-Math.floor(v.cx),-Math.floor(v.cy));ctx.imageSmoothingEnabled=false;ctx.drawImage(floor(),0,0);
+stamp(ctx,'panel',10,1.8,12,3.2);stamp(ctx,'panelSmall',2,2.2,5,1.5);
+for(const p of PORTALS.burger.filter(p=>p.to!=='albal')){const top=p.to==='burger_cocina'?2.9:16.4;stamp(ctx,p.to==='burger_cocina'?'kitchen':'warehouse',p.x-.6,top,1.2,2.6);label(p.to==='burger_cocina'?'COCINA':'PASAJE',p.x*48,(top-.1)*48);}stamp(ctx,'warehouse',28.4,2.9,1.2,2.6);label('ALMACÉN',29*48,2.8*48);
+const layers=props.map(o=>({depth:o.y+o.h,draw:()=>drawProp50(o)}));
+for(const n of getSceneNpcs('burger'))layers.push({depth:n.y+1,draw:()=>{if(n.id==='rafaSlots63'){stamp(ctx,'slots',n.x-.2,n.y-.5,1.4,1.8);drawCharacter('rafa_runner63',(n.x+1.4)*48,(n.y+1)*48,1,0);}else drawCharacter(n.who,(n.x+.5)*48,(n.y+1)*48,n.dir32||0,n.walkAnim32||0);if(Math.hypot(state.player.x-n.x-.5,state.player.y-n.y-.5)<2.6)label(n.label,(n.x+.5)*48,(n.y-1)*48);}});
+for(const p of LORE_POINTS.burger||[])if(p.id.startsWith('mg583_'))layers.push({depth:p.y,draw:()=>marker(p,p.id.slice(6))});
+const f=getFollower29();if(f)layers.push({depth:f.y+.42,draw:()=>drawMonsterFollower(f.x*48,(f.y+.42)*48,f.name,f.anim,f.dir)});
+layers.push({depth:state.player.y+.42,draw:()=>drawCharacter(state.player.chosen,state.player.x*48,(state.player.y+.42)*48,state.player.dir,state.player.anim)});
+layers.sort((a,b)=>a.depth-b.depth).forEach(o=>o.draw());ctx.restore();};
+// Add an indoor route to the existing warehouse event with exactly its old gate.
+const warehouse={id:'op625_warehouse',x:29,y:5.5,label:'Almacén · Cierre S. L.'};
+LORE_POINTS.burger.push(warehouse);
+const oldLandmark=landmarkTalk;
+landmarkTalk=function(p){if(state.scene==='burger'&&p.id==='op625_warehouse'){if(op625Stage()>=3)return op625Open();return dialog('blas',['El almacén está cerrado. Sigue la investigación de la Última Comanda.']);}return oldLandmark(p);};
+// Review UI. Test controls always select the isolated dev save first.
+const bar=document.getElementById('review654');
+function button(name,fn){const b=document.createElement('button');b.textContent=name;b.onclick=fn;bar.appendChild(b);}
+function visit(id,x,y){window.__PREVIA_QA.dev600.select('646_lab');hideModal();state.screen='world';state.scene=id;Object.assign(state.player,{x,y});$('title64')?.classList.add('hidden');gameShell.classList.remove('title-open64');$('dev600Overlay')?.classList.remove('open');updateScene(false);if(id==='burger')settle(x,y);camera.x=state.player.x*48-W/2;camera.y=state.player.y*48-H/2;}
+if(window.__PREVIA_QA){button('Burger · comedor',()=>visit('burger',16.5,14));button('Burger · barra',()=>visit('burger',16,7.5));button('Albal · fachada',()=>visit('albal',16.5,12.5));button('Blas · probar combate',()=>{visit('burger',12.5,19.5);state.badges=[0];state.flags.starter=true;state.flags.burger527Phase=6;delete state.flags.burger527Ready;npcTalk({id:'burger527Blas',who:'blas'});});
+button('Blas · fase 5',()=>{visit('burger',12.5,19.5);state.badges=[0];state.flags.starter=true;state.flags.burger527Phase=5;delete state.flags.burger527Ready;npcTalk({id:'burger527Blas',who:'blas'});});
+button('Blas · fase 4',()=>{visit('burger',12.5,19.5);state.badges=[0];state.flags.starter=true;state.flags.burger527Phase=4;delete state.flags.burger527Ready;npcTalk({id:'burger527Blas',who:'blas'});});
+button('Estado de prueba',()=>{let o=$('qa657-state');if(!o){o=document.createElement('pre');o.id='qa657-state';document.body.appendChild(o);}o.textContent=JSON.stringify({scene:state.scene,screen:state.screen,player:state.player,badges:state.badges,money:state.money,phase:burger527Phase(),ready:!!state.flags.burger527Ready,valid:validSave(serializeState()),stored:JSON.parse(localStorage.getItem(savedKey+'-dev600')||'null')},null,2);});
+button('Vista móvil 390',()=>{document.documentElement.style.width='390px';document.body.style.width='390px';window.dispatchEvent(new Event('resize'));});button('Vista escritorio',()=>{document.documentElement.style.width='';document.body.style.width='';window.dispatchEvent(new Event('resize'));});
+button('Diagnóstico integración',()=>{let out=$('integration-diagnostics');if(!out){out=document.createElement('pre');out.id='integration-diagnostics';out.style.cssText='white-space:pre-wrap';document.body.appendChild(out);}out.textContent=JSON.stringify({npcs:getSceneNpcs('burger'),portals:PORTALS.burger,lore:LORE_POINTS.burger,props,landscape:window.__landscape657,visual:window.__BENIFAIO656.status(),assets:Object.fromEntries(Object.entries(im).map(([k,v])=>[k,{ready:!!v.naturalWidth,src:v.src}]))},null,2);});
+}
+const frameBefore657=title64Frame;title64Frame=function(...args){frameBefore657(...args);const f=title64Layer.querySelector('.title64-footer span');if(f)f.textContent='EDICIÓN LA PREVIA · WEB 6.57 · REVISIÓN';};
+bar.addEventListener('click',()=>setTimeout(()=>window.scrollTo(0,0),0));
+document.title='La Previa 6.57 · Integración · revisión sin publicar';const brand=document.querySelector('.brand small');if(brand)brand.textContent='AVENTURA WEB · 6.57 · REVISIÓN';
+const flowers=new Image();flowers.src='/assets/benifaio652/jardinera_flores_53.png';flowers.onload=()=>{if(!window.__BENIFAIO656.status().ready){setTimeout(flowers.onload,100);return;}const model=window.__benifaio637.map,objects=window.__BENIFAIO656.objects.benifaio;let count=0;
+for(const [x,y,w,h] of [[2,12,2.3,1.2],[6,12.3,2.5,1.2],[2,26,2.5,1.3],[6,26.4,2.5,1.2],[11.5,27.5,2.8,1.3],[33,3,2.5,1.2],[36,3.5,2.5,1.2],[33.5,15.5,2.4,1.2],[34,20,2.8,1.1],[26,28,2.8,1]]){
+let blocked=true;for(let yy=y;yy<=y+h;yy+=.25)for(let xx=x;xx<=x+w;xx+=.25){if(model.floorRows[Math.floor(yy)]?.[Math.floor(xx)]==='1')blocked=false;}if(!blocked||model.portals.some(p=>Math.hypot(p.x-x-w/2,p.y-y-h/2)<2.5)||model.objects.some(o=>o.w>5&&x<o.x+o.w&&x+w>o.x&&y<o.y+o.h&&y+h>o.y))continue;
+objects.push({x:x*48,y:y*48,w:w*48,h:h*48,depth:(y+h)*48,img:flowers});count++;}window.__landscape657={added:count};};
+window.__BURGER657={im,anchor,solid,settle,visit,paintMarker:(g,p,key)=>{const a=im[key];if(!a?.naturalWidth)return false;const w=key==='truck'?2.1:1.3,h=w*a.naturalHeight/a.naturalWidth;g.save();g.imageSmoothingEnabled=false;g.drawImage(a,(p.x-w/2)*48,(p.y-h+.15)*48,w*48,h*48);g.restore();return true;}};
+const markerRender=renderWorld;
+renderWorld=function(){markerRender();if(state.scene!=='albal')return;const v=outsideView53(SCENES.albal);ctx.save();ctx.translate(-Math.floor(v.cx),-Math.floor(v.cy));for(const p of LORE_POINTS.albal||[]){if(p.id==='op625_warehouse')window.__BURGER657.paintMarker(ctx,p,'warehouse');else if(p.id==='aw588_camiones')window.__BURGER657.paintMarker(ctx,p,'truck');}ctx.restore();};
+})();
+
+/* Browser-driven engine regression suite, isolated from real adventures. */
+if(window.__PREVIA_QA)(function qa657(){
+const bar=$('review654'),button=document.createElement('button');button.textContent='Auditar integración 6.57';bar.appendChild(button);
+const output=document.createElement('pre');output.id='qa657-report';output.style.cssText='white-space:pre-wrap;background:#f3ebd8;color:#173e35;padding:16px;display:none';document.body.appendChild(output);
+function here(id,x,y){hideModal();state.scene=id;state.screen='world';state.player.x=x;state.player.y=y;updateScene(false);}
+function reachable(id,start){const prev=state.scene;state.scene=id;try{const s=SCENES[id],w=s.w*4,h=s.h*4,seen=new Uint8Array(w*h),queue=[];
+const xy=k=>[(k%w+.5)/4,(Math.floor(k/w)+.5)/4];const safe=(x,y)=>[[0,0],[.24,0],[-.24,0],[0,.24],[0,-.24]].every(([a,b])=>!collision(x+a,y+b));
+let first=-1,dist=2;for(let y=Math.floor(start[1]*4)-4;y<start[1]*4+4;y++)for(let x=Math.floor(start[0]*4)-4;x<start[0]*4+4;x++){if(x<0||y<0||x>=w||y>=h)continue;let k=y*w+x;const [xx,yy]=xy(k),d=Math.hypot(xx-start[0],yy-start[1]);if(d<dist&&safe(xx,yy)){first=k;dist=d;}}
+if(first<0)return {points:[],near:()=>null};seen[first]=1;queue.push(first);
+for(let i=0;i<queue.length;i++){const k=queue[i],x=k%w,y=Math.floor(k/w);for(const n of [x?k-1:-1,x<w-1?k+1:-1,y?k-w:-1,y<h-1?k+w:-1]){if(n<0||seen[n])continue;const [xx,yy]=xy(n);if(!safe(xx,yy))continue;seen[n]=1;queue.push(n);}}
+const points=queue.map(xy);return {points,near:(x,y,r=1.3)=>points.find(p=>Math.hypot(p[0]-x,p[1]-y)<r)};
+}finally{state.scene=prev;}}
+button.onclick=()=>{const real=localStorage.getItem('la-previa-web-demo-v04'),preview=localStorage.getItem(savedKey);window.__PREVIA_QA.dev600.select('646_lab');const original=JSON.parse(JSON.stringify(serializeState()));const report={version:'6.57-review',checks:[],routes:[],saves:[]};
+function check(name,ok,detail){report.checks.push({name,ok:!!ok,detail});}
+try{
+here('burger',16.5,20);const r=reachable('burger',[16.5,20]);
+for(const n of getSceneNpcs('burger'))report.routes.push({kind:'npc',id:n.id,reachable:!!r.near(n.x+.5,n.y+.5,1.55)});
+for(const p of LORE_POINTS.burger)report.routes.push({kind:'lore',id:p.id,reachable:!!r.near(p.x,p.y,1.3)});
+for(const p of PORTALS.burger)report.routes.push({kind:'portal',id:p.to,reachable:!!r.near(p.x,p.y,1.3)});
+check('Burger NPC/lore/doors reachable with player radius',report.routes.every(x=>x.reachable),r.points.length);
+check('Burger boundaries',collision(0,10)&&collision(31.5,10)&&collision(16,21.5)&&collision(16,3));
+for(const o of ROOMS50.burger.props.filter(o=>o.solid))check('Solid '+o.type+' '+o.x+','+o.y,collision(o.x+o.w/2,o.y+o.h/2));
+for(const p of PORTALS.burger.filter(p=>p.to!=='post99_cocina')){const pos=r.near(p.x,p.y,.65);here('burger',...pos);const found=getNearby();interact();check('Enter '+p.to,state.scene===p.to,{near:found?.point?.id,scene:state.scene});if(p.to==='burger_cocina'){here('burger_cocina',9.5,11.2);interact();check('Return kitchen → Burger',state.scene==='burger'&&state.player.x>23,{scene:state.scene,x:state.player.x,y:state.player.y});}else {here('albal',16.5,11.8);interact();check('Return exterior → Burger',state.scene==='burger'&&state.player.y>19,{scene:state.scene,x:state.player.x,y:state.player.y});}}
+// A locked postgame door must never bypass its original flag.
+here('burger',29,19);delete state.flags.post99_groupWin;interact();check('Secret kitchen gate retained',state.scene==='burger');hideModal();state.screen='world';
+// Every prior Burger position, including a table, must migrate safely without quest/inventory changes.
+for(const [x,y] of [[9,11],[6,10],[2.1,7.2],[15.4,5.85]]){const data=JSON.parse(JSON.stringify(original));data.scene='burger';data.player.x=x;data.player.y=y;delete data.burgerLayout657;const source=JSON.stringify({party:data.party,bag:data.bag,money:data.money,badges:data.badges,flags:data.flags,box:data.box});const ok=applySaveData(data);const now=serializeState();const preserved=source===JSON.stringify({party:now.party,bag:now.bag,money:now.money,badges:now.badges,flags:now.flags,box:now.box});report.saves.push({old:[x,y],ok,valid:validSave(now),free:!collision(now.player.x,now.player.y),preserved});}
+check('Legacy saves migrate with progress preserved',report.saves.every(x=>x.ok&&x.valid&&x.free&&x.preserved));
+here('burger',23,19);const current=JSON.parse(JSON.stringify(serializeState()));const ok=applySaveData(current);check('New save position round trip',ok&&state.player.x===23&&state.player.y===19,{x:state.player.x,y:state.player.y});
+save();const stored=JSON.parse(localStorage.getItem(savedKey+'-dev600'));check('Browser storage serialization v:1',stored?.v===1&&stored?.burgerLayout657===1&&validSave(stored));
+state.badges=[0];state.flags.starter=true;state.flags.burger527Phase=6;delete state.flags.burger527Ready;here('burger',12.5,19.5);npcTalk({id:'burger527Blas',who:'blas'});check('Blas phase 6 repairs readiness and opens challenge',!!state.flags.burger527Ready&&!!$('burger528Fight'));
+const b=window.__BENIFAIO656.status();check('Benifaió collision sample baseline',b.ready&&b.collisionDifferences===0,b);check('Assets loaded',Object.values(window.__BURGER657.im).every(a=>a.complete&&a.naturalWidth>0));
+}catch(e){report.error=String(e);check('No runtime exception',false,String(e));}
+finally{hideModal();applySaveData(original);here('burger',16.5,14);$('title64')?.classList.add('hidden');gameShell.classList.remove('title-open64');$('dev600Overlay')?.classList.remove('open');check('Production save untouched',localStorage.getItem('la-previa-web-demo-v04')===real);check('Review save untouched by tests',localStorage.getItem(savedKey)===preview);}
+report.pass=report.checks.every(x=>x.ok);output.textContent=JSON.stringify(report,null,2);output.style.display='block';};
+const download=document.createElement('button');download.textContent='Descargar pruebas 6.57';download.onclick=()=>{const a=document.createElement('a');a.download='auditoria_657.json';a.href=URL.createObjectURL(new Blob([output.textContent],{type:'application/json'}));a.click();URL.revokeObjectURL(a.href);};bar.appendChild(download);
+})();
+if(window.__PREVIA_QA)(function missionTests657(){
+const b=document.createElement('button');b.textContent='Auditar misiones y minijuegos';$('review654').appendChild(b);
+const out=document.createElement('pre');out.id='qa657-missions';out.style.cssText='display:none;white-space:pre-wrap';document.body.appendChild(out);
+b.onclick=()=>{const real=localStorage.getItem('la-previa-web-demo-v04');window.__PREVIA_QA.dev600.select('646_lab');const original=JSON.parse(JSON.stringify(serializeState())),checks=[];
+const check=(name,ok,detail)=>checks.push({name,ok:!!ok,detail});
+function finishDialog(){for(let i=0;i<15&&$('nextDialog');i++){dialogInputReadyAt=0;$('nextDialog').onclick();}}
+function here(id){hideModal();state.scene=id;state.screen='world';state.player.x=SCENES[id].spawn[0];state.player.y=SCENES[id].spawn[1];}
+try{
+state.badges=[0];state.flags.starter=true;state.flags.burger527Phase=0;delete state.flags.burger527Ready;delete state.flags.mg624_regalo_blas;here('burger');
+npcTalk({id:'burger527Blas',who:'blas'});finishDialog();check('Main quest Blas 0 → 1',burger527Phase()===1);
+npcTalk({id:'npc526_patriBurger',who:'patri'});finishDialog();check('Patri 1 → 2',burger527Phase()===2);
+npcTalk({id:'npc523_irene523_burger',who:'irene523'});finishDialog();check('Irene 2 → 3',burger527Phase()===3);
+changeScene('burger_cocina');npcTalk({id:'burger527Javi',who:'javi_cocinero'});finishDialog();check('Javi cooking menu',!!$('opt0'));
+$('opt1').onclick();check('Wrong cooking answer preserves phase 3',burger527Phase()===3&&modalContent.textContent.includes('Piensa un poco'));
+$('opt0').onclick();$('opt1').onclick();$('opt1').onclick();finishDialog();check('Recipe completes phase 4',burger527Phase()===4);
+changeScene('burger');npcTalk({id:'burger527Blas',who:'blas'});check('Phase 4 cannot start gym',!$('burger528Fight')&&!state.flags.burger527Ready);finishDialog();
+changeScene('burger_cocina');landmarkTalk({id:'burger527Factura'});check('Cierre cinematic available',!!$('burger528Skip'));$('burger528Skip').onclick();check('Cinematic skip preserves progress to 5',burger527Phase()===5&&state.flags.burger527CineSeen);
+changeScene('burger');npcTalk({id:'burger527Blas',who:'blas'});finishDialog();check('Phase 5 → challenge without gift interception',burger527Phase()===6&&!!$('burger528Fight')&&!state.flags.mg624_regalo_blas);
+$('burger528Later').onclick();npcTalk({id:'burger527Blas',who:'blas'});check('Cancel then reopen gym',!!$('burger528Fight'));$('burger528Later').onclick();
+// The medal itself was also won through real UI battle; this fixture checks later optional routes.
+state.badges=[0,1];npcTalk({id:'burger527Blas',who:'blas'});check('Eevee gift dialogue retained after medal',modalContent.textContent.includes('Has evitado que Rober compre el Burger'));finishDialog();check('Eevee gift awarded once',!!state.flags.mg624_regalo_blas&&[...state.party,...state.box].some(p=>p.gift624==='blas'));
+mg623Dismiss();finishDialog();state.flags.op625_step=0;npcTalk({id:'burger527Blas',who:'blas'});finishDialog();check('Última Comanda starts after gift',op625Stage()===1);
+here('albal');npcTalk({id:'javiGrau',who:'javi_grau'});finishDialog();check('Javi Grau clue 1 → 2',op625Stage()===2);
+here('silla');npcTalk({id:'healSilla',who:'sergio'});finishDialog();check('Sergio grants warehouse pass 2 → 3',op625Stage()===3);
+here('burger');landmarkTalk({id:'op625_warehouse'});check('Indoor warehouse door opens existing mission',!!OP625.overlay);op625Leave();
+state.flags.op625_step=2;landmarkTalk({id:'op625_warehouse'});check('Warehouse remains locked without pass',!OP625.overlay);finishDialog();
+for(const g of MG583_LIST){here(g.scene);const marker=(LORE_POINTS[g.scene]||[]).find(p=>p.id==='mg583_'+g.id);landmarkTalk(marker);check('Minigame '+g.id+' starts from world marker',Number(mg583Active)===g.id||[9,11,17,27].includes(g.id)&&!!document.querySelector('#p617Overlay,#mg618Overlay,#mg619Overlay,#mg620Overlay'));
+if(g.id===9)p617Return();else if(g.id===11)mg618Exit();else if(g.id===17)mg619Exit();else if(g.id===27)mg620Exit();else mg583Close();}
+check('Normal save untouched',localStorage.getItem('la-previa-web-demo-v04')===real);
+}catch(e){check('No runtime exception',false,String(e));}
+finally{mg623Dismiss();op625Cleanup();p617Cleanup();mg618Cleanup();mg619Cleanup();mg620Cleanup();hideModal();applySaveData(original);window.__BURGER657.visit('burger',16.5,14);}
+out.textContent=JSON.stringify({checks,pass:checks.every(c=>c.ok)},null,2);out.style.display='block';};
+})();
+
+/* END INTEGRATION657 */
+// Public release 6.58: event cinematics preserve reward and dialogue handlers.
+const GIF658={sergio:'/assets/cine658/sergio.gif',plataMedalla:'/assets/cine658/plata-medalla.gif',roberMedalla:'/assets/cine658/rober-medalla.gif',nachitoPixel:'/assets/cine658/nachito-pixel.gif',aweloCelebracion:'/assets/cine658/awelo-celebracion.gif',blas:'/assets/cine658/blas.gif',plata:'/assets/cine658/plata.gif',horte:'/assets/cine658/horte.gif',nachito:'/assets/cine658/nachito.gif',awelo:'/assets/cine658/awelo.gif',javi:'/assets/cine658/javi.gif',rober:'/assets/cine658/rober.gif',capsule:'/assets/cine658/capsule.gif',final:'/assets/cine658/final.gif'};
+function playGif658(key,title,after){
+ const layer=document.createElement('section');layer.className='gif658';layer.setAttribute('role','dialog');layer.setAttribute('aria-label',title);
+ const previous=state.screen;state.screen='cinematic658';resetJoy27();heldKeys.clear();
+ const heading=document.createElement('h2');heading.textContent=title;const img=document.createElement('img');img.src=GIF658[key];img.alt=title;
+ const button=document.createElement('button');button.textContent='CONTINUAR · A';let done=false;
+ function close(){if(done)return;done=true;layer.remove();document.removeEventListener('keydown',onKey,true);state.screen=previous;after?.();}
+ function onKey(e){if(['Enter','Escape',' ','e','E'].includes(e.key)){e.preventDefault();e.stopImmediatePropagation();close();}}
+ button.onclick=close;img.onerror=close;layer.append(heading,img,button);document.body.appendChild(layer);document.addEventListener('keydown',onKey,true);button.focus();
+}
+const badgeGifs658={0:'sergio',1:'blas',2:'plataMedalla',3:'horte',4:'nachitoPixel',5:'plata',6:'awelo',7:'roberMedalla'};
+const saveBefore658=save;let observedBadges658=null,pendingGifs658=[],playing658=false;
+save=function(){const result=saveBefore658();const current=new Set(state.badges||[]);if(observedBadges658)for(const i of current){if(!observedBadges658.has(i)&&badgeGifs658[i])pendingGifs658.push(i);}observedBadges658=current;return result;};
+function gallery658(){state.screen='menu';showModal('<h2>CINEMÁTICAS · LA PREVIA</h2><p>Revive las medallas y los momentos especiales.</p><div class="modal-actions">'+Object.keys(GIF658).map(k=>'<button data-gif658="'+k+'" class="secondary">'+({sergio:'Sergio · Acta',plataMedalla:'Plata · Calentón',roberMedalla:'Rober · Última Mesa',nachitoPixel:'Nachito · Festivern',aweloCelebracion:'Awelo · Celebración',blas:'Blas · Del Mes',plata:'Orte · Chatarra',horte:'Horte · Kiwi',nachito:'Nachito · Fiesta',awelo:'Awelo · Descanso',javi:'Javi Grau · Medalla',rober:'Rober y Mewtwo',capsule:'Mewtwo · La cápsula',final:'La Previa · Ataque final'}[k]||k)+'</button>').join('')+'<button id="closeGallery658">VOLVER AL JUEGO</button></div>');modalContent.querySelectorAll('[data-gif658]').forEach(b=>b.onclick=()=>playGif658(b.dataset.gif658,b.textContent,gallery658));$('closeGallery658').onclick=backWorld;}
+const galleryButton658=document.createElement('button');galleryButton658.type='button';galleryButton658.textContent='▶ CINEMÁTICAS';galleryButton658.onclick=()=>{closeStart29();gallery658();};$('startMenu29').insertBefore(galleryButton658,$('startMenu29').querySelector('.start-exit29'));
+const loadBefore658=applySaveData;applySaveData=function(data){const result=loadBefore658(data);observedBadges658=new Set(state.badges||[]);pendingGifs658=[];return result;};
+setInterval(()=>{if(!observedBadges658){observedBadges658=new Set(state.badges||[]);return;}if(playing658||!pendingGifs658.length||state.screen==='battle'||state.screen==='cinematic658')return;const i=pendingGifs658.shift();playing658=true;playGif658(badgeGifs658[i],'¡Medalla '+(BADGES[i]?.[0]||'conseguida')+'!',()=>{playing658=false;});},350);
+const style658=document.createElement('style');style658.textContent='.gif658{position:fixed;inset:0;z-index:99999;background:#08141ff5;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;padding:12px;color:#fff;font-family:system-ui}.gif658 h2{margin:0;text-align:center;font-size:clamp(18px,3vw,28px)}.gif658 img{max-width:95vw;max-height:74dvh;object-fit:contain;border-radius:10px;box-shadow:0 0 45px #8f5bcd77}.gif658 button{background:#ffd46b;color:#132e38;border:0;padding:12px 28px;border-radius:8px;font-weight:800;cursor:pointer}@media(orientation:landscape) and (max-height:500px){.gif658{gap:5px}.gif658 img{max-height:66dvh}.gif658 button{padding:7px 20px}}#review654:not([data-public]){display:none}';document.head.appendChild(style658);
+if(new URLSearchParams(location.search).has('qa')){style658.textContent=style658.textContent.replace('#review654:not([data-public]){display:none}','');window.__GIF658={play:playGif658,assets:GIF658,pending:()=>pendingGifs658};}
+document.title='Pokémon La Previa · 6.58';const releaseBrand658=document.querySelector('.brand small');if(releaseBrand658)releaseBrand658.textContent='AVENTURA WEB · 6.58';
 
 asset('friends_atlas25');for(const d of Object.values(AVATARS28))asset(d.asset);
 resizeStage();updateScene(false);showStart();requestAnimationFrame(frame);
