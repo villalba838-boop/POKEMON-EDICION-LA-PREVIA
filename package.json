@@ -1,8 +1,8 @@
 {
   "name": "pokemon-la-previa-web",
-  "version": "6.43.0",
+  "version": "6.59.0",
   "private": true,
-  "description": "Migraci\u00f3n web del juego HTML 6.42",
+  "description": "Pokémon La Previa · cinemáticas, ayuda y recuperación de partidas",
   "scripts": {
     "dev": "python3 -m http.server 8000"
   }

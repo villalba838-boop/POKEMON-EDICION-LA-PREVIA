@@ -33,12 +33,12 @@
   // Reutiliza solo PNG con transparencia real presentes en el repositorio.
   // Ancla visual independiente de la huella bloqueante en la cuadrícula de 48px.
   const objects=[
-    {id:'beni_banco_huerta',scene:'benifaio',asset:'world_bench25',custom:'/assets/previa644/urbano/banco_madera_53.png',x:4,y:25,w:1.65,h:.9,foot:[4,25,2,1],solid:true},
-    {id:'beni_naranjo',scene:'benifaio',asset:'world_tree25',custom:'/assets/previa644/naturaleza/arbol_kanto.png',x:2.5,y:4,w:2.3,h:2.4,foot:[3,6,1,1],solid:false},
-    {id:'beni_maceta',scene:'benifaio',asset:'world_roundplanter',custom:'/assets/previa644/urbano/macetero_redondo.png',x:37,y:22,w:.9,h:.9,foot:[37,22,1,1],solid:false},
-    {id:'albal_banco_terraza',scene:'albal',asset:'world_bench25',custom:'/assets/previa644/urbano/banco_parque_azul.png',x:3,y:21,w:1.65,h:.9,foot:[3,21,2,1],solid:true},
-    {id:'albal_maceta',scene:'albal',asset:'world_roundplanter',custom:'/assets/previa644/urbano/macetero_redondo.png',x:30,y:21,w:.9,h:.9,foot:[30,21,1,1],solid:false},
-    {id:'sueca_banco',scene:'sueca',asset:'world_bench25',custom:'/assets/previa644/urbano/banco_madera_53.png',x:4,y:23,w:1.65,h:.9,foot:[4,23,2,1],solid:true}
+    {id:'beni_banco_huerta',scene:'benifaio',asset:'world_bench25',custom:'/assets/benifaio652/banco_madera_53.png',x:4,y:25,w:1.65,h:.9,foot:[4,25,2,1],solid:true},
+    {id:'beni_naranjo',scene:'benifaio',asset:'world_tree25',custom:'/assets/benifaio652/arbol_kanto.png',x:2.5,y:4,w:2.3,h:2.4,foot:[3,6,1,1],solid:false},
+    {id:'beni_maceta',scene:'benifaio',asset:'world_roundplanter',x:37,y:22,w:.9,h:.9,foot:[37,22,1,1],solid:false},
+    {id:'albal_banco_terraza',scene:'albal',asset:'world_bench25',x:3,y:21,w:1.65,h:.9,foot:[3,21,2,1],solid:true},
+    {id:'albal_maceta',scene:'albal',asset:'world_roundplanter',x:30,y:21,w:.9,h:.9,foot:[30,21,1,1],solid:false},
+    {id:'sueca_banco',scene:'sueca',asset:'world_bench25',custom:'/assets/benifaio652/banco_madera_53.png',x:4,y:23,w:1.65,h:.9,foot:[4,23,2,1],solid:true}
   ];
   const colBefore=collision;
   collision=function(x,y){
