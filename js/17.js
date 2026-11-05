@@ -18716,7 +18716,7 @@ npcTalk=function(n){
   if(step>0)return dialog('blas',[['','Albal: habla con Javi Grau.','Silla: habla con Sergio, el Temporero.','Entra en el almacén secreto de Albal y recupera dos documentos.','Rober te espera al fondo del almacén.',''][step]||'¡Sigue las pistas, que aquí hay hambre!']);
  }
  if(id==='javiGrau'&&step===1)return dialog('javi_grau',['Me han pedido 87 copias de un plano. Todas dicen «Almacén de Reservas», pero ninguna indica por dónde se entra.','Una factura lleva el sello de la oficina del CB Silla. Sergio la ha firmado durante una siesta.','Primero consigue el pase de Sergio. Luego te digo dónde encontrar la entrada.'],()=>op625Set(2));
- if((id==='healSilla'||id==='sillaGuide')&&step===2)return dialog('sergio',['¿EL PASE DEL ALMACÉN? Lo tengo aquí debajo del acta. Si no lo firmo me despiertan y eso no puede ser.','Toma. Pone «AUTORIZADO PARA RECOGER UNA ÚLTIMA COMANDA».','Pero si ves a JL dile que yo ya he salido. ¡PUTOS SILLEROS!'],()=>op625Set(3));
+ if(step===2&&['silla','gym_sergio','silla_descanso','oficina32'].includes(state.scene)&&(['healSilla','sillaGuide','gym_sergio','sillaSergioSiesta520'].includes(id)||n?.who==='sergio'))return dialog('sergio',['¿EL PASE DEL ALMACÉN? Lo tengo aquí debajo del acta. Si no lo firmo me despiertan y eso no puede ser.','Toma. Pone «AUTORIZADO PARA RECOGER UNA ÚLTIMA COMANDA».','Pero si ves a JL dile que yo ya he salido. ¡PUTOS SILLEROS!'],()=>op625Set(3));
  if(id==='javiGrau'&&step===3)return dialog('javi_grau',['El almacén está detrás de la plaza de Albal, junto al camino. Busca un portón con letras de CIERRE S. L.','Entra, recoge la factura y el contrato de las 87 mesas y abre la terminal. Cuidado con los inspectores.']);
  return op625NpcTalkBefore(n);
 };
