@@ -21691,7 +21691,7 @@ button('Estado de prueba',()=>{let o=$('qa657-state');if(!o){o=document.createEl
 button('Vista móvil 390',()=>{document.documentElement.style.width='390px';document.body.style.width='390px';window.dispatchEvent(new Event('resize'));});button('Vista escritorio',()=>{document.documentElement.style.width='';document.body.style.width='';window.dispatchEvent(new Event('resize'));});
 button('Diagnóstico integración',()=>{let out=$('integration-diagnostics');if(!out){out=document.createElement('pre');out.id='integration-diagnostics';out.style.cssText='white-space:pre-wrap';document.body.appendChild(out);}out.textContent=JSON.stringify({npcs:getSceneNpcs('burger'),portals:PORTALS.burger,lore:LORE_POINTS.burger,props,landscape:window.__landscape657,visual:window.__BENIFAIO656.status(),assets:Object.fromEntries(Object.entries(im).map(([k,v])=>[k,{ready:!!v.naturalWidth,src:v.src}]))},null,2);});
 }
-const frameBefore657=title64Frame;title64Frame=function(...args){frameBefore657(...args);const f=title64Layer.querySelector('.title64-footer span');if(f)f.textContent='EDICIÓN LA PREVIA · WEB 6.59';};
+const frameBefore657=title64Frame;title64Frame=function(...args){frameBefore657(...args);const f=title64Layer.querySelector('.title64-footer span');if(f)f.textContent='EDICIÓN LA PREVIA · WEB 6.60';};
 bar.addEventListener('click',()=>setTimeout(()=>window.scrollTo(0,0),0));
 document.title='La Previa 6.57 · Integración · revisión sin publicar';const brand=document.querySelector('.brand small');if(brand)brand.textContent='AVENTURA WEB · 6.57 · REVISIÓN';
 const flowers=new Image();flowers.src='/assets/benifaio652/jardinera_flores_53.png';flowers.onload=()=>{if(!window.__BENIFAIO656.status().ready){setTimeout(flowers.onload,100);return;}const model=window.__benifaio637.map,objects=window.__BENIFAIO656.objects.benifaio;let count=0;
@@ -21792,7 +21792,7 @@ save=function(){const result=saveBefore658();const current=new Set(state.badges|
 function gallery658(){state.screen='menu';showModal('<h2>CINEMÁTICAS · LA PREVIA</h2><p>Revive las medallas y los momentos especiales.</p><div class="modal-actions">'+Object.keys(GIF658).map(k=>'<button data-gif658="'+k+'" class="secondary">'+({sergio:'Sergio · Acta',plataMedalla:'Plata · Calentón',roberMedalla:'Rober · Última Mesa',nachitoPixel:'Nachito · Festivern',aweloCelebracion:'Awelo · Celebración',blas:'Blas · Del Mes',plata:'Turís · Chatarra',horte:'Horte · Kiwi',nachito:'Nachito · Fiesta',awelo:'Awelo · Descanso',javi:'Javi Grau · Medalla',rober:'Rober y Mewtwo',capsule:'Mewtwo · La cápsula',final:'La Previa · Ataque final'}[k]||k)+'</button>').join('')+'<button id="closeGallery658">VOLVER AL JUEGO</button></div>');modalContent.querySelectorAll('[data-gif658]').forEach(b=>b.onclick=()=>playGif658(b.dataset.gif658,b.textContent,gallery658));$('closeGallery658').onclick=backWorld;}
 const galleryButton658=document.createElement('button');galleryButton658.type='button';galleryButton658.textContent='▶ CINEMÁTICAS';galleryButton658.onclick=()=>{closeStart29();gallery658();};$('startMenu29').insertBefore(galleryButton658,$('startMenu29').querySelector('.start-exit29'));
 const loadBefore658=applySaveData;applySaveData=function(data){const result=loadBefore658(data);observedBadges658=new Set(state.badges||[]);pendingGifs658=[];return result;};
-setInterval(()=>{if(!observedBadges658){observedBadges658=new Set(state.badges||[]);return;}if(playing658||!pendingGifs658.length||state.screen!=='world')return;const i=pendingGifs658.shift();playing658=true;playGif658(badgeGifs658[i],'¡Medalla '+(BADGES[i]?.[0]||'conseguida')+'!',()=>{playing658=false;});},350);
+// Reconciled against earned medals and persisted seen flags by 6.60 below.
 const style658=document.createElement('style');style658.textContent='.gif658{position:fixed;inset:0;z-index:99999;background:#08141ff5;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;padding:12px;color:#fff;font-family:system-ui}.gif658 h2{margin:0;text-align:center;font-size:clamp(18px,3vw,28px)}.gif658 img{max-width:95vw;max-height:74dvh;object-fit:contain;border-radius:10px;box-shadow:0 0 45px #8f5bcd77}.gif658 button{background:#ffd46b;color:#132e38;border:0;padding:12px 28px;border-radius:8px;font-weight:800;cursor:pointer}@media(orientation:landscape) and (max-height:500px){.gif658{gap:5px}.gif658 img{max-height:66dvh}.gif658 button{padding:7px 20px}}#review654:not([data-public]),#dev600Launch,#dev600Start,button[aria-label="Activar vista técnica de colisiones"]{display:none!important}';document.head.appendChild(style658);
 if(new URLSearchParams(location.search).has('qa')){style658.textContent=style658.textContent.replace('#review654:not([data-public]),#dev600Launch,#dev600Start,button[aria-label="Activar vista técnica de colisiones"]{display:none!important}','');window.__GIF658={play:playGif658,assets:GIF658,pending:()=>pendingGifs658};}
 document.title='Pokémon La Previa · 6.58';const releaseBrand658=document.querySelector('.brand small');if(releaseBrand658)releaseBrand658.textContent='AVENTURA WEB · 6.58';
@@ -21815,7 +21815,7 @@ playGif658=function(key,title,after){
  canvas.setAttribute('aria-label',title);caption.textContent=C659[key]?.[1]||'';tools.className='cine659-tools';status.setAttribute('role','status');status.textContent='Cargando escena…';
  const pause=document.createElement('button'),replay=document.createElement('button'),next=document.createElement('button');pause.textContent='PAUSAR';replay.textContent='REPETIR';next.textContent='CONTINUAR';pause.disabled=replay.disabled=true;
  let done=false,paused=false,loaded=false,raf=0;const born=performance.now();
- function close(){if(done||performance.now()-born<350)return;done=true;cancelAnimationFrame(raf);img.onload=img.onerror=null;layer.remove();document.removeEventListener('keydown',onKey,true);clip659=null;resetJoy27();heldKeys.clear();state.screen=previous;if(focus?.isConnected)focus.focus();after?.();}
+ function close(){if(done||performance.now()-born<350)return;done=true;cancelAnimationFrame(raf);img.onload=img.onerror=null;layer.remove();document.removeEventListener('keydown',onKey,true);clip659=null;resetJoy27();heldKeys.clear();state.screen=previous;if(focus?.isConnected)focus.focus();after?.({loaded});}
  function paint(){if(done)return;if(loaded&&!paused)canvas.getContext('2d').drawImage(img,0,0,canvas.width,canvas.height);raf=requestAnimationFrame(paint);}
  function onKey(e){if(e.key==='Tab'){const buttons=[pause,replay,next].filter(b=>!b.disabled),i=buttons.indexOf(document.activeElement);e.preventDefault();e.stopImmediatePropagation();buttons[(i+(e.shiftKey?-1:1)+buttons.length)%buttons.length].focus();}else if(['Escape','Enter',' ','e','E'].includes(e.key)){e.preventDefault();e.stopImmediatePropagation();if(e.key==='Escape')close();else if(document.activeElement===pause)pause.click();else if(document.activeElement===replay)replay.click();else close();}}
  pause.onclick=()=>{paused=!paused;pause.textContent=paused?'SEGUIR':'PAUSAR';};
@@ -21860,6 +21860,32 @@ document.title='Pokémon La Previa · 6.59';if(releaseBrand658)releaseBrand658.t
 if(window.__PREVIA_QA)window.__P659={help:help659,rescue:rescue659,safeSpot:safeSpot659,backups:backups659,stash:stash659,save:()=>save(),load:()=>safeLoad(),snapshot:()=>JSON.parse(JSON.stringify(serializeState())),apply:d=>applySaveData(d),talk:n=>npcTalk(n),film:(k,f)=>z534Film(k,f),warehouse:()=>op625Open(),close:()=>clip659?.close(),active:()=>clip659?.key,assets:GIF658,scenes:()=>Object.keys(SCENES),sceneInfo:id=>SCENES[id],valid:d=>validSave(d),setScene:id=>{state.scene=id;state.screen="world";},world:()=>backWorld()};
 
 /* END UPDATE659 */
+/* BEGIN UPDATE660 */
+// Earned medals are the durable queue: reloading cannot discard an unseen scene.
+const failedMedals660=new Set();
+function pendingMedals660(){return [...new Set(state.badges||[])].filter(i=>badgeGifs658[i]&&!state.flags['cine660_badge_'+i]&&!failedMedals660.has(i));}
+function pumpMedals660(){
+ if(playing658||clip659||state.screen!=='world'||!mod.classList.contains('hidden'))return;
+ const i=pendingMedals660()[0];if(i===undefined)return;
+ playing658=true;
+ try{
+  const started=playGif658(badgeGifs658[i],'¡Medalla '+(BADGES[i]?.[0]||'conseguida')+'!',result=>{
+   playing658=false;
+   if(result?.loaded){state.flags['cine660_badge_'+i]=true;save();}
+   else failedMedals660.add(i); // Continue remains available; retry after the next load.
+  });
+  if(started===false)playing658=false;
+ }catch(error){playing658=false;failedMedals660.add(i);console.error('Medalla: no se pudo abrir la escena',error);}
+}
+const loadBefore660=applySaveData;applySaveData=function(data){const result=loadBefore660(data);if(result){failedMedals660.clear();playing658=false;}return result;};
+setInterval(pumpMedals660,350);
+const serialBefore660=serializeState;serializeState=function(){const data=serialBefore660();data.edition='6.60';return data;};
+document.title='Pokémon La Previa · 6.60';if(releaseBrand658)releaseBrand658.textContent='AVENTURA WEB · 6.60';
+if(window.__PREVIA_QA){
+ const button=document.createElement('button');button.textContent='Probar medallas automáticas 6.60';$('review654').appendChild(button);
+ button.onclick=()=>{window.__PREVIA_QA.dev600.select('646_lab');hideModal();state.screen='world';state.scene='burger';state.player.x=16.5;state.player.y=14;state.badges=[];for(let i=0;i<8;i++)delete state.flags['cine660_badge_'+i];save();state.badges=[0,1,2,3,4,5,6,7];save();pumpMedals660();};
+}
+/* END UPDATE660 */
 asset('friends_atlas25');for(const d of Object.values(AVATARS28))asset(d.asset);
 resizeStage();updateScene(false);showStart();requestAnimationFrame(frame);
 })();
