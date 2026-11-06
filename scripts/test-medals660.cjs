@@ -46,7 +46,7 @@ class Element{
  click(){this.onclick?.();}
 }
 const doc={head:new Element('head'),body:new Element('body'),activeElement:null,createElement:t=>new Element(t),addEventListener:(k,fn)=>listeners.set(k,fn),removeEventListener:k=>listeners.delete(k)};
-const env={document:doc,window:{},state:{screen:'world',flags:{}},clip659:null,releaseBrand658:null,motionAllowed22:true,z534Actor(){},monpic:name=>{monNames.add(name);return {complete:true,naturalWidth:96};},resetJoy27(){},heldKeys:{clear(){}},performance:{now:()=>clock},requestAnimationFrame:fn=>{frames.set(++rafId,fn);return rafId;},cancelAnimationFrame:id=>frames.delete(id),escape659:x=>x,showModal(){},modalContent:{querySelectorAll:()=>[]},backWorld(){},f532Cinema(){},serializeState:()=>({v:1}),setInterval(){},save(){},updateObjective(){},console};
+const env={document:doc,window:{},state:{screen:'world',flags:{}},clip659:null,releaseBrand658:null,motionAllowed22:true,audioOn:false,z534Actor(){},monpic:name=>{monNames.add(name);return {complete:true,naturalWidth:96};},resetJoy27(){},heldKeys:{clear(){}},performance:{now:()=>clock},requestAnimationFrame:fn=>{frames.set(++rafId,fn);return rafId;},cancelAnimationFrame:id=>frames.delete(id),escape659:x=>x,showModal(){},modalContent:{querySelectorAll:()=>[]},backWorld(){},f532Cinema(){},serializeState:()=>({v:1}),setInterval(){},save(){},updateObjective(){},console};
 vm.createContext(env);vm.runInContext(nativeSource,env);const native=vm.runInContext('({draw:drawScene661,scenes:SCENES661,play:playScene661,phase:phase661})',env);
 assert.equal(Object.keys(native.scenes).length,19);
 for(const scene of Object.values(native.scenes))for(const t of [0,1,2.9,3.5,4.8,7.5,11])native.draw(g,scene,t);
@@ -64,4 +64,5 @@ assert.equal(nav.children[2].textContent,'CONTINUAR');assert.match(caption.textC
 nav.children[2].click();nav.children[2].click();assert.equal(finished,1);assert.equal(env.state.screen,'world');assert.equal(frames.size,0);assert.equal(listeners.size,0);
 env.motionAllowed22=false;for(const scene of Object.values(native.scenes))native.draw(g,scene,3.5);
 assert.equal(native.play('capsule','Mewtwo',()=>finished++),true);advance(500);listeners.get('keydown')({key:'Escape',repeat:false,preventDefault(){},stopImmediatePropagation(){}});assert.equal(finished,2);
+assert.equal(native.play('blas','Blas',()=>finished++),true);advance(8000);assert.equal(doc.body.children.at(-1).children.at(-1).children[2].textContent,'CONTINUAR','Slow frames must not stretch scene duration');doc.body.children.at(-1).children.at(-1).children[2].click();assert.equal(finished,3);
 console.log('PASS: 19 native scenes, render timeline, pause/replay, completion/skip, single callback, cleanup, reduced motion; no GIF/video requests.');

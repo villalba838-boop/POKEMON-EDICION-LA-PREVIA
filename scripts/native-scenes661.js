@@ -163,22 +163,22 @@ function playScene661(key,title,after){
  const previous=state.screen,focus=document.activeElement,layer=document.createElement('section');
  layer.className='scene661';layer.setAttribute('role','dialog');layer.setAttribute('aria-modal','true');layer.setAttribute('aria-label',c.title);
  const head=document.createElement('header'),label=document.createElement('small'),heading=document.createElement('h2');label.textContent='LA PREVIA · CINEMÁTICA';heading.textContent=title||c.title;head.append(label,heading);
- const stage=document.createElement('div'),canvas=document.createElement('canvas');stage.className='scene661-stage';canvas.width=960;canvas.height=540;canvas.setAttribute('role','img');canvas.setAttribute('aria-label',c.title);stage.append(canvas);
+ const stage=document.createElement('div'),canvas=document.createElement('canvas');stage.className='scene661-stage';canvas.width=960;canvas.height=540;canvas.setAttribute('data-renderer','native');canvas.setAttribute('role','img');canvas.setAttribute('aria-label',c.title);stage.append(canvas);
  const caption=document.createElement('p'),status=document.createElement('small'),tools=document.createElement('nav'),pause=document.createElement('button'),replay=document.createElement('button'),next=document.createElement('button');
  caption.className='scene661-caption';caption.setAttribute('aria-live','polite');status.className='scene661-status';tools.setAttribute('aria-label','Controles de la cinemática');pause.textContent='PAUSAR';replay.textContent='REPETIR';next.textContent='SALTAR ESCENA';tools.append(pause,replay,next);layer.append(head,stage,caption,status,tools);
  state.screen='cinematic658';resetJoy27();heldKeys.clear();document.body.append(layer);
- let closed=false,paused=false,time=0,last=performance.now(),raf=0,drawAt=-1,beat=-1;const born=last,duration=c.duration||7.5,g=canvas.getContext('2d');
+ let closed=false,paused=false,time=0,last=performance.now(),raf=0,drawAt=-1,beat=-1,fallbackLogged=false;const born=last,duration=c.duration||7.5,g=canvas.getContext('2d');
  const inputs=()=>[pause,replay,next];
  function close(){if(closed||performance.now()-born<350)return;closed=true;cancelAnimationFrame(raf);document.removeEventListener('keydown',onKey,true);document.removeEventListener('visibilitychange',onVisibility);layer.remove();clip659=null;state.screen=previous;resetJoy27();heldKeys.clear();if(focus?.isConnected)focus.focus();after?.({loaded:true,renderer:'native'});}
  function onVisibility(){if(document.hidden&&!closed&&time<duration){paused=true;pause.textContent='SEGUIR';status.textContent='Escena pausada.';}}
  function onKey(e){if(e.key==='Tab'){const buttons=inputs(),i=buttons.indexOf(document.activeElement);e.preventDefault();e.stopImmediatePropagation();buttons[(i+(e.shiftKey?-1:1)+buttons.length)%buttons.length].focus();return;}if(['Escape','Enter',' ','e','E'].includes(e.key)){e.preventDefault();e.stopImmediatePropagation();if(e.repeat)return;if(e.key==='Escape')close();else if(document.activeElement===pause)pause.click();else if(document.activeElement===replay)replay.click();else close();}}
- function paint(stamp){if(closed)return;const delta=Math.max(0,Math.min((stamp-last)/1000,.1));last=stamp;if(!paused)time=Math.min(duration,time+delta);
-  const phase=phase661(time,duration);if(phase!==beat){beat=phase;caption.textContent=c.lines[phase];}
-  if(stamp-drawAt>32||drawAt<0){drawAt=stamp;try{drawScene661(g,c,time);}catch(error){rect661(g,0,0,960,540,'#203744');text661(g,c.title,480,220,30,c.accent);text661(g,c.lines[phase],480,285,16);}}
+ function paint(stamp){if(closed)return;const delta=Math.max(0,(stamp-last)/1000);last=stamp;if(!paused)time=Math.min(duration,time+delta);
+  const phase=phase661(time,duration);if(phase!==beat){beat=phase;caption.textContent=c.lines[phase];if(phase===2&&audioOn)beep(784,.12);}
+  if(stamp-drawAt>32||drawAt<0){drawAt=stamp;try{drawScene661(g,c,time);canvas.setAttribute('data-seconds',time.toFixed(2));}catch(error){if(!fallbackLogged){console.error('Escena nativa: dibujo alternativo',key,error);fallbackLogged=true;canvas.setAttribute('data-fallback','true');}rect661(g,0,0,960,540,'#203744');text661(g,c.title,480,220,30,c.accent);text661(g,c.lines[phase],480,285,16);}}
   const finished=time>=duration;next.textContent=finished?'CONTINUAR':'SALTAR ESCENA';if(finished){status.textContent='Escena terminada. Puedes repetirla o continuar.';pause.disabled=true;}else if(!paused)status.textContent='Escena '+(phase+1)+' / 3 · Puedes continuar cuando quieras.';
   raf=requestAnimationFrame(paint);
  }
- pause.onclick=()=>{paused=!paused;pause.textContent=paused?'SEGUIR':'PAUSAR';status.textContent=paused?'Escena pausada.':'Escena en marcha.';};
+ pause.onclick=()=>{paused=!paused;last=performance.now();pause.textContent=paused?'SEGUIR':'PAUSAR';status.textContent=paused?'Escena pausada.':'Escena en marcha.';};
  replay.onclick=()=>{time=0;beat=-1;paused=false;pause.disabled=false;pause.textContent='PAUSAR';last=performance.now();drawAt=-1;};next.onclick=close;
  clip659={key,close};document.addEventListener('keydown',onKey,true);document.addEventListener('visibilitychange',onVisibility);next.focus();paint(last);return true;
 }
