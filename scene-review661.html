@@ -1,0 +1,8 @@
+<!doctype html>
+<html lang="es"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Revisión móvil · escenas 6.61</title>
+<style>body{margin:12px;background:#132832;color:#f0e6c9;font:16px system-ui}button{padding:10px;margin:5px;border:0;border-radius:6px;background:#f0ce87}iframe{display:block;border:3px solid #9cb8ac;background:#12242b}h1{font-size:20px}</style>
+<h1>Revisión de cinemáticas · partida de pruebas</h1><p>Elige una distribución y abre una escena con los botones inferiores del juego.</p>
+<button id="portrait">Vertical 390 × 844</button><button id="landscape">Horizontal 844 × 390</button>
+<iframe id="game-review" title="Juego en móvil" src="/?qa" width="390" height="844"></iframe>
+<script>const f=document.querySelector('iframe');document.querySelector('#portrait').onclick=()=>{f.width=390;f.height=844};document.querySelector('#landscape').onclick=()=>{f.width=844;f.height=390};</script>
+</html>
