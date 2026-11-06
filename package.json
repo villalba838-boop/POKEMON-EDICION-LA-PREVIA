@@ -1,8 +1,8 @@
 {
   "name": "pokemon-la-previa-web",
-  "version": "6.59.0",
+  "version": "6.61.0",
   "private": true,
-  "description": "Pokémon La Previa · cinemáticas, ayuda y recuperación de partidas",
+  "description": "Pokémon La Previa · cinemáticas nativas con sprites del juego",
   "scripts": {
     "dev": "python3 -m http.server 8000"
   }
