@@ -775,7 +775,7 @@ function frame(t){const dt=Math.min((t-last)/1000,.034);last=t;update(dt);draw()
 function keydown(e){if(['TEXTAREA','INPUT'].includes(e.target?.tagName))return;if(['ArrowUp','ArrowDown','ArrowLeft','ArrowRight',' '].includes(e.key))e.preventDefault();const k=e.key.length===1?e.key.toLowerCase():e.key;const alreadyHeld=heldKeys.has(k);heldKeys.add(k);if(e.repeat||alreadyHeld)return;
  if(k==='e'||k==='Enter'||k===' '){if(state.screen==='world')interact();else if(state.screen==='dialog')dialogAdvanceFromA();}
  if(k==='m'||k==='Escape'){if(state.screen==='world')openStart29();else if(state.screen==='start')closeStart29();else if(state.screen==='menu'){if($('closeGallery22'))$('closeGallery22').click();else backWorld();}}
- if(state.screen==='start'){if(['ArrowDown','ArrowUp'].includes(k)){const items=[...$('startMenu29').querySelectorAll('[data-start29]')];const current=items.indexOf(document.activeElement);const move=k==='ArrowDown'?1:-1;items[(current+move+items.length)%items.length]?.focus?.()}if(k==='Enter'||k===' ')document.activeElement?.click?.()}
+ if(state.screen==='start'){if(['ArrowDown','ArrowUp'].includes(k)){const items=[...$('startMenu29').querySelectorAll('button,summary')].filter(el=>el.getClientRects().length&&!el.disabled);const current=items.indexOf(document.activeElement);const move=k==='ArrowDown'?1:-1;items[(current+move+items.length)%items.length]?.focus?.()}if(k==='Enter'||k===' ')document.activeElement?.click?.()}
  if(state.screen==='evolution'&&['e','Enter',' ','Escape','m'].includes(k))evoContinue29?.();
  if(state.screen==='battle'){if(['1','2','3','4'].includes(k)&&!battle.locked&&!battle.forced)attack(Number(k)-1);if(k==='c')throwBall();if(k==='r')runAway();if(k==='b')battlePicker('bag');}
 }
@@ -22029,7 +22029,7 @@ function playScene661(key,title,after){
  const stage=document.createElement('div'),canvas=document.createElement('canvas');stage.className='scene661-stage';canvas.width=960;canvas.height=540;canvas.setAttribute('data-renderer','native');canvas.setAttribute('role','img');canvas.setAttribute('aria-label',c.title);stage.append(canvas);
  const caption=document.createElement('p'),status=document.createElement('small'),tools=document.createElement('nav'),pause=document.createElement('button'),replay=document.createElement('button'),next=document.createElement('button');
  caption.className='scene661-caption';caption.setAttribute('aria-live','polite');status.className='scene661-status';tools.setAttribute('aria-label','Controles de la cinemática');pause.textContent='PAUSAR';replay.textContent='REPETIR';next.textContent='SALTAR ESCENA';tools.append(pause,replay,next);layer.append(head,stage,caption,status,tools);
- state.screen='cinematic658';resetJoy27();heldKeys.clear();document.body.append(layer);
+ state.screen='cinematic658';resetJoy27();heldKeys.clear();(document.fullscreenElement||gameShell).append(layer);
  let closed=false,paused=false,time=0,last=performance.now(),raf=0,drawAt=-1,beat=-1,fallbackLogged=false;const born=last,duration=c.duration||7.5,g=canvas.getContext('2d');
  const inputs=()=>[pause,replay,next];
  function close(){if(closed||performance.now()-born<350)return;closed=true;cancelAnimationFrame(raf);document.removeEventListener('keydown',onKey,true);document.removeEventListener('visibilitychange',onVisibility);layer.remove();clip659=null;state.screen=previous;resetJoy27();heldKeys.clear();if(focus?.isConnected)focus.focus();after?.({loaded:true,renderer:'native'});}
@@ -22061,6 +22061,40 @@ if(window.__PREVIA_QA){
 
 
 
+
+/* BEGIN RELEASE662 */
+// Keep the original actions and their story gates, while shortening START.
+const startBefore662=openStart29;
+openStart29=function(){
+ startBefore662();if(state.screen!=='start')return;
+ const menu=$('startMenu29');let extras=$('startExtras662');
+ if(!extras){extras=document.createElement('details');extras.id='startExtras662';const label=document.createElement('summary');label.textContent='EXTRAS · Aventuras y cinemáticas';extras.append(label);menu.insertBefore(extras,menu.querySelector('.start-exit29'));}
+ const primary=new Set(['party','bag','dex','map','journal','save','options','close']);
+ for(const button of [...menu.querySelectorAll('button')]){
+  if(primary.has(button.dataset.start29)||button.id==='help659Start')continue;
+  extras.append(button);
+ }
+ extras.open=false;
+ const order=['party','bag','dex','map','journal','save','options'];
+ for(const id of order){const button=menu.querySelector('[data-start29="'+id+'"]');if(button)menu.insertBefore(button,extras);}
+ const help=$('help659Start');if(help)menu.insertBefore(help,extras);
+ menu.querySelector('[data-start29="party"]')?.focus();
+};
+// Losing focus must release both keyboard and touch movement.
+function releaseInput662(){heldKeys.clear();resetJoy27();}
+window.addEventListener('blur',releaseInput662);
+document.addEventListener('visibilitychange',()=>{if(document.hidden)releaseInput662();});
+const serialBefore662=serializeState;serializeState=function(){const data=serialBefore662();data.edition='6.62';data.patch='menu-y-pantalla-completa';return data;};
+const style662=document.createElement('style');style662.textContent=`
+#startExtras662{margin:8px 10px;border-top:1px solid #82998e;padding-top:6px}
+#startExtras662 summary{cursor:pointer;padding:12px 5px;min-height:24px;font:700 12px system-ui;color:inherit;list-style-position:inside}
+#startExtras662 button{width:100%;box-sizing:border-box;margin:3px 0}
+#startExtras662 summary:focus-visible{outline:3px solid #bc8c32}
+#startMenu29{overscroll-behavior:contain}
+.scene661{height:100%;height:100dvh}
+`;document.head.append(style662);
+document.title='Pokémon La Previa · 6.62';if(releaseBrand658)releaseBrand658.textContent='AVENTURA WEB · 6.62';
+/* END RELEASE662 */
 
 asset('friends_atlas25');for(const d of Object.values(AVATARS28))asset(d.asset);
 resizeStage();updateScene(false);showStart();requestAnimationFrame(frame);
