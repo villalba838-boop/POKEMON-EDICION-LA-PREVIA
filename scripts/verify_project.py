@@ -11,5 +11,5 @@ for name, meta in data['assets'].items():
 for page in root.glob('*.html'):
  txt=page.read_text()
  for ref in re.findall(r'(?:src|href)="(/(?:assets|js|css|icons)/[^"]+)"',txt):
-  assert (root/ref[1:]).is_file(),f'{page.name}: missing {ref}'
+  assert (root/ref.split('?',1)[0][1:]).is_file(),f'{page.name}: missing {ref}'
 print(f"OK: {len(data['assets'])} assets and referenced scripts/styles")

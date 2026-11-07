@@ -166,7 +166,7 @@ function playScene661(key,title,after){
  const stage=document.createElement('div'),canvas=document.createElement('canvas');stage.className='scene661-stage';canvas.width=960;canvas.height=540;canvas.setAttribute('data-renderer','native');canvas.setAttribute('role','img');canvas.setAttribute('aria-label',c.title);stage.append(canvas);
  const caption=document.createElement('p'),status=document.createElement('small'),tools=document.createElement('nav'),pause=document.createElement('button'),replay=document.createElement('button'),next=document.createElement('button');
  caption.className='scene661-caption';caption.setAttribute('aria-live','polite');status.className='scene661-status';tools.setAttribute('aria-label','Controles de la cinemática');pause.textContent='PAUSAR';replay.textContent='REPETIR';next.textContent='SALTAR ESCENA';tools.append(pause,replay,next);layer.append(head,stage,caption,status,tools);
- state.screen='cinematic658';resetJoy27();heldKeys.clear();document.body.append(layer);
+ state.screen='cinematic658';resetJoy27();heldKeys.clear();(document.fullscreenElement||gameShell).append(layer);
  let closed=false,paused=false,time=0,last=performance.now(),raf=0,drawAt=-1,beat=-1,fallbackLogged=false;const born=last,duration=c.duration||7.5,g=canvas.getContext('2d');
  const inputs=()=>[pause,replay,next];
  function close(){if(closed||performance.now()-born<350)return;closed=true;cancelAnimationFrame(raf);document.removeEventListener('keydown',onKey,true);document.removeEventListener('visibilitychange',onVisibility);layer.remove();clip659=null;state.screen=previous;resetJoy27();heldKeys.clear();if(focus?.isConnected)focus.focus();after?.({loaded:true,renderer:'native'});}
