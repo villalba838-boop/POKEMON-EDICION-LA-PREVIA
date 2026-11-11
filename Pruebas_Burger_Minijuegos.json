@@ -1,0 +1,121 @@
+{
+  "checks": [
+    {
+      "name": "Main quest Blas 0 → 1",
+      "ok": true
+    },
+    {
+      "name": "Patri 1 → 2",
+      "ok": true
+    },
+    {
+      "name": "Irene 2 → 3",
+      "ok": true
+    },
+    {
+      "name": "Javi cooking menu",
+      "ok": true
+    },
+    {
+      "name": "Wrong cooking answer preserves phase 3",
+      "ok": true
+    },
+    {
+      "name": "Recipe completes phase 4",
+      "ok": true
+    },
+    {
+      "name": "Phase 4 cannot start gym",
+      "ok": true
+    },
+    {
+      "name": "Cierre cinematic available",
+      "ok": true
+    },
+    {
+      "name": "Cinematic skip preserves progress to 5",
+      "ok": true
+    },
+    {
+      "name": "Phase 5 → challenge without gift interception",
+      "ok": true
+    },
+    {
+      "name": "Cancel then reopen gym",
+      "ok": true
+    },
+    {
+      "name": "Eevee gift dialogue retained after medal",
+      "ok": true
+    },
+    {
+      "name": "Eevee gift awarded once",
+      "ok": true
+    },
+    {
+      "name": "Última Comanda starts after gift",
+      "ok": true
+    },
+    {
+      "name": "Javi Grau clue 1 → 2",
+      "ok": true
+    },
+    {
+      "name": "Sergio grants warehouse pass 2 → 3",
+      "ok": true
+    },
+    {
+      "name": "Indoor warehouse door opens existing mission",
+      "ok": true
+    },
+    {
+      "name": "Warehouse remains locked without pass",
+      "ok": true
+    },
+    {
+      "name": "Minigame 2 starts from world marker",
+      "ok": true
+    },
+    {
+      "name": "Minigame 3 starts from world marker",
+      "ok": true
+    },
+    {
+      "name": "Minigame 6 starts from world marker",
+      "ok": true
+    },
+    {
+      "name": "Minigame 9 starts from world marker",
+      "ok": true
+    },
+    {
+      "name": "Minigame 11 starts from world marker",
+      "ok": true
+    },
+    {
+      "name": "Minigame 14 starts from world marker",
+      "ok": true
+    },
+    {
+      "name": "Minigame 17 starts from world marker",
+      "ok": true
+    },
+    {
+      "name": "Minigame 21 starts from world marker",
+      "ok": true
+    },
+    {
+      "name": "Minigame 27 starts from world marker",
+      "ok": true
+    },
+    {
+      "name": "Minigame 30 starts from world marker",
+      "ok": true
+    },
+    {
+      "name": "Normal save untouched",
+      "ok": true
+    }
+  ],
+  "pass": true
+}
