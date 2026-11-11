@@ -50,7 +50,7 @@ function playEpic(it){
  <div class="p703-ring"></div><div class="p703-sigil">${scene.kind==='door'?'🚪':scene.kind==='mirror'?'🪞':scene.kind==='eye'?'👁':scene.kind==='bingo'?'404':scene.kind==='signal'?'📡':'◈'}</div>${shards}<div class="p703-scan"></div>
  <div style="position:absolute;top:5%;left:5%;right:5%;letter-spacing:.2em;font-size:clamp(10px,2vw,15px);color:${scene.accent}">${safe(scene.message)}</div>
  <div class="p703-copy"><h2>${safe(seq.title)}</h2><p id="previa703line" aria-live="polite"></p><button id="previa703skip">SALTAR ESCENA</button></div>`;
- document.body.appendChild(root);
+ (document.fullscreenElement||gameShell).appendChild(root);
  const previousFocus=document.activeElement;
  const dismiss=()=>{closeEpic();if(previousFocus?.isConnected)previousFocus.focus?.();};
  root.querySelector('#previa703skip').onclick=dismiss;
