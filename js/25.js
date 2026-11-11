@@ -1,0 +1,27 @@
+(function(){'use strict';
+// Visual-only illusions: never mutate game state, sprites, coordinates or save data.
+const base=window.__PREVIA704_WORLD;if(!base)return;
+let running=null;const reduced=()=>matchMedia('(prefers-reduced-motion: reduce)').matches;
+const routes={piedra:'reality',mew:'pokemon',bocata:'burger',patatas2:'burger',disco:'chromatic',pintura:'chromatic',espejo:'clones',gato:'clones',globo:'giant',sombrero:'giant',teletransporte:'wander',pato:'wander'};
+const scenarios=['reality','burger','pokemon','chromatic','clones','giant','wander'];
+function stop(){if(!running)return;const a=running;running=null;cancelAnimationFrame(a.raf);a.layer.remove();a.caption.remove();}
+function drawCharacter(ctx,x,y,size,color,flip){ctx.save();ctx.translate(x,y);ctx.scale(flip?-1:1,1);ctx.fillStyle=color;ctx.fillRect(-size*.22,-size*.5,size*.44,size*.45);ctx.fillStyle='#f4b18a';ctx.fillRect(-size*.17,-size*.85,size*.34,size*.33);ctx.fillStyle='#262035';ctx.fillRect(-size*.21,-size*.95,size*.42,size*.13);ctx.fillStyle='#272038';ctx.fillRect(-size*.2,-size*.05,size*.15,size*.28);ctx.fillRect(size*.05,-size*.05,size*.15,size*.28);ctx.restore();}
+function play(item){stop();base.stop();const source=document.getElementById('game');if(!source||!source.width||!source.height)return base.play(item);const w=source.width,h=source.height;
+const layer=document.createElement('canvas');layer.width=w;layer.height=h;layer.setAttribute('aria-hidden','true');layer.style.cssText='position:fixed;pointer-events:none;z-index:99990;image-rendering:pixelated;';
+const caption=document.createElement('div');caption.setAttribute('aria-live','polite');caption.style.cssText='position:fixed;z-index:99991;pointer-events:none;background:#160d30e8;color:#fff;padding:7px 10px;border:1px solid #c7a4ff;border-radius:7px;font:700 13px system-ui;text-align:center;max-width:85vw;';
+const id=String(item&&item.id||'');const scenario=routes[id]||scenarios[[...id].reduce((a,c)=>a+c.charCodeAt(0),0)%scenarios.length];
+const captions={reality:'¿POR QUÉ HAY DOS BENIFAIÓS?',burger:'EL BURGER HA COBRADO VIDA',pokemon:'¡LOS POKÉMON EXPLOTAN EN CONFETI!',chromatic:'NADIE CONSERVA SU COLOR ORIGINAL',clones:'TU DOBLE HA ENTRADO EN EL MAPA',giant:'¿DESDE CUÁNDO ERES TAN GRANDE?',wander:'¿QUIÉN ESTÁ MOVIENDO A TU PERSONAJE?'};caption.textContent=captions[scenario];document.body.append(layer,caption);
+const ctx=layer.getContext('2d');if(!ctx){layer.remove();caption.remove();return;}const start=performance.now(),duration=reduced()?2500:8500;const a={layer,caption,raf:0};running=a;
+function frame(now){if(running!==a)return;const r=source.getBoundingClientRect();if(r.width<2||r.height<2){stop();return;}layer.style.cssText+=`left:${r.left}px;top:${r.top}px;width:${r.width}px;height:${r.height}px;`;caption.style.left=Math.max(8,r.left+8)+'px';caption.style.top=Math.max(8,r.top+8)+'px';const t=(now-start)/1000,p=Math.min(1,t/(duration/1000));ctx.clearRect(0,0,w,h);ctx.save();try{
+// All drawings are copies of the live game canvas. Collision and coordinates remain untouched.
+if(scenario==='reality'){ctx.drawImage(source,0,0);ctx.globalAlpha=.65;ctx.filter=`hue-rotate(${t*95}deg)`;ctx.drawImage(source,Math.sin(t*3)*w*.07,Math.cos(t*2)*h*.04,w*.9,h*.9);ctx.filter='none';ctx.globalAlpha=1;ctx.fillStyle='#9d59ff';for(let i=0;i<16;i++)ctx.fillRect((i*79+t*43)%w,(i*47+t*23)%h,8,8);}
+else if(scenario==='chromatic'){ctx.filter=`hue-rotate(${t*140}deg) saturate(2.5)`;ctx.drawImage(source,0,0);ctx.filter='none';for(let i=0;i<8;i++)drawCharacter(ctx,w*(.1+(i%4)*.25),h*(.4+Math.floor(i/4)*.3),h*.12,`hsl(${(t*150+i*51)%360} 100% 55%)`,i%2);}
+else if(scenario==='giant'){ctx.drawImage(source,0,0);const s=h*(.2+Math.min(t/3,1)*.65);drawCharacter(ctx,w*.5,h*.84,s,'#e54663',false);}
+else if(scenario==='clones'){ctx.drawImage(source,0,0);for(let i=0;i<5;i++){ctx.globalAlpha=.45+i*.1;drawCharacter(ctx,w*(.15+i*.17)+Math.sin(t*2+i)*20,h*(.65+Math.sin(t+i)*.1),h*.2,`hsl(${i*65+t*80} 90% 55%)`,i%2);}ctx.globalAlpha=1;}
+else if(scenario==='wander'){ctx.drawImage(source,0,0);const x=w*.5+Math.sin(t*3)*w*.27,y=h*.65+Math.cos(t*4)*h*.17;drawCharacter(ctx,x,y,h*.26,'#f1a936',Math.sin(t*3)<0);for(let i=0;i<3;i++){ctx.globalAlpha=.22;drawCharacter(ctx,x-i*25,y-i*12,h*.26,'#a5e3ff',false);}ctx.globalAlpha=1;}
+else if(scenario==='burger'){ctx.drawImage(source,0,0);const x=w*(.1+.75*Math.min(t/5,1)),y=h*.64;drawCharacter(ctx,x,y,h*.2,'#43d6a3',false);ctx.textAlign='center';ctx.font=`${Math.round(h*(.12+Math.min(t/4,1)*.36))}px system-ui`;ctx.fillText('🍔',x-30+Math.sin(t*2)*15,y-20);if(t>3){ctx.font=`${Math.round(h*.11)}px system-ui`;ctx.fillText('¡ÑAM!',w*.5,h*.35);}}
+else if(scenario==='pokemon'){ctx.drawImage(source,0,0);ctx.textAlign='center';for(let i=0;i<4;i++){const x=w*(.17+i*.21),y=h*.67,phase=t-i*.65;ctx.globalAlpha=phase<0?0:Math.min(1,Math.max(.15,3.5-phase));ctx.font=`${Math.round(h*.13)}px system-ui`;ctx.fillText(phase<1?'🐉':phase<2?'💥':'🎊',x,y);for(let j=0;j<8&&phase>1;j++){ctx.fillStyle=`hsl(${i*60+j*37} 90% 65%)`;ctx.fillRect(x+Math.cos(j*.8)*phase*18,y+Math.sin(j*.8)*phase*18,5,5);}}ctx.globalAlpha=1;}
+}finally{ctx.restore();}if(p>=1){stop();return;}a.raf=requestAnimationFrame(frame);}a.raf=requestAnimationFrame(frame);}
+window.__PREVIA704_WORLD={play,stop:()=>{stop();base.stop();}};
+window.addEventListener('pagehide',stop);document.addEventListener('keydown',e=>{if(e.key==='Escape')stop();});
+})();
