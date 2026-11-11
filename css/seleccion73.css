@@ -1,0 +1,25 @@
+
+/* 7.3 · Original in-game sprite based selection. */
+.title64Layer .title64-panel{max-width:min(1100px,96vw)}
+.title73-heading{font-size:clamp(13px,2vw,21px);font-weight:900;text-align:center;color:#f4f8ff;letter-spacing:.08em;text-shadow:0 2px #122349}
+.title73-subtitle{text-align:center;color:#d9e9ff;font-size:12px;margin:4px 0 12px}
+.title73-lab{background:linear-gradient(#09182b88,#09182bbb),url('../assets/seleccion73/laboratorio_fondo.png') center/cover;border:3px solid #5ac6ef;border-radius:16px;padding:12px;box-shadow:inset 0 0 22px #2c8ec9aa}
+.title73-lab .title64-trainer-grid{display:grid;grid-template-columns:repeat(9,minmax(0,1fr));gap:7px;overflow-x:auto;padding:12px 0}
+.title73-lab .title64-trainer{position:relative;min-width:65px;min-height:145px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:3px;background:linear-gradient(90deg,#19365b88,#4ca7e455,#173b6b88);border:2px solid #6bdcff;border-radius:44% 44% 12px 12px;box-shadow:0 0 14px #36baff88,inset 0 0 14px #8be5ff66;transition:transform .2s,box-shadow .2s}
+.title73-lab .title64-trainer img{width:auto;max-width:90%;height:94px;object-fit:contain;image-rendering:pixelated;filter:drop-shadow(0 3px 3px #081529)}
+.title73-lab .title64-trainer small{font-size:clamp(8px,1vw,11px);font-weight:900;background:#102b51;border-radius:5px;color:white;width:100%;padding:5px 1px;text-align:center}
+.title73-lab .title64-trainer.picked,.title73-lab .title64-trainer:focus-visible{transform:translateY(-8px);box-shadow:0 0 0 3px #ffdc74,0 0 30px #ffe489;outline:none}
+.title73-lab .title64-trainer-preview{background:#0c1a35dd;border:2px solid #7bc9f6;border-radius:12px;padding:8px;min-height:110px}
+.title73-lab .title64-trainer-preview img{image-rendering:pixelated}
+.title73-pokemon{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:18px 0}
+.title73-pokemon .choice{position:relative;min-width:0;border:3px solid #6bdcff!important;border-radius:18px!important;background:linear-gradient(#183b67,#0d1b38)!important;color:white!important;box-shadow:0 7px 0 #0b152c,0 0 14px #399ffb88;display:flex;flex-direction:column;align-items:center;padding:14px 6px!important;gap:7px;transition:transform .15s}
+.title73-pokemon .choice:hover,.title73-pokemon .choice:focus-visible{transform:translateY(-5px);box-shadow:0 7px 0 #0b152c,0 0 22px #fff4a3}
+.title73-pokemon .sprite-select{width:clamp(70px,14vw,155px)!important;height:clamp(70px,14vw,155px)!important;object-fit:contain;image-rendering:pixelated;filter:drop-shadow(0 0 13px #a3e9ff)}
+.title73-pokemon .choice strong{font-size:clamp(13px,2vw,20px)}
+.title73-pokemon .choice span{font-size:12px;color:#c6e4ff}
+.title73-pokemon .choice::before{content:'✦';font-size:18px;color:#ffe288}
+.title73-confirm{padding:15px;background:#0d2342;border:2px solid #8be5ff;border-radius:12px;text-align:center;margin:12px 0}
+.title73-confirm button{margin:5px;cursor:pointer;padding:10px 20px;border-radius:8px;font-weight:900}
+.title73-confirm .yes{background:#f4d46d;color:#12233b}
+.title73-confirm .no{background:#25476d;color:#fff}
+@media(max-width:780px){.title73-lab .title64-trainer-grid{grid-template-columns:repeat(3,minmax(0,1fr));max-height:250px;overflow-y:auto}.title73-lab .title64-trainer{min-height:105px}.title73-lab .title64-trainer img{height:64px}.title73-pokemon{gap:5px}}
