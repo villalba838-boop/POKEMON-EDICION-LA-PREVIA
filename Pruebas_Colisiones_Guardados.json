@@ -1,0 +1,339 @@
+{
+  "version": "6.57-review",
+  "checks": [
+    {
+      "name": "Burger NPC/lore/doors reachable with player radius",
+      "ok": true,
+      "detail": 5098
+    },
+    {
+      "name": "Burger boundaries",
+      "ok": true
+    },
+    {
+      "name": "Solid counter 10,5.9",
+      "ok": true
+    },
+    {
+      "name": "Solid table 3,10",
+      "ok": true
+    },
+    {
+      "name": "Solid table 3,15",
+      "ok": true
+    },
+    {
+      "name": "Solid table 25,10",
+      "ok": true
+    },
+    {
+      "name": "Solid table 25,15",
+      "ok": true
+    },
+    {
+      "name": "Solid table 10,10",
+      "ok": true
+    },
+    {
+      "name": "Solid table 17,10",
+      "ok": true
+    },
+    {
+      "name": "Solid table 10,15",
+      "ok": true
+    },
+    {
+      "name": "Solid table 17,15",
+      "ok": true
+    },
+    {
+      "name": "Solid plant 2,19",
+      "ok": true
+    },
+    {
+      "name": "Solid plant 29,19",
+      "ok": true
+    },
+    {
+      "name": "Solid shelf 7,3.5",
+      "ok": true
+    },
+    {
+      "name": "Solid kitchen 18,3.5",
+      "ok": true
+    },
+    {
+      "name": "Enter burger_cocina",
+      "ok": true,
+      "detail": {
+        "near": "portal",
+        "scene": "burger_cocina"
+      }
+    },
+    {
+      "name": "Return kitchen → Burger",
+      "ok": true,
+      "detail": {
+        "scene": "burger",
+        "x": 25,
+        "y": 7
+      }
+    },
+    {
+      "name": "Enter albal",
+      "ok": true,
+      "detail": {
+        "near": "portal",
+        "scene": "albal"
+      }
+    },
+    {
+      "name": "Return exterior → Burger",
+      "ok": true,
+      "detail": {
+        "scene": "burger",
+        "x": 16.5,
+        "y": 20
+      }
+    },
+    {
+      "name": "Secret kitchen gate retained",
+      "ok": true
+    },
+    {
+      "name": "Legacy saves migrate with progress preserved",
+      "ok": true
+    },
+    {
+      "name": "New save position round trip",
+      "ok": true,
+      "detail": {
+        "x": 23,
+        "y": 19
+      }
+    },
+    {
+      "name": "Browser storage serialization v:1",
+      "ok": true
+    },
+    {
+      "name": "Blas phase 6 repairs readiness and opens challenge",
+      "ok": true
+    },
+    {
+      "name": "Benifaió collision sample baseline",
+      "ok": true,
+      "detail": {
+        "version": "6.56-review",
+        "base": "ac16acbf1968b06fa69c709eba2309ee51aa4c3a",
+        "ready": true,
+        "collisionSamples": {
+          "benifaio": 19200,
+          "beni_plaza562": 21824
+        },
+        "collisionDifferences": 0,
+        "geometryUnchanged": true,
+        "saveUnchanged": true,
+        "engineFunctionsUnchanged": false,
+        "assets": 26
+      }
+    },
+    {
+      "name": "Assets loaded",
+      "ok": true
+    },
+    {
+      "name": "Production save untouched",
+      "ok": true
+    },
+    {
+      "name": "Review save untouched by tests",
+      "ok": true
+    }
+  ],
+  "routes": [
+    {
+      "kind": "npc",
+      "id": "juanchino",
+      "reachable": true
+    },
+    {
+      "kind": "npc",
+      "id": "cocinero",
+      "reachable": true
+    },
+    {
+      "kind": "npc",
+      "id": "burgerPau50",
+      "reachable": true
+    },
+    {
+      "kind": "npc",
+      "id": "burgerRober50",
+      "reachable": true
+    },
+    {
+      "kind": "npc",
+      "id": "frankBurger520",
+      "reachable": true
+    },
+    {
+      "kind": "npc",
+      "id": "npc523_irene523_burger",
+      "reachable": true
+    },
+    {
+      "kind": "npc",
+      "id": "npc526_patriBurger",
+      "reachable": true
+    },
+    {
+      "kind": "npc",
+      "id": "burger527Blas",
+      "reachable": true
+    },
+    {
+      "kind": "npc",
+      "id": "burger527Cliente",
+      "reachable": true
+    },
+    {
+      "kind": "npc",
+      "id": "aweloSilla",
+      "reachable": true
+    },
+    {
+      "kind": "npc",
+      "id": "blasBH",
+      "reachable": true
+    },
+    {
+      "kind": "npc",
+      "id": "nachitoBH",
+      "reachable": true
+    },
+    {
+      "kind": "npc",
+      "id": "rafaSlots63",
+      "reachable": true
+    },
+    {
+      "kind": "lore",
+      "id": "sillaAwelo",
+      "reachable": true
+    },
+    {
+      "kind": "lore",
+      "id": "mandamientos",
+      "reachable": true
+    },
+    {
+      "kind": "lore",
+      "id": "mesaGrupo",
+      "reachable": true
+    },
+    {
+      "kind": "lore",
+      "id": "cineRobbery34",
+      "reachable": true
+    },
+    {
+      "kind": "lore",
+      "id": "burgerLogo35",
+      "reachable": true
+    },
+    {
+      "kind": "lore",
+      "id": "burgerMesas35",
+      "reachable": true
+    },
+    {
+      "kind": "lore",
+      "id": "burgerComanda50",
+      "reachable": true
+    },
+    {
+      "kind": "lore",
+      "id": "burgerGrill51",
+      "reachable": true
+    },
+    {
+      "kind": "lore",
+      "id": "plus541_0",
+      "reachable": true
+    },
+    {
+      "kind": "lore",
+      "id": "mg583_2",
+      "reachable": true
+    },
+    {
+      "kind": "lore",
+      "id": "mg583_6",
+      "reachable": true
+    },
+    {
+      "kind": "lore",
+      "id": "op625_warehouse",
+      "reachable": true
+    },
+    {
+      "kind": "portal",
+      "id": "burger_cocina",
+      "reachable": true
+    },
+    {
+      "kind": "portal",
+      "id": "post99_cocina",
+      "reachable": true
+    },
+    {
+      "kind": "portal",
+      "id": "albal",
+      "reachable": true
+    }
+  ],
+  "saves": [
+    {
+      "old": [
+        9,
+        11
+      ],
+      "ok": true,
+      "valid": true,
+      "free": true,
+      "preserved": true
+    },
+    {
+      "old": [
+        6,
+        10
+      ],
+      "ok": true,
+      "valid": true,
+      "free": true,
+      "preserved": true
+    },
+    {
+      "old": [
+        2.1,
+        7.2
+      ],
+      "ok": true,
+      "valid": true,
+      "free": true,
+      "preserved": true
+    },
+    {
+      "old": [
+        15.4,
+        5.85
+      ],
+      "ok": true,
+      "valid": true,
+      "free": true,
+      "preserved": true
+    }
+  ],
+  "pass": true
+}

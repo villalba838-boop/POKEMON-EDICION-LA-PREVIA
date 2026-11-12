@@ -1,0 +1,596 @@
+{
+  "checks": [
+    {
+      "name": "14 módulos de expansión cargados",
+      "ok": true
+    },
+    {
+      "name": "Recurso assets/dimension404/awelo_normal.png",
+      "ok": true
+    },
+    {
+      "name": "Recurso assets/dimension404/awelo_espejo.png",
+      "ok": true
+    },
+    {
+      "name": "Recurso assets/dimension404/awelo_espectral.png",
+      "ok": true
+    },
+    {
+      "name": "Recurso assets/dimension404/awelo_gigante.png",
+      "ok": true
+    },
+    {
+      "name": "Recurso assets/dimension404/robert_normal.png",
+      "ok": true
+    },
+    {
+      "name": "Recurso assets/dimension404/robert_espejo.png",
+      "ok": true
+    },
+    {
+      "name": "Recurso assets/dimension404/robert_espectral.png",
+      "ok": true
+    },
+    {
+      "name": "Recurso assets/dimension404/robert_gigante.png",
+      "ok": true
+    },
+    {
+      "name": "Recurso assets/dimension404/mewtwo_normal.png",
+      "ok": true
+    },
+    {
+      "name": "Recurso assets/dimension404/mewtwo_espejo.png",
+      "ok": true
+    },
+    {
+      "name": "Recurso assets/dimension404/mewtwo_espectral.png",
+      "ok": true
+    },
+    {
+      "name": "Recurso assets/dimension404/mewtwo_gigante.png",
+      "ok": true
+    },
+    {
+      "name": "Recurso assets/dimension404/hero_normal.png",
+      "ok": true
+    },
+    {
+      "name": "Recurso assets/dimension404/hero_espejo.png",
+      "ok": true
+    },
+    {
+      "name": "Recurso assets/dimension404/hero_espectral.png",
+      "ok": true
+    },
+    {
+      "name": "Recurso assets/dimension404/hero_gigante.png",
+      "ok": true
+    },
+    {
+      "name": "Recurso assets/seleccion73/blas.png",
+      "ok": true
+    },
+    {
+      "name": "Recurso assets/dimension404/mewtwo_404.png",
+      "ok": true
+    },
+    {
+      "name": "Recurso assets/dimension404/hero_404.png",
+      "ok": true
+    },
+    {
+      "name": "Recurso assets/seleccion73/plata.png",
+      "ok": true
+    },
+    {
+      "name": "Recurso assets/seleccion73/nachito.png",
+      "ok": true
+    },
+    {
+      "name": "Recurso assets/seleccion73/sergio.png",
+      "ok": true
+    },
+    {
+      "name": "Recurso assets/seleccion73/alfaro.png",
+      "ok": true
+    },
+    {
+      "name": "Recurso assets/seleccion73/awelo.png",
+      "ok": true
+    },
+    {
+      "name": "Recurso assets/seleccion73/marshall.png",
+      "ok": true
+    },
+    {
+      "name": "Recurso assets/seleccion73/javi_grau.png",
+      "ok": true
+    },
+    {
+      "name": "Recurso assets/cinematicas72/awelo.png",
+      "ok": true
+    },
+    {
+      "name": "Recurso assets/seleccion73/horte.png",
+      "ok": true
+    },
+    {
+      "name": "Recurso assets/dimension404/robert_404.png",
+      "ok": true
+    },
+    {
+      "name": "Recurso assets/cinematicas72/blas.png",
+      "ok": true
+    },
+    {
+      "name": "Recurso assets/cinematicas72/mewtwo.png",
+      "ok": true
+    },
+    {
+      "name": "Recurso assets/cinematicas72/festivern.png",
+      "ok": true
+    },
+    {
+      "name": "Recurso assets/seleccion73/laboratorio_fondo.png",
+      "ok": true
+    },
+    {
+      "name": "Recurso assets/cinematicas72/patri.png",
+      "ok": true
+    },
+    {
+      "name": "Recurso assets/dimension404/awelo_404.png",
+      "ok": true
+    },
+    {
+      "name": "Guardado anterior v:1 válido",
+      "ok": true
+    },
+    {
+      "name": "Importar partida anterior",
+      "ok": true
+    },
+    {
+      "name": "Nuevo guardado con reliquias y caos válido",
+      "ok": true
+    },
+    {
+      "name": "Recarga conserva equipo, medallas y banderas",
+      "ok": true
+    },
+    {
+      "name": "START tiene diario y Extras",
+      "ok": true
+    },
+    {
+      "name": "Diario pausa el mundo",
+      "ok": true
+    },
+    {
+      "name": "Pista en mapa benifaio",
+      "ok": true
+    },
+    {
+      "name": "Pista sin colisión benifaio",
+      "ok": true
+    },
+    {
+      "name": "Pista registrada benifaio",
+      "ok": true
+    },
+    {
+      "name": "Premio benifaio",
+      "ok": true
+    },
+    {
+      "name": "Premio único benifaio",
+      "ok": true
+    },
+    {
+      "name": "Pista en mapa silla",
+      "ok": true
+    },
+    {
+      "name": "Pista sin colisión silla",
+      "ok": true
+    },
+    {
+      "name": "Pista registrada silla",
+      "ok": true
+    },
+    {
+      "name": "Premio silla",
+      "ok": true
+    },
+    {
+      "name": "Premio único silla",
+      "ok": true
+    },
+    {
+      "name": "Pista en mapa albal",
+      "ok": true
+    },
+    {
+      "name": "Pista sin colisión albal",
+      "ok": true
+    },
+    {
+      "name": "Pista registrada albal",
+      "ok": true
+    },
+    {
+      "name": "Premio albal",
+      "ok": true
+    },
+    {
+      "name": "Premio único albal",
+      "ok": true
+    },
+    {
+      "name": "Pista en mapa sueca",
+      "ok": true
+    },
+    {
+      "name": "Pista sin colisión sueca",
+      "ok": true
+    },
+    {
+      "name": "Pista registrada sueca",
+      "ok": true
+    },
+    {
+      "name": "Premio sueca",
+      "ok": true
+    },
+    {
+      "name": "Premio único sueca",
+      "ok": true
+    },
+    {
+      "name": "Pista en mapa festivern",
+      "ok": true
+    },
+    {
+      "name": "Pista sin colisión festivern",
+      "ok": true
+    },
+    {
+      "name": "Pista registrada festivern",
+      "ok": true
+    },
+    {
+      "name": "Premio festivern",
+      "ok": true
+    },
+    {
+      "name": "Premio único festivern",
+      "ok": true
+    },
+    {
+      "name": "Pista en mapa zaragoza",
+      "ok": true
+    },
+    {
+      "name": "Pista sin colisión zaragoza",
+      "ok": true
+    },
+    {
+      "name": "Pista registrada zaragoza",
+      "ok": true
+    },
+    {
+      "name": "Premio zaragoza",
+      "ok": true
+    },
+    {
+      "name": "Premio único zaragoza",
+      "ok": true
+    },
+    {
+      "name": "Sergio entrega pase desde pabellón",
+      "ok": true
+    },
+    {
+      "name": "Introducción marshall",
+      "ok": true
+    },
+    {
+      "name": "Introducción devuelve control marshall",
+      "ok": true
+    },
+    {
+      "name": "Introducción horte",
+      "ok": true
+    },
+    {
+      "name": "Introducción devuelve control horte",
+      "ok": true
+    },
+    {
+      "name": "Introducción plata",
+      "ok": true
+    },
+    {
+      "name": "Introducción devuelve control plata",
+      "ok": true
+    },
+    {
+      "name": "Introducción awelo",
+      "ok": true
+    },
+    {
+      "name": "Introducción devuelve control awelo",
+      "ok": true
+    },
+    {
+      "name": "Introducción sergio",
+      "ok": true
+    },
+    {
+      "name": "Introducción devuelve control sergio",
+      "ok": true
+    },
+    {
+      "name": "Introducción alfaro",
+      "ok": true
+    },
+    {
+      "name": "Introducción devuelve control alfaro",
+      "ok": true
+    },
+    {
+      "name": "Introducción nachito",
+      "ok": true
+    },
+    {
+      "name": "Introducción devuelve control nachito",
+      "ok": true
+    },
+    {
+      "name": "Introducción javi_grau",
+      "ok": true
+    },
+    {
+      "name": "Introducción devuelve control javi_grau",
+      "ok": true
+    },
+    {
+      "name": "Introducción blas",
+      "ok": true
+    },
+    {
+      "name": "Introducción devuelve control blas",
+      "ok": true
+    },
+    {
+      "name": "Animación de inicial Bulbasaur",
+      "ok": true
+    },
+    {
+      "name": "Inicial elegido Bulbasaur",
+      "ok": true
+    },
+    {
+      "name": "Animación de inicial Charmander",
+      "ok": true
+    },
+    {
+      "name": "Inicial elegido Charmander",
+      "ok": true
+    },
+    {
+      "name": "Animación de inicial Squirtle",
+      "ok": true
+    },
+    {
+      "name": "Inicial elegido Squirtle",
+      "ok": true
+    },
+    {
+      "name": "Cinemática nativa dibujada sergio",
+      "ok": true
+    },
+    {
+      "name": "Cinemática devuelve control sergio",
+      "ok": true
+    },
+    {
+      "name": "Cinemática nativa dibujada blas",
+      "ok": true
+    },
+    {
+      "name": "Cinemática devuelve control blas",
+      "ok": true
+    },
+    {
+      "name": "Cinemática nativa dibujada plataMedalla",
+      "ok": true
+    },
+    {
+      "name": "Cinemática devuelve control plataMedalla",
+      "ok": true
+    },
+    {
+      "name": "Cinemática nativa dibujada horte",
+      "ok": true
+    },
+    {
+      "name": "Cinemática devuelve control horte",
+      "ok": true
+    },
+    {
+      "name": "Cinemática nativa dibujada nachitoPixel",
+      "ok": true
+    },
+    {
+      "name": "Cinemática devuelve control nachitoPixel",
+      "ok": true
+    },
+    {
+      "name": "Cinemática nativa dibujada plata",
+      "ok": true
+    },
+    {
+      "name": "Cinemática devuelve control plata",
+      "ok": true
+    },
+    {
+      "name": "Cinemática nativa dibujada awelo",
+      "ok": true
+    },
+    {
+      "name": "Cinemática devuelve control awelo",
+      "ok": true
+    },
+    {
+      "name": "Cinemática nativa dibujada roberMedalla",
+      "ok": true
+    },
+    {
+      "name": "Cinemática devuelve control roberMedalla",
+      "ok": true
+    },
+    {
+      "name": "Cinemática nativa dibujada aweloMadre",
+      "ok": true
+    },
+    {
+      "name": "Cinemática devuelve control aweloMadre",
+      "ok": true
+    },
+    {
+      "name": "Cinemática nativa dibujada teamCierre",
+      "ok": true
+    },
+    {
+      "name": "Cinemática devuelve control teamCierre",
+      "ok": true
+    },
+    {
+      "name": "Cinemática nativa dibujada patriPatinete",
+      "ok": true
+    },
+    {
+      "name": "Cinemática devuelve control patriPatinete",
+      "ok": true
+    },
+    {
+      "name": "Cinemática nativa dibujada rober",
+      "ok": true
+    },
+    {
+      "name": "Cinemática devuelve control rober",
+      "ok": true
+    },
+    {
+      "name": "Cinemática nativa dibujada capsule",
+      "ok": true
+    },
+    {
+      "name": "Cinemática devuelve control capsule",
+      "ok": true
+    },
+    {
+      "name": "Cinemática nativa dibujada final",
+      "ok": true
+    },
+    {
+      "name": "Cinemática devuelve control final",
+      "ok": true
+    },
+    {
+      "name": "Cinemática nativa dibujada javi",
+      "ok": true
+    },
+    {
+      "name": "Cinemática devuelve control javi",
+      "ok": true
+    },
+    {
+      "name": "Cinemática nativa dibujada nachito",
+      "ok": true
+    },
+    {
+      "name": "Cinemática devuelve control nachito",
+      "ok": true
+    },
+    {
+      "name": "Cinemática nativa dibujada aweloCelebracion",
+      "ok": true
+    },
+    {
+      "name": "Cinemática devuelve control aweloCelebracion",
+      "ok": true
+    },
+    {
+      "name": "Cinemática nativa dibujada bingo",
+      "ok": true
+    },
+    {
+      "name": "Cinemática devuelve control bingo",
+      "ok": true
+    },
+    {
+      "name": "Cinemática nativa dibujada festivernExplosion",
+      "ok": true
+    },
+    {
+      "name": "Cinemática devuelve control festivernExplosion",
+      "ok": true
+    },
+    {
+      "name": "Recuperación sin colisión",
+      "ok": true
+    },
+    {
+      "name": "Dimensión pausa el mundo",
+      "ok": true
+    },
+    {
+      "name": "Robert primero solo cuenta un eco",
+      "ok": true
+    },
+    {
+      "name": "Los dos ecos cuentan por separado",
+      "ok": true
+    },
+    {
+      "name": "Tres fragmentos recogidos",
+      "ok": true
+    },
+    {
+      "name": "Final de Dimensión 404",
+      "ok": true
+    },
+    {
+      "name": "Dimensión incluida en guardado válido",
+      "ok": true
+    },
+    {
+      "name": "Dimensión conservada al cargar partida",
+      "ok": true
+    },
+    {
+      "name": "Epílogo entrega 404 monedas",
+      "ok": true
+    },
+    {
+      "name": "Epílogo no duplica premio",
+      "ok": true
+    },
+    {
+      "name": "Sin excepciones capturadas",
+      "ok": true
+    }
+  ],
+  "errors": [],
+  "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36",
+  "viewport": [
+    1363,
+    936
+  ],
+  "finished": "2026-11-11T23:28:35.721Z",
+  "pass": true
+}

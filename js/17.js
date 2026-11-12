@@ -136,7 +136,7 @@ function resizeStage(){
 }
 function safeLoad(){
  // Preserve version 0.4 saves and import old saves without ever deleting their source.
- for(const key of [savedKey,'la-previa-web-demo-v03','la-previa-web-demo-v02','la-previa-web-demo-v01']){
+ for(const key of [savedKey,'la-previa-web-demo-v04-preview637','la-previa-web-demo-v03','la-previa-web-demo-v02','la-previa-web-demo-v01']){
   try{const raw=localStorage.getItem(key);if(!raw)continue;const val=JSON.parse(raw);if(validSave(val))return val;}catch{}
  }
  return null;
@@ -851,7 +851,9 @@ function validSave(o){
  if(o.money!==undefined&&(!Number.isFinite(o.money)||o.money<0||o.money>9999999))return false;
  if(o.bag&&(!Object.keys(o.bag).every(k=>k in FRESH_BAG)||!Object.values(o.bag).every(v=>Number.isInteger(v)&&v>=0&&v<=9999)))return false;
  if(o.badges&&(!Array.isArray(o.badges)||o.badges.some((v,i)=>v!==i)||o.badges.length>BADGES.length))return false;
- if(Object.values(o.flags).some(v=>typeof v!=='boolean'&&!(Number.isInteger(v)&&v>=0&&v<=10000)))return false;
+ const scalar80=v=>typeof v==='boolean'||Number.isInteger(v)&&v>=0&&v<=10000;
+ const record80=(v,depth=0)=>v&&typeof v==='object'&&!Array.isArray(v)&&depth<3&&Object.keys(v).length<=100&&Object.entries(v).every(([k,x])=>/^[a-zA-Z0-9_:-]{1,80}$/.test(k)&&!['__proto__','prototype','constructor'].includes(k)&&(scalar80(x)||record80(x,depth+1)));
+ if(Object.entries(o.flags).some(([k,v])=>!scalar80(v)&&!(['reliquias70','caos70','v80_dimension404'].includes(k)&&record80(v))))return false;
  return ['journal','metFriends'].every(k=>!o[k]||Array.isArray(o[k])&&o[k].length<300&&o[k].every(x=>typeof x==='string'&&x.length<100));
 }
 const baseCreateMon=createMon;createMon=function(n,l){return normalizeMon(baseCreateMon(n,l))};
@@ -1006,7 +1008,7 @@ function winBattle(){if(!battle)return;const b=battle,xp=b.xp||b.enemy.lvl*24,ev
    }
   }
  }
- state.money+=b.wild?30:100;if(b.gymId){const g=GYMS[b.gymId];if(!state.badges.includes(g.i)){state.badges.push(g.i);state.money+=g.reward;noteQuest('medalla'+g.i);events.push(`¡Medalla ${BADGES[g.i][0]}! +${g.reward} monedas. ${state.badges.length}/${BADGES.length} medallas de esta versión.`)}}else if(!b.wild){if(b.trainerId.startsWith('ruta42:')){grantTrailDuel42(b.trainerId.slice(7),events)}else if(b.trainerId==='awelo'){state.flags.aweloDuelWon=true;noteQuest('awelo_duelo')}else if(!['cucu_fray','aw588_team_cierre'].includes(b.trainerId)){state.flags.blasWon=true;noteQuest('blas')}}closeBattle();save();updateObjective();beep(740,.25);const victory=()=>dialog(b.gymId||null,[`¡Victoria! ${xp} EXP para ${recipients.length===1?'tu Pokémon activo':'cada miembro del equipo'}.`,...events,...(b.gymId==='horte'?['Cuatro páginas del Libro de Reservas han vuelto a la mesa. El camino al este de Sueca ya está abierto: Nachito te espera en Picassent.']:b.gymId==='nachito'?['Qué peste, ¿has sido tú? Quinta página recuperada. El Alquimista entrega la Medalla Vesubio.','El próximo destino será Turís. Hasta aquí llega la campaña 2.1: conserva y exporta tu partida.']:[])]);if(evolutions.length)playEvolutions29(evolutions,victory);else victory();}
+ state.money+=b.wild?30:100;if(b.gymId){const g=GYMS[b.gymId];if(!state.badges.includes(g.i)){state.badges.push(g.i);state.money+=g.reward;noteQuest('medalla'+g.i);events.push(`¡Medalla ${BADGES[g.i][0]}! +${g.reward} monedas. ${state.badges.length}/${BADGES.length} medallas de esta versión.`)}}else if(!b.wild){if(b.trainerId.startsWith('ruta42:')){grantTrailDuel42(b.trainerId.slice(7),events)}else if(b.trainerId==='awelo'){state.flags.aweloDuelWon=true;noteQuest('awelo_duelo')}else if(b.trainerId==='borxeta_intro'){state.flags.borxetaDuelWon=true;events.push('¡Primer duelo contra Borxeta superado!');}else if(b.trainerId.startsWith('v80:borxeta:')){const stop=b.trainerId.split(':')[2];state.flags['v80_borxeta_'+stop]=true;events.push('¡Has vencido a Borxeta en '+stop+'!');}else if(!['cucu_fray','aw588_team_cierre'].includes(b.trainerId)){state.flags.blasWon=true;noteQuest('blas')}}closeBattle();save();updateObjective();beep(740,.25);const victory=()=>dialog(b.gymId||null,[`¡Victoria! ${xp} EXP para ${recipients.length===1?'tu Pokémon activo':'cada miembro del equipo'}.`,...events,...(b.gymId==='horte'?['Cuatro páginas del Libro de Reservas han vuelto a la mesa. El camino al este de Sueca ya está abierto: Nachito te espera en Picassent.']:b.gymId==='nachito'?['Qué peste, ¿has sido tú? Quinta página recuperada. El Alquimista entrega la Medalla Vesubio.','El próximo destino será Turís. Hasta aquí llega la campaña 2.1: conserva y exporta tu partida.']:[])]);if(evolutions.length)playEvolutions29(evolutions,victory);else victory();}
 function loseBattle(){if(!battle)return;closeBattle();healAll();changeScene('benifaio',[20,19]);dialog('alfaro',['Tu equipo está curado, incluidos PP y estados. No pierdes medallas ni dinero.','Revisa los tipos, cambia de compañero y usa la mochila. Puedes volver a intentarlo.']);save()}
 function closeBattle(){battle=null;state.screen='world';battleUI.classList.add('hidden');battleUI.classList.remove('calenton');save()}
 function throwBall(){if(!battle||battle.locked||battle.forced||!battle.wild)return;if(captureBalls69()<=0){battle.log='No quedan Poké Balls. Visita la tienda desde Equipo.';updateBattle();return}if(state.party.length>=6&&state.box.length>=300){battle.log='El PC está lleno. No se ha gastado ninguna Poké Ball.';updateBattle();return}consumeCaptureBall69();battle.locked=true;pulse('enemyPic');const e=battle.enemy,odds=captureOdds69(e);if(Math.random()<odds){const captured=normalizeMon(JSON.parse(JSON.stringify(e)));captured.hp=Math.max(1,captured.hp);const box=state.party.length>=6;if(box)state.box.push(captured);else state.party.push(captured);$('teamCount').textContent=state.party.length+' / 6';closeBattle();save();dialog(null,[`¡${e.name} capturado!`,box?'Enviado al PC. Puedes intercambiarlo desde Equipo.':'Se une a tu equipo. Puedes ponerlo primero desde Equipo.']);}else{battle.log='¡La Poké Ball se mueve… se ha escapado!';updateBattle();save();later(enemyTurn)}}
@@ -21692,7 +21694,7 @@ button('Estado de prueba',()=>{let o=$('qa657-state');if(!o){o=document.createEl
 button('Vista móvil 390',()=>{document.documentElement.style.width='390px';document.body.style.width='390px';window.dispatchEvent(new Event('resize'));});button('Vista escritorio',()=>{document.documentElement.style.width='';document.body.style.width='';window.dispatchEvent(new Event('resize'));});
 button('Diagnóstico integración',()=>{let out=$('integration-diagnostics');if(!out){out=document.createElement('pre');out.id='integration-diagnostics';out.style.cssText='white-space:pre-wrap';document.body.appendChild(out);}out.textContent=JSON.stringify({npcs:getSceneNpcs('burger'),portals:PORTALS.burger,lore:LORE_POINTS.burger,props,landscape:window.__landscape657,visual:window.__BENIFAIO656.status(),assets:Object.fromEntries(Object.entries(im).map(([k,v])=>[k,{ready:!!v.naturalWidth,src:v.src}]))},null,2);});
 }
-const frameBefore657=title64Frame;title64Frame=function(...args){frameBefore657(...args);const f=title64Layer.querySelector('.title64-footer span');if(f)f.textContent='EDICIÓN LA PREVIA · WEB 6.62';};
+const frameBefore657=title64Frame;title64Frame=function(...args){frameBefore657(...args);const f=title64Layer.querySelector('.title64-footer span');if(f)f.textContent='EDICIÓN LA PREVIA · WEB 8.0 · REVISIÓN';};
 bar.addEventListener('click',()=>setTimeout(()=>window.scrollTo(0,0),0));
 document.title='La Previa 6.57 · Integración · revisión sin publicar';const brand=document.querySelector('.brand small');if(brand)brand.textContent='AVENTURA WEB · 6.57 · REVISIÓN';
 const flowers=new Image();flowers.src='/assets/benifaio652/jardinera_flores_53.png';flowers.onload=()=>{if(!window.__BENIFAIO656.status().ready){setTimeout(flowers.onload,100);return;}const model=window.__benifaio637.map,objects=window.__BENIFAIO656.objects.benifaio;let count=0;
@@ -21703,6 +21705,44 @@ window.__BURGER657={im,anchor,solid,settle,visit,paintMarker:(g,p,key)=>{const a
 const markerRender=renderWorld;
 renderWorld=function(){markerRender();if(state.scene!=='albal')return;const v=outsideView53(SCENES.albal);ctx.save();ctx.translate(-Math.floor(v.cx),-Math.floor(v.cy));for(const p of LORE_POINTS.albal||[]){if(p.id==='op625_warehouse')window.__BURGER657.paintMarker(ctx,p,'warehouse');else if(p.id==='aw588_camiones')window.__BURGER657.paintMarker(ctx,p,'truck');}ctx.restore();};
 })();
+
+// 6.58 — Centro de aventura. Aditivo, sin modificar el esquema v:1.
+(function aventura658(){
+ const clean658=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+ const steps658=[
+  {title:'El comienzo de la aventura',detail:'Visita el laboratorio de Alfaro en Benifaió y elige a tu primer compañero.',done:()=>!!state.flags.starter},
+  {title:'Silla · Medalla del Acta',detail:'Habla con Alfaro para preparar el acta y entra en el pabellón para desafiar a Sergio.',done:()=>state.badges.includes(0)},
+  {title:'Albal · Burger L’Horta',detail:'Investiga el Burger, habla con los personajes y completa el encargo de la mesa antes de retar a Blas.',done:()=>state.badges.includes(1)},
+  {title:'L’Alqueria · La pizarra de Plata',detail:'Explora la pista y resuelve la situación de espacios que propone Plata.',done:()=>state.badges.includes(2)},
+  {title:'Sueca · El milagro del 5%',detail:'Revisa las diapositivas de Horte y supera su desafío.',done:()=>state.badges.includes(3)},
+  {title:'Picassent · El laboratorio',detail:'Continúa hacia el laboratorio de Picassent y sigue las pistas de la historia.',done:()=>state.badges.includes(4)},
+  {title:'La ruta de los ocho',detail:'Sigue el diario y el mapa para descubrir los siguientes gimnasios.',done:()=>state.badges.length>=8}
+ ];
+ function show658(){
+  if(state.screen!=='world' && state.screen!=='start')return;
+  if(state.screen==='start')closeStart29();
+  const current=steps658.findIndex(s=>!s.done());const objective=$('objective')?.textContent||'Explora y habla con los personajes';
+  const hp=(state.party||[]).map(mon=>{const name=clean658(mon.name||mon.species||mon.id||'Pokémon');const cur=Number(mon.hp??mon.currentHp),max=Number(mon.maxHp??mon.maxHP);return `<li>${name}${Number.isFinite(cur)&&Number.isFinite(max)&&max>0?` · ${cur}/${max} PS`:''}</li>`;}).join('')||'<li>Visita a Alfaro para formar tu equipo.</li>';
+  state.screen='menu';
+  showModal(`<div class="eyebrow">LA PREVIA · GUÍA 6.58</div><h2>Centro de aventura</h2><p><b>Ahora:</b> ${clean658(objective)}</p><p><b>Lugar:</b> ${clean658(state.scene)} · <b>Medallas:</b> ${state.badges.length}/8 · <b>Monedas:</b> ${Number(state.money)||0}</p><div class="aventura658-scroll"><h3>Ruta principal</h3>${steps658.map((q,i)=>`<div class="aventura658-step ${q.done()?'done658':''} ${i===current?'current658':''}"><b>${q.done()?'✓':i===current?'➤':'○'} ${clean658(q.title)}</b><small>${i===current?clean658(q.detail):q.done()?'Completado':'Se desbloquea siguiendo la historia'}</small></div>`).join('')}<h3>Tu equipo</h3><ul>${hp}</ul></div><p class="aventura658-foot">La guía no modifica misiones, Pokémon ni progreso. Guarda antes de salir del juego.</p><div class="modal-actions aventura658-buttons"><button type="button" id="aventura658Export" class="secondary">DESCARGAR COPIA</button><button type="button" id="aventura658Return" class="primary">VOLVER · A</button></div>`);
+  $('aventura658Return').onclick=backWorld;
+  $('aventura658Export').onclick=()=>{
+   try{
+    const d=serializeState();if(!validSave(d)){toast('Todavía no hay partida válida para exportar.');return;}
+    const blob=new Blob([JSON.stringify(d,null,2)],{type:'application/json'});
+    const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='la-previa-partida-'+new Date().toISOString().slice(0,10)+'.json';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);toast('Copia de la partida preparada.');
+   }catch(e){toast('No se pudo descargar. Usa Exportar desde Pokémon.');}
+  };
+ }
+ const menu=$('startMenu29');
+ if(menu&&!menu.querySelector('[data-aventura658]')){
+  const btn=document.createElement('button');btn.type='button';btn.dataset.aventura658='1';btn.innerHTML='<span class="start-icon29">✦</span><span>GUÍA DE AVENTURA</span><span class="start-arrow29">›</span>';
+  btn.onclick=show658;const before=menu.querySelector('[data-start29="save"]');menu.insertBefore(btn,before);
+ }
+ document.addEventListener('keydown',e=>{if(e.key?.toLowerCase()==='h'&&!e.repeat&&!e.altKey&&!e.ctrlKey&&!e.metaKey&&state.screen==='world'&&!['INPUT','TEXTAREA'].includes(document.activeElement?.tagName)){e.preventDefault();show658();}});
+ window.__AVENTURA658={open:show658,progress:()=>({completed:steps658.filter(q=>q.done()).length,total:steps658.length,badges:state.badges.length,saveValid:validSave(serializeState())})};
+})();
+
 
 /* Browser-driven engine regression suite, isolated from real adventures. */
 if(window.__PREVIA_QA)(function qa657(){
@@ -22095,6 +22135,542 @@ const style662=document.createElement('style');style662.textContent=`
 `;document.head.append(style662);
 document.title='Pokémon La Previa · 6.62';if(releaseBrand658)releaseBrand658.textContent='AVENTURA WEB · 6.62';
 /* END RELEASE662 */
+
+const engineSave80=()=>save();
+/* La Previa 6.59 — Cuaderno del entrenador. Independiente del guardado del motor. */
+(function(){
+ 'use strict';
+ const KEY='la-previa-cuaderno-659';
+ const chapters=[
+  ['Benifaió','Conoce a Alfaro y consigue tu primer Pokémon.'],
+  ['Silla','Investiga el pabellón y consigue la medalla de Sergio.'],
+  ['Albal','Explora Burger L’Horta y resuelve el reto de Blas.'],
+  ['L’Alqueria','Descubre el desafío de Plata.'],
+  ['Sueca','Vive la remontada del 5 % de Horte.'],
+  ['Picassent','Sigue las pistas del laboratorio.'],
+  ['Zaragoza','Explora El Tubo y el apartamento de Awelo.'],
+  ['Final','Prepárate para Team Cierre y Mewtwo.']
+ ];
+ const escapeHTML=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+ let notes={};try{const obj=JSON.parse(localStorage.getItem(KEY)||'{}');if(obj&&typeof obj==='object'&&!Array.isArray(obj))notes=obj;}catch(e){}
+ const persist=()=>{try{localStorage.setItem(KEY,JSON.stringify(notes));return true;}catch(e){return false;}};
+ function openNotebook(){
+  if(typeof state==='undefined'||!['world','start'].includes(state.screen))return;
+  if(state.screen==='start'&&typeof closeStart29==='function')closeStart29();
+  const badges=Array.isArray(state.badges)?state.badges:[];
+  const flags=state.flags||{};
+  const progress=chapters.map((c,i)=>i===0?!!flags.starter:i<=5?badges.includes(i-1):i===7?badges.length>=8:false);
+  const completed=progress.filter(Boolean).length;
+  state.screen='menu';
+  showModal(`<div class="eyebrow">LA PREVIA · 6.59</div><h2>Cuaderno del entrenador</h2><p>Tu aventura · ${completed}/${chapters.length} hitos orientativos · ${badges.length}/8 medallas</p><p>Apunta pistas, personajes y cosas que quieras explorar. Las notas se guardan en este navegador y no modifican tu partida.</p><div class="notebook659-list">${chapters.map((c,i)=>`<div class="notebook659-entry"><label for="nb659-${i}"><b>${progress[i]?'✓':'○'} ${escapeHTML(c[0])}</b><small>${escapeHTML(c[1])}</small></label><textarea id="nb659-${i}" maxlength="600" rows="2" placeholder="Mis pistas y notas…">${escapeHTML(String(notes[i]||'').slice(0,600))}</textarea></div>`).join('')}</div><div class="modal-actions"><button type="button" id="nb659-save" class="primary">GUARDAR NOTAS</button><button type="button" id="nb659-export" class="secondary">EXPORTAR NOTAS</button><button type="button" id="nb659-back" class="secondary">VOLVER</button></div>`);
+  const collect=()=>{chapters.forEach((_,i)=>{const v=document.getElementById('nb659-'+i)?.value||'';notes[i]=v.slice(0,600);});return persist();};
+  document.getElementById('nb659-save').onclick=()=>{const ok=collect();if(typeof toast==='function')toast(ok?'Notas guardadas':'No se pudieron guardar las notas');};
+  document.getElementById('nb659-back').onclick=()=>{collect();backWorld();};
+  document.getElementById('nb659-export').onclick=()=>{collect();const data={version:1,created:new Date().toISOString(),notes};const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='la-previa-cuaderno.json';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1500);};
+ }
+ const menu=document.getElementById('startMenu29');
+ if(menu){const btn=document.createElement('button');btn.type='button';btn.dataset.notebook659='1';btn.innerHTML='<span class="start-icon29">✎</span><span>CUADERNO</span><span class="start-arrow29">›</span>';btn.addEventListener('click',openNotebook);const guide=menu.querySelector('[data-aventura658]');if(guide)guide.after(btn);else menu.appendChild(btn);}
+ document.addEventListener('keydown',e=>{if(e.key?.toLowerCase()!=='j'||e.repeat||e.altKey||e.ctrlKey||e.metaKey||typeof state==='undefined'||state.screen!=='world'||['INPUT','TEXTAREA'].includes(document.activeElement?.tagName))return;e.preventDefault();openNotebook();});
+ window.__PREVIA659={openNotebook,chapters:chapters.length,getNotes:()=>({...notes})};
+})();
+
+/* La Previa 7.0 — Reliquias de La Previa (revisión). No altera el formato de guardado. */
+(function(){'use strict';
+const ITEMS={patatas:{name:'Patatas Eternas de Blas',icon:'🍟',desc:'Cura a todo el equipo. Se recarga tras 3 victorias.',kind:'reusable'},acta:{name:'Acta de Sergio',icon:'📋',desc:'Cura completamente a un Pokémon. Un uso.',kind:'consumable'},menu:{name:'Menú Cierre',icon:'🍔',desc:'Cura el 50 % de PS de todo el equipo. Un uso.',kind:'consumable'},gafas:{name:'Gafas de Nachito',icon:'🕶️',desc:'Permiten consultar una pista aleatoria de la aventura.',kind:'reusable'},mochila:{name:'Mochila Gato',icon:'🐈',desc:'Premio de exploración: contiene 2 pociones y 1 Poké Ball.',kind:'consumable'},bingo:{name:'Bingo del Limonero',icon:'🎱',desc:'Sorpresa aleatoria: monedas, pociones o un susto sin daño.',kind:'consumable'},triple:{name:'Triple del 5 %',icon:'🏀',desc:'Recupera a un Pokémon debilitado con el 25 % de PS.',kind:'consumable'},cristal:{name:'Cristal Festivern',icon:'💎',desc:'Reliquia de colección. Brilla al completar el laboratorio.',kind:'collectible'}};
+const AWARDS=[['catDone','mochila'],['casetaReward31','gafas'],['recado32','menu',3],['archivo32','acta'],['puzzle31_done','bingo'],['labReady','cristal'],['taller32','patatas'],['albumReward31','triple']];
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function data(){if(!state.flags.reliquias70||typeof state.flags.reliquias70!=='object')state.flags.reliquias70={owned:{},claimed:{},wins:0,lastRecharge:0};return state.flags.reliquias70;}
+function sync(){if(typeof state==='undefined'||!state.flags?.starter)return;const d=data();let changed=false;for(const [flag,id,equals] of AWARDS){if(!d.claimed[flag]&&(equals===undefined?!!state.flags[flag]:state.flags[flag]===equals)){d.claimed[flag]=true;d.owned[id]=(d.owned[id]||0)+1;changed=true;}}if(changed){try{localStorage.setItem('la-previa-reliquias70-last',new Date().toISOString());}catch(e){}}}
+function use(id){const d=data(),it=ITEMS[id];if(!it||!d.owned[id])return 'No tienes ese objeto.';if(typeof battle!=='undefined'&&battle)return 'Las reliquias se utilizan fuera del combate.';let msg='';const party=state.party||[];
+if(id==='patatas'){if(d.usedPatatas&&d.wins-d.lastRecharge<3)return 'Las patatas necesitan 3 victorias para recargarse.';let any=false;party.forEach(p=>{if(p.hp>0&&p.hp<p.maxHp){p.hp=p.maxHp;any=true;}});if(!any)return 'Tu equipo ya está recuperado.';d.lastRecharge=d.wins;d.usedPatatas=true;msg='¡Patatas para todos! Los Pokémon conscientes recuperan sus PS.';}
+else if(id==='menu'){let any=false;party.forEach(p=>{if(p.hp>0&&p.hp<p.maxHp){p.hp=Math.min(p.maxHp,p.hp+Math.ceil(p.maxHp*.5));any=true;}});if(!any)return 'Tu equipo ya está recuperado.';msg='El Menú Cierre recuperó a tu equipo.';}
+else if(id==='acta'||id==='triple'){const p=party.find(p=>id==='triple'?p.hp===0:p.hp>0&&p.hp<p.maxHp);if(!p)return 'No hay ningún Pokémon que necesite este objeto.';if(id==='triple')p.hp=Math.max(1,Math.ceil(p.maxHp*.25));else p.hp=p.maxHp;msg=p.name+' se ha recuperado.';}
+else if(id==='mochila'){state.bag.potion=(state.bag.potion||0)+2;state.balls=(state.balls||0)+1;msg='¡Dentro había 2 pociones y una Poké Ball!';}
+else if(id==='bingo'){const r=Math.floor(Math.random()*4);if(r===0){state.money+=300;msg='¡BINGO! +300 monedas.';}else if(r===1){state.bag.potion=(state.bag.potion||0)+3;msg='¡BINGO! +3 pociones.';}else if(r===2){state.balls=(state.balls||0)+2;msg='¡BINGO! +2 Poké Balls.';}else msg='El Limonero canta línea... pero no hay premio. ¡Vaya cuadro!';}
+else if(id==='gafas'){const hints=['Busca caminos laterales y habla con los NPC dos veces.','Los minijuegos y recados pueden esconder premios.','En el laboratorio importa el orden de los símbolos.','Consulta el cuaderno para recordar pistas.'];msg='Nachito ve el futuro: '+hints[Math.floor(Math.random()*hints.length)];}
+else return 'Esta reliquia se conserva en tu colección.';
+if(it.kind==='consumable')d.owned[id]--;save();return msg;}
+function open(){if(typeof state==='undefined'||!['world','start','menu'].includes(state.screen))return;sync();if(state.screen==='start'&&typeof closeStart29==='function')closeStart29();state.screen='menu';const d=data();const count=Object.values(d.owned).reduce((a,b)=>a+b,0);showModal(`<div class="eyebrow">LA PREVIA · 7.0 REVISION</div><h2>🎁 Reliquias de La Previa</h2><p>${count} objetos disponibles · ${Object.keys(d.claimed).length}/${AWARDS.length} recompensas descubiertas</p><p>Se obtienen automáticamente al completar retos existentes. Los objetos no se pueden usar durante un combate.</p><div style="display:grid;gap:8px;max-height:45vh;overflow:auto">${Object.entries(ITEMS).map(([id,it])=>`<button type="button" data-relic70="${id}" style="text-align:left;padding:10px;border-radius:9px" ${!d.owned[id]?'disabled':''}><b>${it.icon} ${esc(it.name)} ×${d.owned[id]||0}</b><small style="display:block">${esc(it.desc)}</small></button>`).join('')}</div><div class="modal-actions"><button type="button" id="relic70-back" class="primary">VOLVER</button></div>`);document.querySelectorAll('[data-relic70]').forEach(b=>b.onclick=()=>{const msg=use(b.dataset.relic70);open();if(typeof toast==='function')toast(msg);});document.getElementById('relic70-back').onclick=()=>backWorld();}
+const menu=document.getElementById('startMenu29');if(menu&&!menu.querySelector('[data-relic70-open]')){const b=document.createElement('button');b.type='button';b.dataset.relic70Open='1';b.innerHTML='<span class="start-icon29">🎁</span><span>RELIQUIAS</span><span class="start-arrow29">›</span>';b.onclick=open;menu.appendChild(b);}
+// Integración no invasiva: guarda las recompensas en flags del guardado normal.
+if(typeof save==='function'){const oldSave=save;save=function(){sync();return oldSave.apply(this,arguments);};}
+if(typeof winBattle==='function'){const oldWin=winBattle;winBattle=function(){const result=oldWin.apply(this,arguments);if(typeof state!=='undefined'&&state.flags?.starter){const d=data();d.wins++;save();}return result;};}
+document.addEventListener('keydown',e=>{if(e.key?.toLowerCase()!=='r'||e.repeat||e.ctrlKey||e.metaKey||e.altKey||typeof state==='undefined'||state.screen!=='world'||['INPUT','TEXTAREA'].includes(document.activeElement?.tagName))return;e.preventDefault();open();});
+window.__PREVIA70={items:ITEMS,open,sync,use};
+})();
+
+/* La Previa 7.0 — Gabinete del Caos. Revisión local, sin cambios de motor. */
+(function(){'use strict';
+const CATALOG=[{"id": "piedra", "name": "Piedra del Festivern", "icon": "🔮", "desc": "Alucinaciones cromáticas y mensajes imposibles.", "fx": "vision"}, {"id": "espejo", "name": "Espejo de Awelo", "icon": "🪞", "desc": "El mundo se refleja durante unos segundos.", "fx": "mirror"}, {"id": "radio", "name": "Radio de Rober", "icon": "📻", "desc": "Una interferencia invade la pantalla.", "fx": "static"}, {"id": "gafas3d", "name": "Gafas 3D de Nachito", "icon": "🥽", "desc": "El pueblo se desdobla en colores.", "fx": "double"}, {"id": "factura", "name": "Factura de Team Cierre", "icon": "🧾", "desc": "Lluvia de facturas absurdas.", "fx": "rain"}, {"id": "brujula", "name": "Brújula de Silla", "icon": "🧭", "desc": "Gira la pantalla como si estuvieras perdido.", "fx": "tilt"}, {"id": "chicle", "name": "Chicle de Plata", "icon": "🫧", "desc": "El mundo rebota como un chicle.", "fx": "bounce"}, {"id": "cafe", "name": "Café de Javi Grau", "icon": "☕", "desc": "El mundo vibra de cafeína.", "fx": "shake"}, {"id": "niebla", "name": "Bote de Niebla", "icon": "🌫️", "desc": "Una niebla misteriosa tapa el mapa.", "fx": "fog"}, {"id": "confeti", "name": "Confeti de Sueca", "icon": "🎊", "desc": "Explosión de celebración.", "fx": "confetti"}, {"id": "loteria", "name": "Rasca del Limonero", "icon": "🎟️", "desc": "Premio o desgracia monetaria aleatoria.", "fx": "lottery"}, {"id": "teletransporte", "name": "Billete Arrugado", "icon": "🎫", "desc": "Un destino inventado aparece en pantalla.", "fx": "message"}, {"id": "zapato", "name": "Zapato de Sergio", "icon": "👞", "desc": "La pantalla da un pequeño salto.", "fx": "bounce"}, {"id": "silbato", "name": "Silbato de Horte", "icon": "📣", "desc": "Aparece un árbitro imaginario.", "fx": "message"}, {"id": "azucar", "name": "Azúcar del Festivern", "icon": "🍬", "desc": "Un arcoíris imposible atraviesa el pueblo.", "fx": "vision"}, {"id": "mando", "name": "Mando de Robert", "icon": "🎮", "desc": "La imagen se vuelve pixelada.", "fx": "pixel"}, {"id": "sombrero", "name": "Sombrero de Marshall", "icon": "🎩", "desc": "Oscurece la escena como un teatro.", "fx": "theater"}, {"id": "patatas2", "name": "Patatas Mutantes", "icon": "🍟", "desc": "Una lluvia de patatas cae del cielo.", "fx": "rain"}, {"id": "gato", "name": "Gato Interdimensional", "icon": "🐈", "desc": "Un gato fantasma aparece en tus visiones.", "fx": "message"}, {"id": "triple2", "name": "Triple Imposible", "icon": "🏀", "desc": "Celebración con un premio de monedas.", "fx": "coins"}, {"id": "bocata", "name": "Bocadillo del Caos", "icon": "🥖", "desc": "Recupera PS a un Pokémon y provoca visiones.", "fx": "healvision"}, {"id": "reloj", "name": "Reloj Roto", "icon": "⏰", "desc": "El tiempo parece detenerse.", "fx": "slow"}, {"id": "disco", "name": "Disco de Albal", "icon": "💿", "desc": "El mapa se convierte en una discoteca.", "fx": "disco"}, {"id": "calcetin", "name": "Calcetín del Awelo", "icon": "🧦", "desc": "Una nube maloliente invade la escena.", "fx": "fog"}, {"id": "linterna", "name": "Linterna de Alfaro", "icon": "🔦", "desc": "Un foco ilumina solo el centro.", "fx": "spotlight"}, {"id": "pintura", "name": "Pintura Prohibida", "icon": "🎨", "desc": "Invierte los colores de la aventura.", "fx": "invert"}, {"id": "moneda", "name": "Moneda Tramposa", "icon": "🪙", "desc": "Cara: ganas monedas; cruz: pierdes unas pocas.", "fx": "lottery"}, {"id": "bingo2", "name": "Bingo Paranormal", "icon": "🎱", "desc": "Invoca un número de bingo imposible.", "fx": "message"}, {"id": "patinete2", "name": "Patinete Cuántico", "icon": "🛴", "desc": "La imagen se desplaza lateralmente.", "fx": "tilt"}, {"id": "mew", "name": "Fragmento de Mewtwo", "icon": "🧬", "desc": "Una visión inquietante anuncia el final.", "fx": "theater"}, {"id": "pato", "name": "Pato del Burger", "icon": "🦆", "desc": "Una invasión de patos imaginarios.", "fx": "rain"}, {"id": "llave", "name": "Llave del No-Sitio", "icon": "🗝️", "desc": "Abre una puerta imaginaria en el aire.", "fx": "message"}, {"id": "telefono", "name": "Teléfono de Blas", "icon": "📱", "desc": "Recibes un mensaje absurdo.", "fx": "message"}, {"id": "globo", "name": "Globo de Benifaió", "icon": "🎈", "desc": "La pantalla flota suavemente.", "fx": "bounce"}, {"id": "corona", "name": "Corona del Inútil", "icon": "👑", "desc": "Una coronación totalmente innecesaria.", "fx": "confetti"}];
+const STORY_STAGES=[{"flag": "starter", "label": "Inicio en Benifaió", "items": ["globo", "telefono", "linterna", "reloj"]}, {"flag": "catDone", "label": "El gato de Horte", "items": ["gafas3d", "gato", "calcetin", "espejo"]}, {"flag": "casetaReward31", "label": "Secretos de Silla", "items": ["brujula", "zapato", "corona", "silbato"]}, {"flag": "recado32", "label": "Recados de Albal", "items": ["pato", "disco", "bocata", "chicle"]}, {"flag": "archivo32", "label": "Archivo del Team Cierre", "items": ["radio", "factura", "mando", "llave"]}, {"flag": "puzzle31_done", "label": "El misterio del bingo", "items": ["bingo2", "loteria", "moneda", "niebla"]}, {"flag": "labReady", "label": "El laboratorio de Alfaro", "items": ["piedra", "azucar", "mew", "pintura"]}, {"flag": "taller32", "label": "El taller y sus secretos", "items": ["patatas2", "patinete2", "cafe", "sombrero"]}, {"flag": "albumReward31", "label": "El álbum de la aventura", "items": ["triple2", "confeti", "teletransporte"]}];
+const styles={vision:'hue-rotate(150deg) saturate(2.5) contrast(1.2)',mirror:'none',static:'grayscale(1) contrast(2)',double:'drop-shadow(5px 0 red) drop-shadow(-5px 0 cyan)',tilt:'sepia(.6)',bounce:'saturate(2)',shake:'contrast(1.3)',fog:'blur(3px)',confetti:'saturate(2)',rain:'sepia(.4)',message:'none',lottery:'none',pixel:'contrast(3) saturate(3)',theater:'brightness(.35)',coins:'saturate(1.7)',healvision:'hue-rotate(110deg)',slow:'grayscale(.5)',disco:'hue-rotate(260deg) saturate(3)',spotlight:'brightness(.4) contrast(1.8)',invert:'invert(1)'};
+
+const EPIC={
+ piedra:{title:'EL FESTIVERN HA DESAPARECIDO',lines:['La música se corta. Todo Benifaió está vacío.','Una voz al otro lado de la pantalla susurra: «¿ESTIC BÉ ACÍ????»','El cielo se abre. Por un segundo ves otra versión del pueblo.','Una inscripción aparece: «NO TODO LO QUE HAS VISTO HA PASADO».'],glyph:'🔮',palette:['#20043d','#8b24ba','#14e7cf']},
+ mew:{title:'SEÑAL DESCONOCIDA · M E W T W O',lines:['El mapa se queda sin sonido.','Una silueta gigantesca aparece detrás de ti.','«ROBERT NO HA TERMINADO».','La silueta se acerca... y la transmisión se interrumpe.'],glyph:'👁️',palette:['#09051c','#6a1fbc','#ef58ff']},
+ llave:{title:'LA PUERTA QUE NO EXISTÍA',lines:['Una puerta aparece donde antes había una pared.','Alguien golpea tres veces desde dentro.','Una voz idéntica a la tuya dice: «NO ABRAS».','La puerta se pliega sobre sí misma y desaparece.'],glyph:'🚪',palette:['#071522','#0f6477','#e3faff']},
+ radio:{title:'INTERRUPCIÓN DEL TEAM CIERRE',lines:['SEÑAL INTERCEPTADA · 00:00:00','Tres Roberts aparecen discutiendo al mismo tiempo.','«NO HEMOS ESTADO AQUÍ».','La señal se corta. Nadie parece haberlo visto.'],glyph:'📡',palette:['#0d1c13','#20845b','#d7ff80']},
+ espejo:{title:'EL OTRO AWELO',lines:['Tu reflejo se mueve antes que tú.','El Awelo del espejo golpea el cristal.','«ESTÁS CONTENTA? AL FINAL LO HAS CONSEGUIDO».','El cristal se rompe... pero el mundo sigue intacto.'],glyph:'🪞',palette:['#110a25','#4b65d9','#fff0fa']},
+ bingo2:{title:'BINGO · NÚMERO IMPOSIBLE',lines:['TODAS LAS BOLAS SE DETIENEN.','El bombo anuncia el número 404.','Las gradas aplauden aunque están vacías.','El marcador escribe: «ESTO NO HA OCURRIDO».'],glyph:'🎱',palette:['#251006','#a95b1a','#ffdb75']}
+};
+const SCENES={
+ piedra:{kind:'portal',symbols:['✦','◈','✧','⬡'],accent:'#7dfde5',message:'REALIDAD 02 · BENIFAIÓ'},
+ mew:{kind:'eye',symbols:['◉','⟁','◉'],accent:'#ff70ff',message:'CONTENCIÓN FALLIDA'},
+ llave:{kind:'door',symbols:['▥','▣','▥'],accent:'#89e7ff',message:'UBICACIÓN: NO EXISTE'},
+ radio:{kind:'signal',symbols:['▥','▧','▤'],accent:'#c5ff83',message:'TEAM CIERRE · FRECUENCIA 404'},
+ espejo:{kind:'mirror',symbols:['◖','◗','◖'],accent:'#f9a7fa',message:'REFLEJO NO SINCRONIZADO'},
+ bingo2:{kind:'bingo',symbols:['4','0','4'],accent:'#ffcf65',message:'BINGO · SESIÓN INEXISTENTE'}
+};
+let epicLayer=null,epicTimers=[];
+function closeEpic(){epicTimers.forEach(t=>typeof t==='function'?t():clearTimeout(t));epicTimers=[];epicLayer?.remove();epicLayer=null;}
+function playEpic(it){
+ const seq=EPIC[it.id],scene=SCENES[it.id];if(!seq||!scene)return false;
+ closeEpic();stop();
+ const root=document.createElement('div');epicLayer=root;root.setAttribute('role','dialog');root.setAttribute('aria-modal','true');root.setAttribute('aria-label',seq.title);
+ root.style.cssText='position:fixed;inset:0;z-index:2147483640;background:#03040a;color:white;overflow:hidden;font-family:system-ui;text-align:center;isolation:isolate;';
+ const safe=v=>String(v).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;');
+ const shards=Array.from({length:24},(_,i)=>`<span class="p703-shard" style="--x:${(i*47)%100}%;--y:${(i*31)%100}%;--delay:${(i%9)*-.43}s;--dur:${2+(i%5)*.6}s">${scene.symbols[i%scene.symbols.length]}</span>`).join('');
+ root.innerHTML=`<style>
+ @keyframes p703spin{to{transform:rotate(360deg)}}@keyframes p703breathe{50%{transform:scale(1.3);filter:blur(2px)}}
+ @keyframes p703shard{0%{transform:translate3d(-30px,40px,0) rotate(0deg);opacity:0}30%{opacity:.8}100%{transform:translate3d(40px,-55px,0) rotate(140deg);opacity:0}}
+ @keyframes p703glitch{0%,87%,100%{transform:translateX(0);opacity:1}89%{transform:translateX(-12px);opacity:.7}91%{transform:translateX(13px);opacity:1}93%{transform:translateX(-4px)}}
+ @keyframes p703flicker{0%,94%,100%{opacity:.18}95%{opacity:.85}97%{opacity:0}}
+ @keyframes p703enter{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+ .p703-shard{position:absolute;left:var(--x);top:var(--y);font-size:clamp(18px,4vw,40px);color:${scene.accent};text-shadow:0 0 18px ${scene.accent};animation:p703shard var(--dur) var(--delay) linear infinite;pointer-events:none}
+ .p703-ring{position:absolute;left:50%;top:43%;width:min(72vw,520px);height:min(72vw,520px);border:5px solid ${scene.accent};border-radius:50%;box-shadow:0 0 40px ${scene.accent},inset 0 0 55px ${scene.accent};transform:translate(-50%,-50%);opacity:.7;animation:p703breathe 2.7s ease-in-out infinite}
+ .p703-ring:before{content:'';position:absolute;inset:13%;border:3px dashed ${scene.accent};border-radius:50%;animation:p703spin 8s linear infinite}
+ .p703-ring:after{content:'';position:absolute;inset:31%;border:2px solid white;border-radius:50%;box-shadow:0 0 40px white}
+ .p703-sigil{position:absolute;left:50%;top:43%;transform:translate(-50%,-50%);font-size:clamp(110px,24vw,280px);line-height:1;filter:drop-shadow(0 0 30px ${scene.accent});animation:p703glitch 1.7s infinite;white-space:nowrap}
+ .p703-scan{position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,transparent 0px,transparent 5px,#fff2 6px);animation:p703flicker 2s infinite}
+ .p703-copy{position:absolute;bottom:6%;left:5%;width:90%;z-index:4;animation:p703enter .6s ease-out;text-shadow:0 3px 14px #000}
+ .p703-copy h2{font-size:clamp(17px,3vw,32px);letter-spacing:.12em;margin:0 0 12px;color:${scene.accent}}
+ .p703-copy p{font-size:clamp(17px,2.6vw,26px);min-height:3.3em;line-height:1.4;margin:0 auto;max-width:680px}
+ .p703-copy button{margin-top:14px;background:#101625dd;color:white;border:1px solid #ffffff88;border-radius:9px;padding:11px 24px;cursor:pointer}
+ @media(prefers-reduced-motion:reduce){.p703-shard,.p703-ring,.p703-ring:before,.p703-sigil,.p703-scan{animation:none!important}}
+ </style><div style="position:absolute;inset:-20%;background:radial-gradient(circle at 50% 40%,${seq.palette[1]} 0%,${seq.palette[0]} 38%,#000 74%)"></div>
+ <div class="p703-ring"></div><div class="p703-sigil">${scene.kind==='door'?'🚪':scene.kind==='mirror'?'🪞':scene.kind==='eye'?'👁':scene.kind==='bingo'?'404':scene.kind==='signal'?'📡':'◈'}</div>${shards}<div class="p703-scan"></div>
+ <div style="position:absolute;top:5%;left:5%;right:5%;letter-spacing:.2em;font-size:clamp(10px,2vw,15px);color:${scene.accent}">${safe(scene.message)}</div>
+ <div class="p703-copy"><h2>${safe(seq.title)}</h2><p id="previa703line" aria-live="polite"></p><button id="previa703skip">SALTAR ESCENA</button></div>`;
+ (document.fullscreenElement||gameShell).appendChild(root);
+ const previousFocus=document.activeElement;
+ const dismiss=()=>{closeEpic();if(previousFocus?.isConnected)previousFocus.focus?.();};
+ root.querySelector('#previa703skip').onclick=dismiss;
+ root.querySelector('#previa703skip').focus();
+ const keyHandler=e=>{if(e.key==='Escape'){e.preventDefault();dismiss();}};
+ document.addEventListener('keydown',keyHandler);
+ epicTimers.push(()=>document.removeEventListener('keydown',keyHandler));
+ seq.lines.forEach((line,i)=>{const timer=setTimeout(()=>{if(epicLayer===root){const node=root.querySelector('#previa703line');if(node)node.textContent=line;}},i*2600+500);epicTimers.push(timer);});
+ epicTimers.push(setTimeout(dismiss,seq.lines.length*2600+1800));return true;
+}
+
+let overlay=null,timer=null;
+function db(){if(typeof state==='undefined'||!state.flags)return null;return state.flags.caos70||(state.flags.caos70={owned:{},claimed:{},uses:0});}
+function award(){const d=db();if(!d||!state.flags.starter)return;const flags=state.flags;const checkpoints=[["starter", "globo"], ["starter", "telefono"], ["starter", "linterna"], ["starter", "reloj"], ["catDone", "gafas3d"], ["catDone", "gato"], ["catDone", "calcetin"], ["catDone", "espejo"], ["casetaReward31", "brujula"], ["casetaReward31", "zapato"], ["casetaReward31", "corona"], ["casetaReward31", "silbato"], ["recado32", "pato"], ["recado32", "disco"], ["recado32", "bocata"], ["recado32", "chicle"], ["archivo32", "radio"], ["archivo32", "factura"], ["archivo32", "mando"], ["archivo32", "llave"], ["puzzle31_done", "bingo2"], ["puzzle31_done", "loteria"], ["puzzle31_done", "moneda"], ["puzzle31_done", "niebla"], ["labReady", "piedra"], ["labReady", "azucar"], ["labReady", "mew"], ["labReady", "pintura"], ["taller32", "patatas2"], ["taller32", "patinete2"], ["taller32", "cafe"], ["taller32", "sombrero"], ["albumReward31", "triple2"], ["albumReward31", "confeti"], ["albumReward31", "teletransporte"]];for(const [flag,id] of checkpoints){if(d.claimed[flag]&&!d.claimed[flag+":"+id]){d.claimed[flag+":"+id]=true;if(!d.owned[id])d.owned[id]=1;}if(flags[flag]&&!d.claimed[flag+":"+id]){d.claimed[flag+":"+id]=true;d.owned[id]=(d.owned[id]||0)+1;}}}
+function stop(){if(timer)clearTimeout(timer);timer=null;if(overlay){overlay.remove();overlay=null;}const stage=document.getElementById('game')||document.querySelector('canvas');if(stage)stage.style.filter='';document.documentElement.style.removeProperty('--chaos-transform');}
+function effect(it){stop();const stage=document.getElementById('game')||document.querySelector('canvas');if(stage)stage.style.filter=styles[it.fx]||'';overlay=document.createElement('div');overlay.id='previa-chaos70';overlay.style.cssText='position:fixed;inset:0;z-index:999999;pointer-events:none;display:flex;align-items:center;justify-content:center;overflow:hidden;background:transparent;';const b=document.createElement('div');b.style.cssText='max-width:min(80vw,560px);padding:18px 24px;border-radius:16px;background:rgba(17,13,37,.85);color:white;text-align:center;font:bold 21px system-ui;box-shadow:0 10px 40px #0009';const messages=['¿ESTIC BÉ ACÍ????','NO AWELO NO','HAS ENTRADO EN EL NO-SITIO','LA PREVIA SE HA ROTO (MENTIRA)','UN PATO TE ESTÁ JUZGANDO','¿QUIÉN HA APAGADO BENIFAIÓ?'];b.textContent=it.icon+' '+it.name+' · '+messages[Math.floor(Math.random()*messages.length)];overlay.appendChild(b);if(['rain','confetti','vision','disco'].includes(it.fx)){for(let i=0;i<24;i++){const s=document.createElement('span');s.textContent=it.fx==='confetti'?'🎊':it.fx==='rain'?it.icon:'✦';s.style.cssText=`position:absolute;left:${Math.random()*95}%;top:${Math.random()*95}%;font-size:${16+Math.random()*24}px;opacity:.8;transform:rotate(${Math.random()*360}deg)`;overlay.appendChild(s);}}document.body.appendChild(overlay);timer=setTimeout(stop,4200);}
+function use(id){const d=db(),it=CATALOG.find(x=>x.id===id);if(!d||!it||!d.owned[id])return;if(typeof battle!=='undefined'&&battle){if(typeof toast==='function')toast('No se puede activar durante un combate.');return;}if(it.fx==='lottery'){const amount=Math.random()<.7?150:-50;state.money=Math.max(0,(state.money||0)+amount);if(typeof toast==='function')toast((amount>0?'+':'')+amount+' monedas');}if(it.fx==='coins'){state.money=(state.money||0)+100;}if(it.fx==='healvision'){const mon=(state.party||[]).find(x=>x.hp>0&&x.hp<x.maxHp);if(mon)mon.hp=Math.min(mon.maxHp,mon.hp+Math.ceil(mon.maxHp*.4));}d.uses++;try{window.dispatchEvent(new CustomEvent('previa:reliquia-usada',{detail:{id:it.id,name:it.name||it.id,fx:it.fx||''}}));}catch(e){}if(typeof save==='function')save();if(!playEpic(it))window.__PREVIA704_WORLD.play(it);}
+function open(){if(typeof state==='undefined'||!['world','start','menu'].includes(state.screen))return;award();if(state.screen==='start'&&typeof closeStart29==='function')closeStart29();state.screen='menu';const d=db();if(!d)return;const owned=Object.values(d.owned).filter(Boolean).length;const html=`<div class="eyebrow">LA PREVIA · 7.0</div><h2>🌀 Gabinete del Caos</h2><p>${owned}/${CATALOG.length} rarezas descubiertas. Las visiones duran 4 segundos y no alteran el progreso.</p><p>Cada reliquia está ligada a un acontecimiento real de la historia. Consulta su procedencia en el registro.</p><div style="display:flex;gap:8px;margin:10px 0"><button id="chaos70-buy">📜 Ver pistas de historia</button><button id="chaos70-back">VOLVER</button></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:7px;max-height:48vh;overflow:auto">${CATALOG.map(x=>`<button data-chaos70="${x.id}" ${!d.owned[x.id]?'disabled':''} style="text-align:left;padding:8px;border-radius:8px"><b>${x.icon} ${x.name} ×${d.owned[x.id]||0}</b><small style="display:block">${x.desc}</small></button>`).join('')}</div>`;if(typeof showModal!=='function')return;showModal(html);document.querySelectorAll('[data-chaos70]').forEach(el=>el.onclick=()=>{const id=el.dataset.chaos70;use(id);if(!EPIC[id])open();});document.getElementById('chaos70-back').onclick=()=>{stop();if(typeof backWorld==='function')backWorld();};document.getElementById('chaos70-buy').onclick=()=>{const lines=STORY_STAGES.map(x=>x.label+': '+x.items.map(id=>{const it=CATALOG.find(c=>c.id===id);return (d.owned[id]?'✓ ':'? ')+(it?.name||id)}).join(', '));if(typeof showModal==='function')showModal('<h2>📜 Origen de las reliquias</h2><p>Completa los acontecimientos para descubrir las piezas. No se venden reliquias únicas.</p><div style="max-height:50vh;overflow:auto">'+lines.map(x=>'<p>'+x+'</p>').join('')+'</div><button id="chaos702-return">VOLVER</button>');document.getElementById('chaos702-return')?.addEventListener('click',open);};}
+const menu=document.getElementById('startMenu29');if(menu&&!menu.querySelector('[data-chaos70-open]')){const b=document.createElement('button');b.type='button';b.dataset.chaos70Open='1';b.innerHTML='<span class="start-icon29">🌀</span><span>GABINETE DEL CAOS</span><span class="start-arrow29">›</span>';b.onclick=open;menu.appendChild(b);}
+document.addEventListener('keydown',e=>{if(e.key?.toLowerCase()!=='k'||e.repeat||e.ctrlKey||e.altKey||e.metaKey||typeof state==='undefined'||state.screen!=='world'||['INPUT','TEXTAREA'].includes(document.activeElement?.tagName))return;e.preventDefault();open();});
+window.__PREVIA70_CHAOS={catalog:CATALOG,open,stop,award,storyStages:STORY_STAGES,playEpic,closeEpic};
+})();
+(function(){'use strict';
+let active=null;
+const variants=['warp','giant','explosion','burger','rainbow','ghost','shuffle'];
+const map={piedra:'warp',mew:'explosion',bocata:'burger',disco:'rainbow',espejo:'ghost',gato:'ghost',pintura:'rainbow',patatas2:'burger',teletransporte:'shuffle',globo:'giant',sombrero:'giant',pato:'shuffle'};
+const reduce=()=>window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+function stop(){if(!active)return;const a=active;active=null;cancelAnimationFrame(a.raf);a.layer.remove();a.hud.remove();}
+function play(item){stop();const canvas=document.getElementById('game');if(!canvas||!canvas.getBoundingClientRect){return;}const kind=map[item.id]||variants[Math.abs([...item.id].reduce((n,c)=>n+c.charCodeAt(0),0))%variants.length];const rect=canvas.getBoundingClientRect();if(rect.width<1||rect.height<1)return;
+const layer=document.createElement('canvas');layer.width=canvas.width;layer.height=canvas.height;layer.setAttribute('aria-hidden','true');layer.style.cssText='position:fixed;pointer-events:none;z-index:99990;';const hud=document.createElement('div');hud.style.cssText='position:fixed;z-index:99991;pointer-events:none;background:#160b32dd;color:white;border:1px solid #d2b8ff;border-radius:10px;padding:8px 12px;font:700 13px system-ui;max-width:85vw;text-align:center;';hud.textContent=({warp:'EL MAPA YA NO RECUERDA SU FORMA',giant:'¡TE ESTÁS HACIENDO GIGANTE!',explosion:'¡LOS POKÉMON HAN EXPLOTADO! (¿O NO?)',burger:'¡UNA HAMBURGUESA SE HA COMIDO EL MUNDO!',rainbow:'LOS PERSONAJES CAMBIAN DE COLOR',ghost:'HAY ALGUIEN MÁS EN EL MAPA',shuffle:'¿QUIÉN ESTÁ CONTROLANDO A TU PERSONAJE?'})[kind];document.body.append(layer,hud);
+const ctx=layer.getContext('2d');const started=performance.now();const duration=reduce()?2200:6500;const a={layer,hud,raf:0};active=a;
+function tick(now){if(active!==a)return;const r=canvas.getBoundingClientRect();if(r.width<1||r.height<1){stop();return;}layer.style.left=r.left+'px';layer.style.top=r.top+'px';layer.style.width=r.width+'px';layer.style.height=r.height+'px';hud.style.left=Math.max(8,r.left+8)+'px';hud.style.top=Math.max(8,r.top+8)+'px';const t=(now-started)/1000;ctx.clearRect(0,0,layer.width,layer.height);const w=layer.width,h=layer.height;
+try{ctx.save();if(kind==='warp'){ctx.translate(w/2,h/2);ctx.rotate(Math.sin(t*3)*.12);const z=1+.13*Math.sin(t*5);ctx.scale(z,z);ctx.translate(-w/2,-h/2);ctx.filter=`hue-rotate(${t*140}deg) saturate(2)`;ctx.drawImage(canvas,0,0);}
+else if(kind==='giant'){ctx.drawImage(canvas,0,0);const z=1+Math.min(2,t*.42);ctx.translate(w/2,h*.60);ctx.scale(z,z);ctx.translate(-w/2,-h*.60);ctx.globalAlpha=.83;ctx.drawImage(canvas,0,0);}
+else if(kind==='shuffle'){ctx.drawImage(canvas,0,0);for(let i=0;i<3;i++){ctx.globalAlpha=.3;ctx.drawImage(canvas,Math.sin(t*5+i)*30,Math.cos(t*4+i)*22);}}
+else if(kind==='rainbow'){ctx.filter=`hue-rotate(${t*125}deg) saturate(2.8)`;ctx.drawImage(canvas,0,0);ctx.filter='none';for(let i=0;i<8;i++){ctx.fillStyle=`hsla(${t*120+i*45},100%,60%,.35)`;ctx.fillRect((i*139+t*37)%w,(i*83)%h,28,50);}}
+else if(kind==='ghost'){ctx.drawImage(canvas,0,0);ctx.globalAlpha=.42;ctx.filter='hue-rotate(240deg)';ctx.drawImage(canvas,Math.sin(t*2)*45,Math.cos(t*3)*18);ctx.filter='none';ctx.globalAlpha=.9;ctx.font='64px system-ui';ctx.fillText('👤',w*.52+Math.sin(t*2)*w*.17,h*.60);}
+else if(kind==='burger'){ctx.drawImage(canvas,0,0);ctx.textAlign='center';ctx.font=`${Math.round(80+Math.min(t,3)*85)}px system-ui`;ctx.fillText('🍔',w/2,h*.52);ctx.font='28px system-ui';ctx.fillText('¡ÑAM!',w*.5,h*.8);}
+else if(kind==='explosion'){ctx.drawImage(canvas,0,0);ctx.textAlign='center';for(let i=0;i<7;i++){const x=w*(.12+(i%4)*.24),y=h*(.22+Math.floor(i/4)*.46);const phase=Math.max(0,t-i*.25);ctx.font=`${Math.round(30+Math.min(phase,1)*65)}px system-ui`;ctx.globalAlpha=Math.max(.1,1-phase/3);ctx.fillText(phase<.7?'⚡':phase<1.8?'💥':'✨',x,y);}}ctx.restore();}catch(e){ctx.restore();stop();return;}
+if(now-started>=duration){stop();return;}a.raf=requestAnimationFrame(tick);}
+a.raf=requestAnimationFrame(tick);}
+window.__PREVIA704_WORLD={play,stop};
+window.addEventListener('pagehide',stop);
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&active)stop();});
+})();
+
+(function(){'use strict';
+// Visual-only illusions: never mutate game state, sprites, coordinates or save data.
+const base=window.__PREVIA704_WORLD;if(!base)return;
+let running=null;const reduced=()=>matchMedia('(prefers-reduced-motion: reduce)').matches;
+const routes={piedra:'reality',mew:'pokemon',bocata:'burger',patatas2:'burger',disco:'chromatic',pintura:'chromatic',espejo:'clones',gato:'clones',globo:'giant',sombrero:'giant',teletransporte:'wander',pato:'wander'};
+const scenarios=['reality','burger','pokemon','chromatic','clones','giant','wander'];
+function stop(){if(!running)return;const a=running;running=null;cancelAnimationFrame(a.raf);a.layer.remove();a.caption.remove();}
+function drawCharacter(ctx,x,y,size,color,flip){ctx.save();ctx.translate(x,y);ctx.scale(flip?-1:1,1);ctx.fillStyle=color;ctx.fillRect(-size*.22,-size*.5,size*.44,size*.45);ctx.fillStyle='#f4b18a';ctx.fillRect(-size*.17,-size*.85,size*.34,size*.33);ctx.fillStyle='#262035';ctx.fillRect(-size*.21,-size*.95,size*.42,size*.13);ctx.fillStyle='#272038';ctx.fillRect(-size*.2,-size*.05,size*.15,size*.28);ctx.fillRect(size*.05,-size*.05,size*.15,size*.28);ctx.restore();}
+function play(item){stop();base.stop();const source=document.getElementById('game');if(!source||!source.width||!source.height)return base.play(item);const w=source.width,h=source.height;
+const layer=document.createElement('canvas');layer.width=w;layer.height=h;layer.setAttribute('aria-hidden','true');layer.style.cssText='position:fixed;pointer-events:none;z-index:99990;image-rendering:pixelated;';
+const caption=document.createElement('div');caption.setAttribute('aria-live','polite');caption.style.cssText='position:fixed;z-index:99991;pointer-events:none;background:#160d30e8;color:#fff;padding:7px 10px;border:1px solid #c7a4ff;border-radius:7px;font:700 13px system-ui;text-align:center;max-width:85vw;';
+const id=String(item&&item.id||'');const scenario=routes[id]||scenarios[[...id].reduce((a,c)=>a+c.charCodeAt(0),0)%scenarios.length];
+const captions={reality:'¿POR QUÉ HAY DOS BENIFAIÓS?',burger:'EL BURGER HA COBRADO VIDA',pokemon:'¡LOS POKÉMON EXPLOTAN EN CONFETI!',chromatic:'NADIE CONSERVA SU COLOR ORIGINAL',clones:'TU DOBLE HA ENTRADO EN EL MAPA',giant:'¿DESDE CUÁNDO ERES TAN GRANDE?',wander:'¿QUIÉN ESTÁ MOVIENDO A TU PERSONAJE?'};caption.textContent=captions[scenario];document.body.append(layer,caption);
+const ctx=layer.getContext('2d');if(!ctx){layer.remove();caption.remove();return;}const start=performance.now(),duration=reduced()?2500:8500;const a={layer,caption,raf:0};running=a;
+function frame(now){if(running!==a)return;const r=source.getBoundingClientRect();if(r.width<2||r.height<2){stop();return;}layer.style.cssText+=`left:${r.left}px;top:${r.top}px;width:${r.width}px;height:${r.height}px;`;caption.style.left=Math.max(8,r.left+8)+'px';caption.style.top=Math.max(8,r.top+8)+'px';const t=(now-start)/1000,p=Math.min(1,t/(duration/1000));ctx.clearRect(0,0,w,h);ctx.save();try{
+// All drawings are copies of the live game canvas. Collision and coordinates remain untouched.
+if(scenario==='reality'){ctx.drawImage(source,0,0);ctx.globalAlpha=.65;ctx.filter=`hue-rotate(${t*95}deg)`;ctx.drawImage(source,Math.sin(t*3)*w*.07,Math.cos(t*2)*h*.04,w*.9,h*.9);ctx.filter='none';ctx.globalAlpha=1;ctx.fillStyle='#9d59ff';for(let i=0;i<16;i++)ctx.fillRect((i*79+t*43)%w,(i*47+t*23)%h,8,8);}
+else if(scenario==='chromatic'){ctx.filter=`hue-rotate(${t*140}deg) saturate(2.5)`;ctx.drawImage(source,0,0);ctx.filter='none';for(let i=0;i<8;i++)drawCharacter(ctx,w*(.1+(i%4)*.25),h*(.4+Math.floor(i/4)*.3),h*.12,`hsl(${(t*150+i*51)%360} 100% 55%)`,i%2);}
+else if(scenario==='giant'){ctx.drawImage(source,0,0);const s=h*(.2+Math.min(t/3,1)*.65);drawCharacter(ctx,w*.5,h*.84,s,'#e54663',false);}
+else if(scenario==='clones'){ctx.drawImage(source,0,0);for(let i=0;i<5;i++){ctx.globalAlpha=.45+i*.1;drawCharacter(ctx,w*(.15+i*.17)+Math.sin(t*2+i)*20,h*(.65+Math.sin(t+i)*.1),h*.2,`hsl(${i*65+t*80} 90% 55%)`,i%2);}ctx.globalAlpha=1;}
+else if(scenario==='wander'){ctx.drawImage(source,0,0);const x=w*.5+Math.sin(t*3)*w*.27,y=h*.65+Math.cos(t*4)*h*.17;drawCharacter(ctx,x,y,h*.26,'#f1a936',Math.sin(t*3)<0);for(let i=0;i<3;i++){ctx.globalAlpha=.22;drawCharacter(ctx,x-i*25,y-i*12,h*.26,'#a5e3ff',false);}ctx.globalAlpha=1;}
+else if(scenario==='burger'){ctx.drawImage(source,0,0);const x=w*(.1+.75*Math.min(t/5,1)),y=h*.64;drawCharacter(ctx,x,y,h*.2,'#43d6a3',false);ctx.textAlign='center';ctx.font=`${Math.round(h*(.12+Math.min(t/4,1)*.36))}px system-ui`;ctx.fillText('🍔',x-30+Math.sin(t*2)*15,y-20);if(t>3){ctx.font=`${Math.round(h*.11)}px system-ui`;ctx.fillText('¡ÑAM!',w*.5,h*.35);}}
+else if(scenario==='pokemon'){ctx.drawImage(source,0,0);ctx.textAlign='center';for(let i=0;i<4;i++){const x=w*(.17+i*.21),y=h*.67,phase=t-i*.65;ctx.globalAlpha=phase<0?0:Math.min(1,Math.max(.15,3.5-phase));ctx.font=`${Math.round(h*.13)}px system-ui`;ctx.fillText(phase<1?'🐉':phase<2?'💥':'🎊',x,y);for(let j=0;j<8&&phase>1;j++){ctx.fillStyle=`hsl(${i*60+j*37} 90% 65%)`;ctx.fillRect(x+Math.cos(j*.8)*phase*18,y+Math.sin(j*.8)*phase*18,5,5);}}ctx.globalAlpha=1;}
+}finally{ctx.restore();}if(p>=1){stop();return;}a.raf=requestAnimationFrame(frame);}a.raf=requestAnimationFrame(frame);}
+window.__PREVIA704_WORLD={play,stop:()=>{stop();base.stop();}};
+window.addEventListener('pagehide',stop);document.addEventListener('keydown',e=>{if(e.key==='Escape')stop();});
+})();
+(function(){'use strict';
+// Archivo de anomalías: datos independientes del guardado del juego.
+const KEY='la-previa-706-archivo';
+const GROUPS=[['festivern','Festivern','piedra','La piedra altera el mundo.'],['burger','Burger L’Horta','bocata','Algo enorme tiene hambre.'],['rober','Team Cierre','mew','La transmisión no debería existir.'],['awelo','Awelo','espejo','No mires demasiado tu reflejo.'],['zaragoza','Zaragoza','bingo','El número imposible.'],['albal','Albal','disco','La música cambia las reglas.']];
+let data={events:[],first:{},seen:0};try{let x=JSON.parse(localStorage.getItem(KEY)||'null');if(x&&Array.isArray(x.events))data={events:x.events.slice(-100),first:x.first||{},seen:Number(x.seen)||0};}catch(e){}
+function persist(){try{localStorage.setItem(KEY,JSON.stringify(data));}catch(e){}}
+function record(id,name){if(!id)return;const now=new Date().toISOString();data.events.push({id:String(id).slice(0,64),name:String(name||id).slice(0,90),at:now});data.events=data.events.slice(-100);if(!data.first[id])data.first[id]=now;data.seen++;persist();}
+window.addEventListener('previa:reliquia-usada',e=>record(e.detail&&e.detail.id,e.detail&&e.detail.name));
+const css='position:fixed;inset:0;background:#070516eb;z-index:100500;display:flex;align-items:center;justify-content:center;padding:16px;color:#f5efff;font:15px system-ui';let modal=null;
+function close(){if(modal){modal.remove();modal=null;}}
+function open(){close();modal=document.createElement('div');modal.style.cssText=css;const pane=document.createElement('section');pane.setAttribute('role','dialog');pane.setAttribute('aria-modal','true');pane.setAttribute('aria-label','Archivo de anomalías');pane.style.cssText='width:min(680px,100%);max-height:90vh;overflow:auto;background:#19112f;border:2px solid #ad7dff;border-radius:16px;padding:20px;box-shadow:0 18px 80px #000';
+const title=document.createElement('h2');title.textContent='📖 Archivo de lo Imposible';pane.append(title);const sub=document.createElement('p');sub.textContent='Cada reliquia utilizada deja una huella. Registro independiente de tu partida: no cambia misiones ni Pokémon.';pane.append(sub);
+const total=Object.keys(data.first).length;const stats=document.createElement('p');stats.textContent=`Reliquias diferentes utilizadas: ${total} · Activaciones totales: ${data.seen}`;pane.append(stats);
+const achievements=[['Primera grieta',total>=1,'Utiliza tu primera reliquia'],['Coleccionista extraño',total>=5,'Utiliza cinco reliquias distintas'],['Realidad rota',total>=12,'Utiliza doce reliquias distintas'],['Otra vez no',data.seen>=20,'Activa veinte anomalías']];
+const h=document.createElement('h3');h.textContent='🏆 Logros de anomalías';pane.append(h);for(const [name,ok,desc] of achievements){const row=document.createElement('p');row.textContent=`${ok?'🏆':'🔒'} ${name} — ${desc}`;pane.append(row);}
+const g=document.createElement('h3');g.textContent='🗺️ Expedientes de la historia';pane.append(g);for(const [id,where,item,hint] of GROUPS){const row=document.createElement('p');const unlocked=!!data.first[item];row.textContent=`${unlocked?'✦':'?'} ${where}: ${unlocked?'Reliquia '+item+' utilizada.':hint}`;pane.append(row);}
+const portal=document.createElement('button');portal.textContent='⟁ Entrar en la Dimensión Prohibida (P)';portal.style.cssText='padding:10px;background:#6d3ec2;color:white;border:0;border-radius:8px;cursor:pointer;margin:10px 0';portal.onclick=()=>{close();window.__PREVIA707?.open();};pane.append(portal);const recent=document.createElement('h3');recent.textContent='Últimas anomalías';pane.append(recent);if(!data.events.length){const p=document.createElement('p');p.textContent='Aún no hay registros. Utiliza una reliquia del Gabinete del Caos.';pane.append(p);}else for(const e of data.events.slice(-8).reverse()){const p=document.createElement('p');p.textContent=`${e.name} · ${new Date(e.at).toLocaleString('es-ES')}`;pane.append(p);}
+const b=document.createElement('button');b.textContent='Cerrar (Esc)';b.style.cssText='padding:10px 18px;background:#8052dc;color:white;border:0;border-radius:9px;cursor:pointer';b.onclick=close;pane.append(b);modal.append(pane);modal.addEventListener('click',e=>{if(e.target===modal)close();});(document.fullscreenElement||gameShell).append(modal);b.focus();}
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&modal){close();return;}if((e.key==='l'||e.key==='L')&&!e.repeat&&!e.ctrlKey&&!e.metaKey&&!e.altKey&&!['INPUT','TEXTAREA'].includes(document.activeElement?.tagName)){if(modal)close();else open();}});
+window.__PREVIA706={open,close,summary:()=>({distinct:Object.keys(data.first).length,uses:data.seen})};
+})();
+/* La Previa 7.0.7 — Dimensión Prohibida. Submundo independiente y reversible. */
+(()=>{'use strict';
+const KEY='la-previa-707-dimension',ARCH='la-previa-706-archivo';const saveGame80=()=>engineSave80();
+const rows=[
+'####################',
+'#....#.......#.....#',
+'#....#.......#..F..#',
+'#............#.....#',
+'#..N...............#',
+'#........##........#',
+'#..F.....##........#',
+'#........##...N....#',
+'#..............#...#',
+'#.....#........#...#',
+'#.....#....F.......#',
+'#.E..............R.#',
+'####################'];
+const W=20,H=13,T=32;let root=null,ctx=null,player={x:2,y:11},found=[],talk='',frame=0,raf=0,focusBefore=null;let phase=0,echoes=0,boss=0,distortion=0,won=false,previousScreen='world';
+try{const d=JSON.parse(localStorage.getItem(KEY)||'{}');found=Array.isArray(d.found)?d.found.filter(x=>['3,6','16,2','11,10'].includes(x)):[];echoes=d.echoes===1?1:d.echoes===2?3:0;won=!!d.won;}catch(_){}
+function save(){state.flags.v80_dim_imported=true;state.flags.v80_dim_echoes=echoes;state.flags.v80_dim_won=won;for(const id of ['3,6','16,2','11,10'])state.flags['v80_dim_'+id.replace(',','_')]=found.includes(id);
+ saveGame80();try{localStorage.setItem(KEY,JSON.stringify({found,echoes:Number(!!(echoes&1))+Number(!!(echoes&2)),won,completed:won}));}catch(_){}}
+function unlocked(){try{const d=JSON.parse(localStorage.getItem(ARCH)||'{}');return !!(d.first&&(d.first.piedra||d.first.mew));}catch(_){return false;}}
+function text(s){talk=s;const e=root?.querySelector('#p707-talk');if(e)e.textContent=s;}
+function close(){if(!root)return;state.screen=previousScreen;heldKeys.clear();resetJoy27();cancelAnimationFrame(raf);root.remove();root=null;ctx=null;focusBefore?.focus?.();}
+function tile(x,y){return rows[y]?.[x]||'#';}
+function act(){let p=tile(player.x,player.y),id=player.x+','+player.y;
+ if(p==='F'){if(!found.includes(id)){found.push(id);distortion=160;save();text('✦ Fragmento '+found.length+'/3. El suelo acaba de respirar. ¿Lo has visto?');}else text('El fragmento ha dejado una sombra que se mueve sola.');}
+ else if(p==='N'){if(player.x<6){if(!(echoes&1)){echoes|=1;distortion=210;save();text('AWELO 404: «NO AWELO NO». Su copia crece hasta tapar el cielo. Has obtenido el ECO DEL AWELO.');}else text('AWELO 404: «Si te ves dos veces, no saludes al segundo».');}else{if(!(echoes&2)){echoes|=2;distortion=230;save();text('ROBERT 404: «Soy el original. El otro Robert está jugando contigo». ECO DE ROBERT recuperado.');}else text('ROBERT 404: «El mapa recuerda cosas que tú todavía no has hecho».');}}
+ else if(p==='R'){if(won){text('MEWTWO 404: «Ya no sé cuál de nosotros es el reflejo».');return;}if(found.length<3||echoes!==3){text('MEWTWO 404: «Necesitas tres fragmentos y los dos ecos. Te faltan '+(3-found.length)+' fragmentos y '+(2-Number(!!(echoes&1))-Number(!!(echoes&2)))+' ecos».');return;}boss++;distortion=260;if(boss===1)text('MEWTWO 404 se multiplica en tres sombras. ¡Pulsa E de nuevo para romper la primera ilusión!');else if(boss===2)text('¡CRASH! El cielo se agrieta. Una hamburguesa gigante devora una de las sombras. ¡Pulsa E otra vez!');else{won=true;save();text('✦ HAS VENCIDO AL ECO DE MEWTWO. Reliquia desbloqueada: CORAZÓN 404. La salida está abierta.');}}
+ else if(p==='E'){if(won){text('Has cerrado la grieta. Benifaió 404 seguirá esperando al otro lado.');setTimeout(()=>{if(root)close();},1300);}else text('La salida no responde. Reúne los tres fragmentos, los dos ecos y derrota al Mewtwo falso.');}
+ else{distortion=80;text('Durante un segundo, todas las casas parecen mirarte.');}updateHud();}
+ function updateHud(){const el=root?.querySelector('#p707-status');if(el)el.textContent=found.length+'/3 fragmentos · '+(Number(!!(echoes&1))+Number(!!(echoes&2)))+'/2 ecos · '+(won?'Corazón 404 obtenido':boss?'Mewtwo: fase '+boss+'/3':'Mewtwo pendiente');}
+function move(dx,dy){let x=player.x+dx,y=player.y+dy;if(tile(x,y)==='#')return;player={x,y};if('FNRE'.includes(tile(x,y)))act();else text('Busca los fragmentos y habla con Awelo 404 y Robert 404. Algo te observa.');updateHud();}
+// Sprites originales de 8x12 píxeles, pintados directamente sobre el canvas.
+const SPRITES={
+ awelo:['..hhhh..','.hssss h.','.hsees h.','.hssss h.','..mmmm..','.mmmmmm.','.mmp pmm.','.mmmmmm.','..bbbb..','..bbbb..','..b..b..','..s..s..'],
+ robert:['..hhhh..','.hhhhhh.','.hssss h.','.hsees h.','.hssss h.','..vvvv..','.vvvvvv.','.vvv vvv','.vvvvvv.','..bbbb..','..b..b..','..s..s..'],
+ mewtwo:['.pp..pp.','pppppppp','.pssssp.','psees sep','psss ssp','..pppp..','.pppppp.','pppppppp','p.pppp.p','..p..p..','.pp..pp.','p......p'],
+ hero:['..rrrr..','.rrrrrr.','.hssss h.','.hsees h.','..ssss..','.bbbbbb.','.bbwwbb.','.bbbbbb.','..dddd..','..dddd..','..d..d..','..s..s..']};
+const PAL={h:'#402b36',s:'#f2b18b',e:'#131021',m:'#a751d2',p:'#ad83ed',v:'#39b7b2',b:'#2e68ac',d:'#343050',r:'#e34e5c',w:'#e7e9f5'};
+const ART404={};for(const id of ['awelo','robert','mewtwo','hero']){ART404[id]={};for(const variant of ['normal','espejo','espectral','gigante']){const im=new Image();im.src='assets/dimension404/'+id+'_'+variant+'.png';ART404[id][variant]=im;}}
+function sprite(c,kind,x,y,scale=2,ghost=false,variant='normal'){const data=SPRITES[kind];if(!data)return;c.save();c.translate(Math.round(x),Math.round(y));c.scale(scale,scale);if(ghost)c.globalAlpha=.42;const art=ART404[kind]?.[variant]||ART404[kind]?.normal;if(art&&art.complete&&art.naturalWidth){c.imageSmoothingEnabled=false;const sw=art.naturalWidth,sh=art.naturalHeight;c.drawImage(art,-sw/4,-sh/4,sw/2,sh/2);c.restore();return;}for(let j=0;j<data.length;j++)for(let i=0;i<data[j].length;i++){const ch=data[j][i];if(PAL[ch]){c.fillStyle=PAL[ch];c.fillRect(i,j,1,1);}}c.restore();}
+function character(c,kind,x,y){const special=distortion>0&&(kind==='awelo'||kind==='robert'||kind==='mewtwo');const grow=special?1+Math.sin(frame*.12)*.35:1;const xx=x+(special?Math.sin(frame*.17)*3:0);const yy=y+(special?Math.cos(frame*.1)*3:0);const phase=Math.floor(frame/18)%4;const variant=special?['normal','espectral','espejo','gigante'][phase]:'normal';if(special){sprite(c,kind,xx-11,yy-7,2*grow,true,'espectral');sprite(c,kind,xx+9,yy+3,2*grow,true,'espejo');}sprite(c,kind,xx,yy,2*grow,false,variant);if(special){c.save();c.globalCompositeOperation='screen';c.fillStyle='rgba(166,70,245,.18)';c.fillRect(x-5,y-5,34,35);c.restore();}}
+function draw(){if(!ctx)return;frame++;if(distortion>0)distortion--;const c=ctx;c.clearRect(0,0,W*T,H*T);c.save();if(distortion>0){c.translate(W*T/2,H*T/2);c.rotate(Math.sin(frame*.16)*.018);c.scale(1+Math.sin(frame*.12)*.024,1+Math.cos(frame*.11)*.024);c.translate(-W*T/2,-H*T/2);}for(let y=0;y<H;y++)for(let x=0;x<W;x++){let v=tile(x,y),px=x*T,py=y*T,sh=Math.sin(frame/28+x*.9+y*.7);c.fillStyle=v==='#'?'#281342':((x+y)%2?'#13293c':'#172c42');c.fillRect(px,py,T,T);if(v==='#'){c.fillStyle='#62438e';c.fillRect(px+2,py+2,28,5);c.fillStyle='#43255e';c.fillRect(px+5,py+12,22,13);}else{c.fillStyle='rgba(156,97,233,.13)';c.fillRect(px+5+sh*2,py+5,4,4);}if(v==='F'&&!found.includes(x+','+y)){c.fillStyle='#6ffff2';c.font='26px monospace';c.fillText('✦',px+7,py+26);}if(v==='N'){character(c,x<6?'awelo':'robert',px+8,py+3);}if(v==='R'){character(c,'mewtwo',px+8,py+3);}if(v==='E'){c.fillStyle=found.length===3?'#7affad':'#c96e72';c.fillRect(px+6,py+3,20,27);c.fillStyle='#fff';c.font='12px monospace';c.fillText('E',px+13,py+20);}}character(c,'hero',player.x*T+8,player.y*T+3);if(distortion>0){c.fillStyle='rgba(202,70,245,.12)';for(let i=0;i<14;i++){const xx=(i*127+frame*3)%(W*T),yy=(i*79+frame*2)%(H*T);c.fillRect(xx,yy,22+(i%3)*12,3);}if(boss>=2&&!won){c.font='80px serif';c.fillText('🍔',240+Math.sin(frame*.08)*80,180);for(let k=0;k<3;k++)sprite(c,'mewtwo',330+k*42+Math.sin(frame*.08+k)*12,170+k*12,3,true);}}if(won){c.fillStyle='#d7baff';c.font='bold 14px monospace';c.fillText('✦ CORAZÓN 404 ✦',240,28);}c.restore();raf=requestAnimationFrame(draw);}
+function open(){if(root)return;if(state.flags.v80_dim_imported){found=['3,6','16,2','11,10'].filter(id=>state.flags['v80_dim_'+id.replace(',','_')]);echoes=state.flags.v80_dim_echoes||0;won=!!state.flags.v80_dim_won;boss=0;}if(!unlocked()){alert('La grieta aún está cerrada. Utiliza primero la Piedra del Festivern o el Fragmento de Mewtwo desde el Gabinete del Caos.');return;}previousScreen=state.screen;state.screen='dimension80';heldKeys.clear();resetJoy27();focusBefore=document.activeElement;root=document.createElement('div');root.id='p707';root.setAttribute('role','dialog');root.setAttribute('aria-modal','true');root.setAttribute('aria-label','Dimensión Prohibida');root.style.cssText='position:fixed;inset:0;z-index:2147483641;background:#090516f5;color:#f7f0ff;display:flex;align-items:center;justify-content:center;padding:12px;font:15px system-ui';root.innerHTML='<div style="width:min(740px,100%);max-height:96vh;overflow:auto;background:#17102b;border:2px solid #a779fa;border-radius:14px;padding:14px;box-shadow:0 0 80px #7038be88"><header style="display:flex;justify-content:space-between;align-items:center;gap:8px"><div><strong>⟁ DIMENSIÓN PROHIBIDA</strong><div style="font-size:12px;color:#c6b3e9">BENIFAIÓ 404 · '+found.length+'/3 fragmentos</div></div><button id="p707-exit" style="padding:9px">Salir (Esc)</button></header><div id="p707-status" style="margin-top:8px;color:#9bf6e9;font-size:13px"></div><canvas id="p707-map" width="640" height="416" aria-label="Mapa de 20 por 13 casillas" style="display:block;width:100%;max-width:640px;margin:12px auto;image-rendering:pixelated;background:#100e24;border:1px solid #7856b6"></canvas><p id="p707-talk" aria-live="polite" style="min-height:42px;background:#2d1b49;padding:10px;border-radius:8px">Busca tres fragmentos luminosos. Muévete con flechas o WASD; E para interactuar.</p><div style="display:flex;justify-content:center;gap:9px;flex-wrap:wrap"><button data-step="0,-1">▲</button><button data-step="-1,0">◀</button><button data-step="0,1">▼</button><button data-step="1,0">▶</button><button id="p707-act">Hablar / Recoger</button></div></div>';(document.fullscreenElement||gameShell).append(root);ctx=root.querySelector('canvas').getContext('2d');root.querySelector('#p707-exit').onclick=close;root.querySelector('#p707-act').onclick=act;root.querySelectorAll('[data-step]').forEach(b=>b.onclick=()=>{const [dx,dy]=b.dataset.step.split(',').map(Number);move(dx,dy);});root.querySelector('#p707-exit').focus();updateHud();draw();}
+document.addEventListener('keydown',e=>{if(root){if(['ArrowUp','ArrowDown','ArrowLeft','ArrowRight','w','a','s','d','e','Enter',' ','Escape'].includes(e.key)){e.stopImmediatePropagation();}if(e.key==='Escape'){e.preventDefault();close();return;}const k=e.key.toLowerCase(),dirs={arrowup:[0,-1],w:[0,-1],arrowdown:[0,1],s:[0,1],arrowleft:[-1,0],a:[-1,0],arrowright:[1,0],d:[1,0]};if(dirs[k]){e.preventDefault();move(...dirs[k]);}else if(k==='e'||k==='enter'||k===' '){e.preventDefault();act();}return;}if(e.key.toLowerCase()==='p'&&!e.repeat&&!e.ctrlKey&&!e.metaKey&&!['INPUT','TEXTAREA'].includes(document.activeElement?.tagName)&&state.screen==='world')open();},true);
+window.__PREVIA707={open,close,unlocked,progress:()=>state.flags.v80_dim_imported?({found:['3_6','16_2','11_10'].filter(k=>state.flags['v80_dim_'+k]).length,total:3,echoes:Number(!!(state.flags.v80_dim_echoes&1))+Number(!!(state.flags.v80_dim_echoes&2)),won:!!state.flags.v80_dim_won}):({found:found.length,total:3,echoes:Number(!!(echoes&1))+Number(!!(echoes&2)),won})};
+})();
+
+/* La Previa 7.1 — panel de verificación local y exportación de respaldo. */
+(()=>{'use strict';
+let panel=null,previous=null;
+const check=()=>{
+ const keys=['__PREVIA659','__PREVIA70','__PREVIA70_CHAOS','__PREVIA704_WORLD','__PREVIA706','__PREVIA707'];
+ return keys.map(k=>({module:k,ok:!!window[k]}));
+};
+function close(){if(!panel)return;panel.remove();panel=null;previous?.focus?.();}
+function exportBackup(){
+ const out={format:'la-previa-71-backup',created:new Date().toISOString(),origin:location.origin,items:{}};
+ try{for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(/previa|pokemon|poke|save|partida|trainer/i.test(k))out.items[k]=localStorage.getItem(k);}}
+ catch(e){alert('No se pudo leer el almacenamiento: '+e.message);return;}
+ const blob=new Blob([JSON.stringify(out,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='La_Previa_7_1_respaldo_'+new Date().toISOString().slice(0,10)+'.json';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+function open(){if(panel)return;previous=document.activeElement;panel=document.createElement('div');panel.id='previa71-qa';panel.setAttribute('role','dialog');panel.setAttribute('aria-modal','true');panel.setAttribute('aria-label','Diagnóstico de la versión 7.1');panel.style.cssText='position:fixed;inset:0;z-index:2147483645;background:#070a14eb;color:#f5f5ff;display:grid;place-items:center;padding:16px;font:15px system-ui';const box=document.createElement('section');box.style.cssText='width:min(620px,100%);max-height:90vh;overflow:auto;background:#192238;border:2px solid #7b93d8;border-radius:14px;padding:20px';const h=document.createElement('h2');h.textContent='LA PREVIA 7.1 · DIAGNÓSTICO';box.append(h);const p=document.createElement('p');p.textContent='Comprueba la carga de los módulos. Este panel no modifica la partida.';box.append(p);const ul=document.createElement('ul');for(const item of check()){const li=document.createElement('li');li.textContent=(item.ok?'✓ ':'✕ ')+item.module;li.style.color=item.ok?'#a6f0bb':'#ffb5ad';ul.append(li);}box.append(ul);const prog=document.createElement('p');try{const d=window.__PREVIA707?.progress();prog.textContent=d?'Dimensión 404: '+d.found+'/3 fragmentos, '+d.echoes+'/2 ecos, final '+(d.won?'superado':'pendiente'):'Dimensión no disponible';}catch(e){prog.textContent='No se pudo leer el progreso de la dimensión.';}box.append(prog);const b=document.createElement('button');b.textContent='Descargar copia de seguridad';b.onclick=exportBackup;const c=document.createElement('button');c.textContent='Cerrar';c.onclick=close;for(const btn of [b,c]){btn.style.cssText='margin:6px;padding:10px 14px;border-radius:8px;cursor:pointer';box.append(btn);}panel.append(box);panel.addEventListener('click',e=>{if(e.target===panel)close();});(document.fullscreenElement||gameShell).append(panel);c.focus();}
+document.addEventListener('keydown',e=>{if(panel&&e.key==='Escape'){e.preventDefault();e.stopImmediatePropagation();close();return;}if(e.key==='F9'&&!e.repeat&&!e.ctrlKey&&!e.metaKey){e.preventDefault();if(panel)close();else open();}},true);
+window.__PREVIA71={open,close,check,exportBackup};
+})();
+
+(()=>{'use strict';
+const SCENES={
+ blas:{title:'Blas · La medalla entre patatas',img:'blas',frames:[['Un olor a fritanga invade la sala…','Blas se lanza sobre una montaña de patatas.'],['BLAS','¡Aquí estaba! ¡La medalla del mes!'],['OBJETO CONSEGUIDO','Una medalla crujiente. Mejor no preguntar.']]},
+ awelo:{title:'Awelo · ¿Estás contenta?',img:'awelo',frames:[['Una cama tiembla en la oscuridad…','Se oye un golpe en una barriga.'],['AWELO','¿ESTÁS CONTENTA? ¡AL FINAL LO HAS CONSEGUIDO!'],['AWELO','¡MIS AMIGOS SE ESTÁN RIENDO DE MÍ!']]},
+ patri:{title:'Patri · El patinete',img:'patri',frames:[['PATRI','Tengo algo para ti. Pero no hagas el animal.'],['OBJETO CONSEGUIDO','¡PATINETE ELÉCTRICO NEGRO!'],['PATRI','¡Como te caigas, yo no he visto nada!']]},
+ festivern:{title:'Festivern · El laboratorio',img:'festivern',frames:[['ALARMA','La máquina empieza a vibrar…'],['¡BOOOOM!','Una luz violeta atraviesa el laboratorio.'],['OBJETO CONSEGUIDO','Has encontrado la PIEDRA DE CRISTAL.']]},
+ mewtwo:{title:'Robert · El despertar',img:'mewtwo',frames:[['ROBERT','Ha llegado el momento.'],['CRAAACK','La cápsula se rompe. Una silueta flota entre cristales.'],['MEWTWO','Una fuerza desconocida os empuja hacia atrás…'],['TODOS','¡Ahora! ¡Atacad juntos!'],['MEWTWO','La criatura se acerca. Cada vez está más cerca…']]}
+};
+let layer=null,scene=null,step=0,origin=null,activeId=null;
+function watched(){try{return JSON.parse(localStorage.getItem('laprevia_cinema72')||'{}')}catch{return {}}}
+function mark(id){try{const w=watched();w[id]=Date.now();localStorage.setItem('laprevia_cinema72',JSON.stringify(w))}catch{}}
+function close(){if(!layer)return;const done=activeId;mark(done);layer.remove();layer=null;scene=null;activeId=null;document.removeEventListener('keydown',keys,true);if(origin&&origin.focus)origin.focus();document.dispatchEvent(new CustomEvent('laprevia:cinematic-end',{detail:{id:done}}));}
+function show(){if(!layer||!scene)return;const [speaker,line]=scene.frames[step];layer.querySelector('[data-speaker]').textContent=speaker;layer.querySelector('[data-line]').textContent=line;layer.querySelector('[data-progress]').textContent=(step+1)+' / '+scene.frames.length;const pic=layer.querySelector('[data-art]');pic.style.transform='scale('+(1+step*.025)+')';pic.style.filter=step===1?'brightness(1.15)':'none';}
+function next(){if(!scene)return;if(step+1>=scene.frames.length)close();else{step++;show()}}
+function keys(e){if(!layer)return;if(['Escape','Enter',' ','ArrowRight','ArrowLeft'].includes(e.key)){e.preventDefault();e.stopImmediatePropagation();if(e.key==='Escape')close();else if(e.key==='ArrowLeft'){step=Math.max(0,step-1);show()}else next()}}
+function play(id,{replay=true}={}){if(!SCENES[id]||layer)return false;if(!replay&&watched()[id])return false;activeId=id;scene=SCENES[id];step=0;origin=document.activeElement;layer=document.createElement('div');layer.id='lp-cinema72';layer.setAttribute('role','dialog');layer.setAttribute('aria-modal','true');layer.setAttribute('aria-label',scene.title);layer.innerHTML=`<div class="lp-cinema-panel"><header><strong></strong><button data-skip type="button">Saltar escena ✕</button></header><div class="lp-cinema-picture"><img data-art alt="Ilustración pixel art de la escena"/></div><div class="lp-cinema-dialog"><b data-speaker></b><p data-line></p><small data-progress></small></div><footer><button data-prev type="button">◀ Atrás</button><button data-next type="button">Continuar ▶</button></footer></div>`;layer.querySelector('header strong').textContent=scene.title;layer.querySelector('[data-art]').src='assets/cinematicas72/'+scene.img+'.png';(document.fullscreenElement||gameShell).append(layer);layer.querySelector('[data-skip]').onclick=close;layer.querySelector('[data-next]').onclick=next;layer.querySelector('[data-prev]').onclick=()=>{step=Math.max(0,step-1);show()};document.addEventListener('keydown',keys,true);show();layer.querySelector('[data-next]').focus();return true}
+function gallery(){if(layer)return;const d=document.createElement('div');d.id='lp-cinema-gallery';d.innerHTML='<div class="lp-cinema-gallery-inner"><h2>🎬 Archivo de cinemáticas</h2><p>Escenas de demostración. No alteran las misiones ni entregan objetos.</p><div data-list></div><button data-close>Cerrar</button></div>';for(const [id,s] of Object.entries(SCENES)){const b=document.createElement('button');b.textContent=(watched()[id]?'✓ ':'▶ ')+s.title;b.onclick=()=>{d.remove();play(id)};d.querySelector('[data-list]').append(b)}d.querySelector('[data-close]').onclick=()=>d.remove();(document.fullscreenElement||gameShell).append(d)}
+window.LaPreviaCinemas={play,gallery,watched,scenes:Object.keys(SCENES)};
+document.addEventListener('laprevia:cinematic',e=>{const id=e.detail&&e.detail.id;if(id)play(id,{replay:false})});
+const b=document.createElement('button');b.id='lp-cinema-access';b.textContent='🎬 Escenas';b.title='Abrir escenas de demostración';b.onclick=gallery;document.body.append(b);
+})();
+/* 7.3: original nine trainer capsules + original three Pokemon choice.
+   This is a visual enhancement only. Existing new-game and starter save handlers remain authoritative. */
+(function(){
+const trainerIds=['marshall','horte','plata','awelo','sergio','alfaro','nachito','javi_grau','blas'];
+const oldCharacters=title64Characters;
+title64Characters=function(){
+ oldCharacters.apply(this,arguments);
+ const panel=title64Layer.querySelector('.title64-panel');if(!panel)return;
+ const grid=panel.querySelector('.title64-trainer-grid');if(!grid)return;
+ panel.classList.add('title73-lab');
+ const heading=panel.querySelector('.title64-panel-head');if(heading){heading.textContent='ELIGE TU PERSONAJE · 9 CÁPSULAS';heading.classList.add('title73-heading');}
+ for(const card of [...grid.querySelectorAll('[data-char64]')]){
+  const id=card.dataset.char64;
+  if(!trainerIds.includes(id)){card.remove();continue;}
+  const pic=card.querySelector('img');if(pic){pic.src='assets/seleccion73/'+id+'.png';pic.onerror=()=>{pic.onerror=null;pic.src=title65MapSprite(id)};}
+  card.setAttribute('aria-label','Seleccionar '+(CHARS[id]?.name||id));
+ }
+ const preview=panel.querySelector('.title64-trainer-preview > img');if(preview){preview.src='assets/seleccion73/'+title64Selected+'.png';preview.onerror=()=>{preview.onerror=null;preview.src=title65MapSprite(title64Selected)}}
+ const sub=document.createElement('div');sub.className='title73-subtitle';sub.textContent='Las cápsulas contienen los personajes del juego. Elige uno para recorrer Benifaió.';
+ grid.before(sub);
+};
+const oldStarter=starterModal;
+starterModal=function(){
+ oldStarter.apply(this,arguments);
+ const grid=modalContent.querySelector('.choice-grid');if(!grid)return;
+ grid.classList.add('title73-pokemon');
+ const h=modalContent.querySelector('h2');if(h)h.textContent='LABORATORIO ALFARO · ELIGE TU POKÉMON';
+ const desc=modalContent.querySelector('p');if(desc)desc.textContent='Tres cápsulas, tres compañeros. Elige con calma: tu decisión quedará guardada en esta partida.';
+ const types={Bulbasaur:'PLANTA · VENENO',Charmander:'FUEGO',Squirtle:'AGUA'};
+ for(const btn of grid.querySelectorAll('[data-starter]')){
+  const name=btn.dataset.starter,span=btn.querySelector('span');if(span)span.textContent=types[name]+' · NIVEL 5';
+  const original=btn.onclick;
+  btn.onclick=function(ev){
+   ev.preventDefault();
+   if(modalContent.querySelector('.title73-confirm'))modalContent.querySelector('.title73-confirm').remove();
+   const confirm=document.createElement('div');confirm.className='title73-confirm';
+   const label=document.createElement('p');label.textContent='¿Comenzar la aventura con '+name+'? Esta elección no se puede cambiar.';
+   const yes=document.createElement('button');yes.className='yes';yes.textContent='SÍ, ¡A LA AVENTURA!';
+   const no=document.createElement('button');no.className='no';no.textContent='VOLVER A ELEGIR';
+   yes.onclick=()=>original.call(btn,ev);no.onclick=()=>{confirm.remove();btn.focus()};
+   confirm.append(label,yes,no);grid.after(confirm);yes.focus();
+  };
+ }
+};
+if(window.__PREVIA_QA)Object.assign(window.__PREVIA_QA,{selection73:true,selection73TrainerIds:trainerIds});
+})();
+
+/* 7.4 - Animación de elección: no altera el guardado hasta terminar. */
+(function(){
+ const previous=starterModal;
+ const info={Bulbasaur:{type:'PLANTA · VENENO',color:'#71dc9d',line:'¡Un compañero tranquilo y resistente!'},Charmander:{type:'FUEGO',color:'#ffae65',line:'¡Una pequeña llama para una gran aventura!'},Squirtle:{type:'AGUA',color:'#81cfff',line:'¡Preparado para salpicar a toda la región!'}};
+ starterModal=function(){
+  previous.apply(this,arguments);
+  const grid=modalContent.querySelector('.choice-grid');if(!grid)return;
+  grid.querySelectorAll('[data-starter]').forEach(btn=>{
+   const name=btn.dataset.starter;
+   btn.addEventListener('click',()=>{
+    const confirm=modalContent.querySelector('.title73-confirm');if(!confirm)return;
+    const yes=confirm.querySelector('.yes');if(!yes)return;
+    const commit=yes.onclick;
+    yes.onclick=(event)=>{
+     event.preventDefault();
+     if(state.flags?.starter)return;
+     const p=info[name];
+     const layer=document.createElement('div');layer.className='starter74-layer';layer.setAttribute('role','dialog');layer.setAttribute('aria-modal','true');layer.setAttribute('aria-label','Presentación de '+name);
+     layer.style.setProperty('--starter-glow',p.color);
+     layer.innerHTML='<div class="starter74-stars" aria-hidden="true"></div><div class="starter74-top">LABORATORIO ALFARO · PROTOCOLO INICIAL</div><div class="starter74-capsule"><div class="starter74-glass"></div><div class="starter74-sprite"><img alt="'+name+'" src="'+media22('mon22_'+name.toLowerCase()+'_front.png')+'"></div><div class="starter74-base"></div></div><h2>¡'+name.toUpperCase()+'!</h2><p>'+p.line+'</p><small>'+p.type+' · NIVEL 5</small><div class="starter74-actions"><button type="button" class="starter74-skip">SALTAR ANIMACIÓN</button><button type="button" class="starter74-next" disabled>CONTINUAR</button></div>';
+     (document.fullscreenElement||gameShell).appendChild(layer);
+     let finished=false;
+     const finish=()=>{if(finished)return;finished=true;clearTimeout(timer);window.removeEventListener('keydown',keys,true);layer.remove();commit.call(yes,event);if(state.flags?.starter&&window.__previaBorxetaIntro)window.__previaBorxetaIntro(name);};
+     const keys=e=>{if(!layer.isConnected)return;if(['Escape','Enter',' ','Spacebar'].includes(e.key)){e.preventDefault();e.stopImmediatePropagation();finish();}};
+     window.addEventListener('keydown',keys,true);
+     layer.querySelector('.starter74-skip').onclick=finish;
+     layer.querySelector('.starter74-next').onclick=finish;
+     const timer=setTimeout(()=>{if(!layer.isConnected)return;layer.classList.add('starter74-ready');layer.querySelector('.starter74-next').disabled=false;},2100);
+    };
+   });
+  });
+ };
+ if(window.__PREVIA_QA)Object.assign(window.__PREVIA_QA,{starter74:true});
+})();
+
+/* 7.6: Borxeta intro + optional real battle; avoids changing quest Blas. */
+(function(){
+ let active=false;
+ const portrait='/assets/ba/ba8a1f80a7449f5bb2ba21e3.webp';
+ const scene='/assets/ae/ae191997443528952ce23a10.png';
+ const steps=[
+  ['NARRADOR','Una voz interrumpe el momento más importante del laboratorio...'],
+  ['BORXETA','ESTIC BÉ ACÍ????'],
+  ['ALFARO','¡Borxeta! ¡Aparta de las cápsulas!'],
+  ['BORXETA','Vale, vale... ¿pero yo contra quién juego?'],
+  ['BORXETA','¡Te reto a un combate! ¿O también tengo que preguntar dónde estoy?']
+ ];
+ function duel(){
+  if(typeof state==='undefined'||!state.flags?.starter||state.screen!=='world'||typeof startBattle!=='function'){
+   if(typeof toast==='function')toast('Termina la elección antes de combatir.');return;
+  }
+  if(state.flags.borxetaDuelWon){if(typeof toast==='function')toast('Ya has ganado el duelo de Borxeta.');return;}
+  const picked=state.party?.[0]?.name || ''; // flags.starter is boolean, not the Pokemon name
+  const counter={Bulbasaur:'Charmander',Charmander:'Squirtle',Squirtle:'Bulbasaur'};
+  const enemy=counter[picked]||'Pidgey';
+  startBattle(enemy,5,false,'borxeta_intro');
+ }
+ window.__previaBorxetaIntro=function(starter){
+  if(active||!document.body)return;if(state.screen==='dialog'){const flags=state.flags;setTimeout(()=>{if(state.flags===flags&&state.flags.starter)window.__previaBorxetaIntro(starter);},250);return;}if(state.screen!=='world')return;
+  if(typeof state!=='undefined'&&state.flags?.borxetaIntroSeen)return; const previousScreen=state.screen;state.screen='rival80';resetJoy27();heldKeys.clear();active=true;let index=0;
+  const layer=document.createElement('section');layer.className='borxeta75';layer.setAttribute('role','dialog');layer.setAttribute('aria-modal','true');layer.setAttribute('aria-label','Presentación de Borxeta');
+  layer.innerHTML='<div class="borxeta75-top"><span>LA PREVIA · PRIMER RIVAL</span><button type="button" data-skip>SALTAR ESCENA ×</button></div><div class="borxeta75-stage"><img class="borxeta75-back" alt="Escena de Borxeta" src="'+scene+'"><div class="borxeta75-aura"></div><img class="borxeta75-face" alt="Retrato de Borxeta" src="'+portrait+'"><div class="borxeta75-banner">¡APARECE BORXETA!</div></div><div class="borxeta75-dialog"><strong data-speaker></strong><p data-line></p><div class="borxeta75-bottom"><span data-progress></span><button type="button" data-next>SIGUIENTE ▸</button></div></div>';
+  (document.fullscreenElement||gameShell).appendChild(layer);
+  const nextButton=layer.querySelector('[data-next]');
+  function render(){layer.querySelector('[data-speaker]').textContent=steps[index][0];layer.querySelector('[data-line]').textContent=steps[index][1];layer.querySelector('[data-progress]').textContent=(index+1)+' / '+steps.length;if(index===steps.length-1){nextButton.textContent='¡COMBATIR!';let later=layer.querySelector('[data-later]');if(!later){later=document.createElement('button');later.type='button';later.dataset.later='';later.textContent='AHORA NO';later.style.marginLeft='8px';later.onclick=()=>end(false);nextButton.after(later);}}else nextButton.textContent='SIGUIENTE ▸';}
+  function end(fight){if(!active)return;active=false;state.screen=previousScreen;heldKeys.clear();if(typeof state!=='undefined'&&state.flags){state.flags.borxetaIntroSeen=true;if(typeof save==='function')save();}window.removeEventListener('keydown',keys,true);layer.remove();if(fight)duel();}
+  function next(){if(index>=steps.length-1)end(true);else{index++;render();}}
+  function keys(e){if(!active)return;if(['Enter',' ','Spacebar','Escape'].includes(e.key)){e.preventDefault();e.stopImmediatePropagation();e.key==='Escape'?end(false):next();}}
+  layer.querySelector('[data-skip]').onclick=()=>end(false);nextButton.onclick=next;
+  window.addEventListener('keydown',keys,true);render();
+ };
+ window.__PREVIA_76={version:'7.7',duel,preview:()=>window.__previaBorxetaIntro('Charmander')};
+})();
+
+/* La Previa 7.8: optional nine-character new-game introductions. No save schema changes. */
+(function(){
+ const scenes={
+ marshall:['MARSHALL','¡La mesa nunca se cancela!','Antes de salir, comprueba que llevas las Poké Balls. Yo llevo la reserva.'],
+ horte:['HORTE','¡TRIPLE SOBRE LA BOCINA!','Horte lanza desde la puerta del laboratorio. Alfaro pide que no vuelva a hacerlo.'],
+ plata:['PLATA','Hoy va a ser un día tranquilo.','Plata ve el mapa de Benifaió y empieza a calentarse antes de dar el primer paso.'],
+ awelo:['AWELO','NO AWELO NO.','El Awelo se levanta de mal humor. «¿Quién me ha despertado para esto?»'],
+ sergio:['SERGIO','Bienvenido a la franquicia.','Sergio repasa su acta y anuncia que esta aventura tendrá normas.'],
+ alfaro:['ALFARO','¡Bienvenido al laboratorio!','Alfaro cierra sus apuntes: «Primero un compañero Pokémon; luego las preguntas».'],
+ nachito:['NACHITO','¿Pero esto por dónde se sale?','Nachito entra por la puerta equivocada y decide que igualmente era el camino bueno.'],
+ javi_grau:['JAVI GRAU','¿Ya habéis empezado?','Javi Grau aparece de repente. Nadie recuerda haberle visto entrar.'],
+ blas:['BLAS','¡LAS PATATAS SON SAGRADAS!','Blas guarda la última patata antes de empezar. Esta vez no piensa compartir.']
+ };
+ let open=false;
+ // The original new-game flow enters intro67 first; only show our scene after it ends.
+ const previousIntroEnd=intro67End;
+ intro67End=function(){
+  const chosen=typeof state!=='undefined'&&state.player?.chosen;
+  const wasIntro=typeof intro67!=='undefined'&&!!intro67;
+  previousIntroEnd.apply(this,arguments);
+  if(wasIntro&&state?.screen==='world'&&scenes[chosen]&&!open)show(chosen);
+ };
+ function show(id){
+  const previousScreen=state.screen;state.screen='trainer80';resetJoy27();heldKeys.clear();open=true;let step=0;const data=scenes[id];
+  const layer=document.createElement('section');layer.className='trainer78';layer.setAttribute('role','dialog');layer.setAttribute('aria-modal','true');layer.setAttribute('aria-label','Presentación de '+data[0]);
+  const picture=document.createElement('img');picture.src='assets/seleccion73/'+id+'.png';picture.alt='Retrato de '+data[0];picture.onerror=()=>{picture.onerror=null;picture.src=title65MapSprite(id)};
+  layer.innerHTML='<div class="trainer78-top">POKÉMON EDICIÓN LA PREVIA · NUEVA AVENTURA</div><div class="trainer78-spotlight"></div><div class="trainer78-portrait"></div><div class="trainer78-copy"><small>ENTRENADOR ELEGIDO</small><h2></h2><p></p><div class="trainer78-controls"><button type="button" data-skip>SALTAR</button><button type="button" data-next>CONTINUAR ▸</button></div></div>';
+  layer.querySelector('.trainer78-portrait').appendChild(picture);(document.fullscreenElement||gameShell).appendChild(layer);
+  const title=layer.querySelector('h2'),line=layer.querySelector('p'),next=layer.querySelector('[data-next]');
+  function render(){title.textContent=data[0];line.textContent=data[step+1];next.textContent=step===1?'¡A JUGAR!':'CONTINUAR ▸';layer.classList.toggle('trainer78-second',step===1)}
+  function close(){if(!open)return;open=false;state.screen=previousScreen;heldKeys.clear();window.removeEventListener('keydown',onKey,true);layer.remove();}
+  function advance(){if(step===1)close();else{step=1;render();}}
+  function onKey(e){if(!open)return;if(['Enter',' ','Escape'].includes(e.key)){e.preventDefault();e.stopImmediatePropagation();e.key==='Escape'?close():advance()}}
+  layer.querySelector('[data-skip]').onclick=close;next.onclick=advance;window.addEventListener('keydown',onKey,true);render();
+ }
+ window.__PREVIA_78={version:'7.8',characters:Object.keys(scenes),preview:(id)=>{if(!open&&scenes[id])show(id)}};
+})();
+
+/* LA PREVIA 8.0 — expansion compatible with existing v:1 saves. */
+(()=>{'use strict';
+const QUESTS=[
+ {id:'benifaio',title:'El recado de Marshall',city:'Benifaió',detail:'Vuelve a recorrer Benifaió y recoge el encargo de Marshall.',scenes:['benifaio','pueblo','inicio'],reward:120},
+ {id:'silla',title:'La factura de Team Cierre',city:'Silla',detail:'Encuentra el rastro de la factura en Silla.',scenes:['silla'],reward:160},
+ {id:'albal',title:'El pedido imposible',city:'Albal',detail:'Visita Albal y revisa los pedidos de Burger L’Horta.',scenes:['albal','burger'],reward:180},
+ {id:'sueca',title:'El milagro del 5 %',city:'Sueca',detail:'Investiga el marcador de la remontada en Sueca.',scenes:['sueca'],reward:220},
+ {id:'festivern',title:'La pista de cristal',city:'Festivern',detail:'Busca un rastro de la piedra de cristal.',scenes:['festivern'],reward:260},
+ {id:'zaragoza',title:'El bingo imposible',city:'Zaragoza',detail:'Investiga el extraño bingo de Zaragoza.',scenes:['zaragoza'],reward:300}
+];
+const RIVALS=[{id:'silla',city:'Silla',scene:'silla',level:9},{id:'albal',city:'Albal',scene:'albal',level:15},{id:'sueca',city:'Sueca',scene:'sueca',level:22},{id:'festivern',city:'Festivern',scene:'festivern',level:28},{id:'zaragoza',city:'Zaragoza',scene:'zaragoza',level:35}];
+let panel=null,oldFocus=null;
+const ready=()=>typeof state!=='undefined'&&!!state.flags?.starter;
+const f=key=>!!state.flags['v80_'+key];
+const put=key=>{state.flags['v80_'+key]=true;save();};
+const scene=()=>String(state.scene||'').toLowerCase();
+const match=(id)=>scene().includes(id)||(id==='festivern'&&scene()==='picassent')||(id==='zaragoza'&&scene().startsWith('z534_'));
+const currentQuest=q=>q.scenes.some(match);
+function safeText(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function claim(q){if(!ready()||f('quest_'+q.id)||!currentQuest(q)||!f('found_'+q.id))return;const amount=Math.min(q.reward,Math.max(0,9999999-state.money));state.money+=amount;put('quest_'+q.id);toast('¡Misión completada! +'+amount+' monedas');render();}
+function event(q){if(!ready()||f('event_'+q.id)||!currentQuest(q))return;const lines={benifaio:'Marshall ha dejado un recado que nadie sabe interpretar.',silla:'El acta de Sergio aparece firmada por un entrenador desconocido.',albal:'Burger L’Horta recibe un pedido con 404 hamburguesas.',sueca:'El marcador vuelve a mostrar 25–44. ¿Se repetirá el milagro?',festivern:'El laboratorio vibra. Algo brilla bajo el suelo.',zaragoza:'El bombo anuncia el número 404 y se detiene.'};close();dialog(null,[lines[q.id],'¡Evento descubierto en '+q.city+'!'],()=>{put('event_'+q.id);backWorld();});}
+
+function duel(r){if(!ready()||!match(r.scene)||f('borxeta_'+r.id))return;if(state.party.every(p=>p.hp<=0)){alert('Cura primero a tu equipo.');return;}close();const picked=state.party[0]?.name;const counter={Bulbasaur:'Charmander',Charmander:'Squirtle',Squirtle:'Bulbasaur'};startBattle(counter[picked]||'Pidgey',r.level,false,'v80:borxeta:'+r.id);}
+function bonus404(){const p=window.__PREVIA707?.progress?.();if(!p?.won){alert('Primero completa el desafío original de Dimensión 404.');return;}if(f('bonus404'))return;const amount=Math.min(404,Math.max(0,9999999-state.money));state.money+=amount;put('bonus404');toast('¡Eco estabilizado! +'+amount+' monedas');render();}
+function backup(){if(window.__PREVIA71?.exportBackup)window.__PREVIA71.exportBackup();else alert('El módulo de respaldo no está disponible.');}
+function status(){const q=QUESTS.filter(x=>f('quest_'+x.id)).length;return q+' / '+QUESTS.length+' recados · '+RIVALS.filter(x=>f('borxeta_'+x.id)).length+' / '+RIVALS.length+' duelos de Borxeta';}
+function close(){if(!panel)return;panel.remove();panel=null;state.screen='world';resetJoy27();heldKeys.clear();document.removeEventListener('keydown',key,true);oldFocus?.focus?.();}
+function key(e){if(e.key==='Escape'){e.preventDefault();e.stopImmediatePropagation();close();}}
+function render(){if(!panel)return;const body=panel.querySelector('[data-body]');body.replaceChildren();
+ const header=document.createElement('p');header.textContent='Zona actual: '+(typeof SCENES!=='undefined'&&SCENES[state.scene]?.name||state.scene)+' · '+status();body.append(header);
+ function section(title,description){const h=document.createElement('h3');h.textContent=title;body.append(h);const p=document.createElement('p');p.textContent=description;p.className='v80-muted';body.append(p);}
+ function item(title,detail,label,enabled,action){const row=document.createElement('div');row.className='v80-item';const info=document.createElement('div');const strong=document.createElement('strong');strong.textContent=title;const p=document.createElement('p');p.textContent=detail;info.append(strong,p);const btn=document.createElement('button');btn.textContent=label;btn.disabled=!enabled;btn.onclick=action;row.append(info,btn);body.append(row);}
+ section('Misiones secundarias','Descubre cada ciudad y cobra una recompensa sin perder la historia principal.');
+ QUESTS.forEach(q=>item(q.title,q.city+' · '+q.detail,f('quest_'+q.id)?'✓ Completada':currentQuest(q)?f('found_'+q.id)?'Completar +'+q.reward:'Busca la pista en el mapa':'Visita '+q.city,!f('quest_'+q.id)&&currentQuest(q)&&f('found_'+q.id),()=>claim(q)));
+ section('Eventos por ciudad','Pequeñas escenas narrativas, una por ciudad, sin bloquear misiones.');
+ QUESTS.forEach(q=>item('Evento: '+q.city,'Encuentro especial de la zona',f('event_'+q.id)?'✓ Visto':currentQuest(q)?'Descubrir':'No disponible',!f('event_'+q.id)&&currentQuest(q),()=>event(q)));
+ item('Primer duelo · Borxeta','Puedes recuperar el duelo del laboratorio si lo dejaste pendiente.',state.flags.borxetaDuelWon?'✓ Vencido':'Combatir nivel 5',!state.flags.borxetaDuelWon,()=>{close();window.__PREVIA_76.duel();});
+ section('Borxeta vuelve','Desafíos opcionales con dificultad creciente; una victoria por ciudad.');
+ RIVALS.forEach(r=>item('Borxeta · '+r.city,'Combate de nivel '+r.level,f('borxeta_'+r.id)?'✓ Vencido':match(r.scene)?'¡Combatir!':'Busca a Borxeta',!f('borxeta_'+r.id)&&match(r.scene),()=>duel(r)));
+ section('Dimensión 404 · Epílogo','Recompensa adicional al terminar el desafío original.');
+ const done=!!window.__PREVIA707?.progress?.()?.won;item('El eco estabilizado','Desbloquea 404 monedas después del final de Dimensión 404.',f('bonus404')?'✓ Recuperado':done?'Reclamar':'Final pendiente',done&&!f('bonus404'),bonus404);
+ section('Partida y accesibilidad','Herramientas para proteger el progreso y salir de bloqueos.');
+ item('Copia de seguridad','Descarga un archivo con los guardados locales.','Exportar respaldo',true,backup);
+ item('Recuperación de posición','Te devuelve al punto de aparición del mapa actual; no altera las misiones.','Volver al inicio',true,()=>{if(!confirm('¿Volver al punto de aparición de esta zona?'))return;close();rescue659();});
+}
+function open(){if(panel||!ready()){if(!ready())alert('Comienza una partida antes de abrir el diario.');return;}if(state.screen==='start')closeStart29();if(state.screen!=='world')return;oldFocus=document.activeElement;state.screen='diary80';resetJoy27();heldKeys.clear();panel=document.createElement('div');panel.id='previa80';panel.setAttribute('role','dialog');panel.setAttribute('aria-modal','true');panel.setAttribute('aria-label','Diario de aventura 8.0');panel.innerHTML='<div class="v80-card"><header><div><small>POKÉMON EDICIÓN LA PREVIA</small><h2>DIARIO DE AVENTURA · 8.0</h2></div><button data-close>CERRAR ×</button></header><div data-body></div></div>';(document.fullscreenElement||gameShell).append(panel);panel.querySelector('[data-close]').onclick=close;panel.addEventListener('click',e=>{if(e.target===panel)close();});document.addEventListener('keydown',key,true);render();panel.querySelector('[data-close]').focus();}
+function inject(){const menu=document.getElementById('startMenu29');if(!menu||menu.querySelector('[data-v80]'))return;const b=document.createElement('button');b.type='button';b.dataset.v80='1';b.innerHTML='<span class="start-icon29">📜</span><span>AVENTURA 8.0</span><span class="start-arrow29">›</span>';b.onclick=open;menu.insertBefore(b,menu.querySelector('[data-start29="save"]'));}
+const previous=openStart29;openStart29=function(){previous.apply(this,arguments);inject();};
+document.addEventListener('keydown',e=>{if(e.key==='j'&&!e.ctrlKey&&!e.metaKey&&!e.altKey&&!e.repeat&&!panel&&ready()&&state.screen==='world'){e.preventDefault();open();}},true);
+window.__PREVIA80={version:'8.0',open,close,status,quests:QUESTS.map(q=>q.id),rivals:RIVALS.map(r=>r.id)};
+})();
+
+/* 8.0 audit: world clues, fullscreen overlays, final bindings and release identity. */
+(()=>{'use strict';
+const clues=[
+ ['benifaio','benifaio','El recado de Marshall','Marshall ha perdido la lista de la mesa. En el reverso pone: «El jueves, donde siempre».'],
+ ['silla','silla','La factura de Team Cierre','Una factura arrugada lleva el sello de Sergio. El turno termina después de la siesta.'],
+ ['albal','albal','El pedido imposible','El pedido dice: 404 hamburguesas, cero servilletas. Blas sospecha de Rober.'],
+ ['sueca','sueca','El marcador del 5 %','Bajo el marcador encuentras la última jugada: confianza, una ayuda y un triple.'],
+ ['festivern','picassent','La pista de cristal','Un brillo violeta apunta al laboratorio. Nachito ha olvidado apagar la máquina.'],
+ ['zaragoza','zaragoza','El bingo imposible','El Limonero ha anotado el 404 en una casilla que no existe.']
+];
+for(const [id,scene,title,line] of clues){const sc=SCENES[scene];if(!sc)continue;const oldScene=state.scene;state.scene=scene;const sp=sc.spawn||[sc.w/2,sc.h/2];let at=null;
+ for(let radius=1;radius<5&&!at;radius+=.5)for(let i=0;i<16&&!at;i++){const x=Math.round((sp[0]+Math.cos(i*Math.PI/8)*radius)*2)/2,y=Math.round((sp[1]+Math.sin(i*Math.PI/8)*radius)*2)/2;if(x>1&&y>1&&x<sc.w-1&&y<sc.h-1&&!collision(x,y)&&getSceneNpcs().every(n=>Math.hypot(n.x-x,n.y-y)>1.1))at=[x,y];}
+ state.scene=oldScene;if(at)(LORE_POINTS[scene]||(LORE_POINTS[scene]=[])).push({id:'v80clue_'+id,x:at[0],y:at[1],who:'alfaro',label:'📜 '+title,title:'📜 '+title,lines:[line]});
+}
+const talk=landmarkTalk;landmarkTalk=function(p){if(!p?.id?.startsWith('v80clue_'))return talk(p);const id=p.id.slice(8),q=clues.find(x=>x[0]===id);if(!q)return;if(!state.flags.starter)return toast('Primero elige tu compañero con Alfaro.');dialog(null,[q[3],'Pista registrada. Reclama el recado en START → Aventura 8.0.'],()=>{state.flags['v80_found_'+id]=true;save();backWorld();});};
+const profile=getProfile;getProfile=function(id){return profile(id==='borxeta_intro'||id?.startsWith('v80:borxeta:')?'borxeta':id);};
+const serialize=serializeState;serializeState=function(){const d=serialize();d.edition='8.0';d.patch='revision-auditada-1';return d;};
+// Add the diary to the main menu; retain every optional action in Extras.
+const start=openStart29;openStart29=function(){start();const menu=$('startMenu29'),extra=$('startExtras662');if(!menu||!extra)return;for(const b of [...menu.querySelectorAll('button')]){if(b.dataset.v80){menu.insertBefore(b,menu.querySelector('[data-start29="save"]'));continue;}if(!b.dataset.start29&&b.id!=='help659Start')extra.append(b);}};
+const newGame=title64StartNew;title64StartNew=function(id){newGame(id);state.flags.v80_dim_imported=true;state.flags.v80_dim_echoes=0;state.flags.v80_dim_won=false;};
+$('intro67Skip').onclick=()=>intro67End();
+const titleFrame=title64Frame;title64Frame=function(){titleFrame.apply(this,arguments);const label=title64Layer.querySelector('.title64-footer span');if(label)label.textContent='EDICIÓN LA PREVIA · WEB 8.0 · REVISIÓN';};
+document.title='Pokémon La Previa · 8.0 · Revisión';if(releaseBrand658)releaseBrand658.textContent='AVENTURA WEB · 8.0';
+if(window.__PREVIA_QA)Object.assign(window.__PREVIA_QA,{getState:()=>state,serializeState:()=>serializeState(),validSave:o=>validSave(o),setState:o=>applySaveData(o),save:()=>save(),startBattle:(...a)=>startBattle(...a),winBattle:()=>winBattle(),landmarkTalk:p=>landmarkTalk(p),npcTalk:n=>npcTalk(n),openStart29:()=>openStart29(),starterModal:()=>starterModal(),title64StartNew:id=>{title64ConfirmNew=true;title64StartNew(id)},intro67End:()=>intro67End(),getScenes:()=>SCENES,clues80:()=>clues.map(q=>({id:q[0],scene:q[1],point:(LORE_POINTS[q[1]]||[]).find(p=>p.id==='v80clue_'+q[0])})),nativeScenes:()=>Object.keys(SCENES661),playNative:(id)=>playScene661(id),finishEntry:()=>finishEntry54(),finishDialog:()=>{let n=0;while(state.screen==='dialog'&&n++<30)(dialogInputReadyAt=0,$('nextDialog')?.onclick?.());},visit:(scene)=>{hideModal();state.screen='world';changeScene(scene);},rescue:rescue659});
+})();
 
 asset('friends_atlas25');for(const d of Object.values(AVATARS28))asset(d.asset);
 resizeStage();updateScene(false);showStart();requestAnimationFrame(frame);

@@ -1,8 +1,8 @@
 {
   "name": "pokemon-la-previa-web",
-  "version": "6.62.0",
+  "version": "8.0.0",
   "private": true,
-  "description": "Pokémon La Previa · cinemáticas nativas con sprites del juego",
+  "description": "Pok\u00e9mon Edici\u00f3n La Previa Web 8.0 \u2014 revisi\u00f3n",
   "scripts": {
     "dev": "python3 -m http.server 8000"
   }
